@@ -1,0 +1,38 @@
+@import "../../styles/variables";
+
+.button {
+  display: flex;
+  padding: 18px 64px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border: 0.5px solid $border-color;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: $text-white;
+
+  width: 300px;
+
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  &:active {
+    transform: translateY(2px);
+  }
+
+  &.primary {
+    background-color: $primary-color;
+
+    &:hover {
+      background-color: darken($primary-color, 5%);
+    }
+  }
+
+  &.secondary {
+    background-color: $secondary-color;
+
+    &:hover {
+      background-color: darken($border-color, 5%);
+    }
+  }
+}
