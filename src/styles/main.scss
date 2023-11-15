@@ -66,6 +66,7 @@ p {
     align-items: center;
     justify-content: center;
     gap: 2rem;
+    margin-bottom: 3rem;
   }
 
   .hero {
@@ -98,7 +99,8 @@ p {
     }
   }
 
-  .first-content-section {
+  .content-section-01,
+  .content-section-02 {
     img {
       // Expand to total width
       width: calc(100% + 32px);

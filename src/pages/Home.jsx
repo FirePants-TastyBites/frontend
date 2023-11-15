@@ -32,7 +32,7 @@ const Home = () => {
 
       </section>
 
-      <section className="first-content-section">
+      <section className="content-section-01">
         <figure>
           <img src="https://images.unsplash.com/photo-1485182708500-e8f1f318ba72?q=80&w=1210&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="People dining in restaurant." />
         </figure>
@@ -45,9 +45,32 @@ const Home = () => {
           Vitae sit commodo enim et leo. Commodo ipsum lorem eros non id congue vel praesent velit.
         </p>
 
-        <a href="/menu">
+        <a href="#">
           <Button
             label="View Our Menu"
+            type="primary"
+            onClick={() => console.log("Primary clicked")}
+          />
+        </a>
+
+      </section>
+
+      <section className="content-section-02">
+        <figure>
+          <img src="https://images.unsplash.com/photo-1485182708500-e8f1f318ba72?q=80&w=1210&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="People dining in restaurant." />
+        </figure>
+
+        <h2>We Have Something for
+          <br />Every Taste!
+        </h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur. Integer vulputate ornare aliquet suspendisse. Quis dui phasellus donec egestas amet urna. Feugiat quis mattis pharetra euismod pulvinar scelerisque.
+          Vitae sit commodo enim et leo. Commodo ipsum lorem eros non id congue vel praesent velit.
+        </p>
+
+        <a href="#">
+          <Button
+            label="See Our Healthy Options"
             type="primary"
             onClick={() => console.log("Primary clicked")}
           />
