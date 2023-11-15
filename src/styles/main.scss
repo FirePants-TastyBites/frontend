@@ -44,6 +44,10 @@ p {
   line-height: 150%;
 }
 
+a {
+  color: inherit;
+}
+
 .container {
   display: flex;
   flex-direction: column;
