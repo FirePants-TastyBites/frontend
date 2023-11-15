@@ -36,7 +36,9 @@ function HamburgerNav({ isVisible, setIsVisible }) {
             <>
                 <div className={styles.overlayShadow} onClick={closeHamburgerNav}></div>
                 <nav className={styles.hamburgerNav}>
-                    <button onClick={closeHamburgerNav}>close</button>
+                    <div className={styles.iconClose} onClick={closeHamburgerNav}>
+                        <i className="fa-regular fa-circle-xmark iconClose" onClick={closeHamburgerNav}></i>
+                    </div>
                     {renderedOptions}
                 </nav>
             </>
