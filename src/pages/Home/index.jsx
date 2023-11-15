@@ -1,4 +1,5 @@
 import Button from "../../components/Button";
+import PinkThingy from "../../components/PinkThingy";
 import './Home.scss';
 
 const Home = () => {
@@ -56,10 +57,13 @@ const Home = () => {
 
       </section>
 
+      <PinkThingy />
+
       <section className="content-section-02">
-        <figure>
-          <img src="https://images.unsplash.com/photo-1485182708500-e8f1f318ba72?q=80&w=1210&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="People dining in restaurant." />
-        </figure>
+        <section>
+          {/* div with background image instead of img tag */}
+          <div></div>
+        </section>
 
         <h2>We Have Something for
           <br />Every Taste!
