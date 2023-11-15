@@ -1,4 +1,5 @@
 import Button from "../../components/Button";
+import PinkThingy from "../../components/PinkThingy";
 import './Home.scss';
 
 const Home = () => {
@@ -38,13 +39,15 @@ const Home = () => {
           <img src="https://images.unsplash.com/photo-1485182708500-e8f1f318ba72?q=80&w=1210&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="People dining in restaurant." />
         </figure>
 
-        <h2>Delight Your Palate,
-          <br />Bite by Bite!
-        </h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur. Integer vulputate ornare aliquet suspendisse. Quis dui phasellus donec egestas amet urna. Feugiat quis mattis pharetra euismod pulvinar scelerisque.
-          Vitae sit commodo enim et leo. Commodo ipsum lorem eros non id congue vel praesent velit.
-        </p>
+        <section className="text">
+          <h2>Delight Your Palate,
+            <br />Bite by Bite!
+          </h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur. Integer vulputate ornare aliquet suspendisse. Quis dui phasellus donec egestas amet urna. Feugiat quis mattis pharetra euismod pulvinar scelerisque.
+            Vitae sit commodo enim et leo. Commodo ipsum lorem eros non id congue vel praesent velit.
+          </p>
+        </section>
 
         <a href="#">
           <Button
@@ -56,18 +59,23 @@ const Home = () => {
 
       </section>
 
-      <section className="content-section-02">
-        <figure>
-          <img src="https://images.unsplash.com/photo-1485182708500-e8f1f318ba72?q=80&w=1210&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="People dining in restaurant." />
-        </figure>
+      <PinkThingy />
 
-        <h2>We Have Something for
-          <br />Every Taste!
-        </h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur. Integer vulputate ornare aliquet suspendisse. Quis dui phasellus donec egestas amet urna. Feugiat quis mattis pharetra euismod pulvinar scelerisque.
-          Vitae sit commodo enim et leo. Commodo ipsum lorem eros non id congue vel praesent velit.
-        </p>
+      <section className="content-section-02">
+        <section className="image">
+          {/* div with background image instead of img tag */}
+          <div></div>
+        </section>
+
+        <section className="text">
+          <h2>We Have Something for
+            <br />Every Taste!
+          </h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur. Integer vulputate ornare aliquet suspendisse. Quis dui phasellus donec egestas amet urna. Feugiat quis mattis pharetra euismod pulvinar scelerisque.
+            Vitae sit commodo enim et leo. Commodo ipsum lorem eros non id congue vel praesent velit.
+          </p>
+        </section>
 
         <a href="#">
           <Button
