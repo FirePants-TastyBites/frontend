@@ -65,14 +65,14 @@ const Menu = () => {
       </nav>
       <section className="menu-grid">
         {filteredFoods.map((food) => (
-          <div onClick={() => handleItemClick(food)} key={food.id}>
-            <MenuItem
-              name={food.itemName}
-              price={food.price}
-              imageUrl={foodImage}
-              category={food.category}
-            />
-          </div>
+          <MenuItem
+            key={food.id}
+            name={food.itemName}
+            price={food.price}
+            imageUrl={foodImage}
+            category={food.category}
+            onIconClick={() => handleItemClick(food)}
+          />
         ))}
       </section>
       {isModalOpen && (

@@ -1,10 +1,11 @@
 import styles from "./MenuItem.module.scss";
 
-const MenuItem = ({ name, price, imageUrl, category }) => {
+const MenuItem = ({ name, price, imageUrl, category, onIconClick }) => {
   return (
     <section className={styles.menuItem}>
       <article className={styles.itemContainer}>
         <svg
+          onClick={onIconClick}
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
