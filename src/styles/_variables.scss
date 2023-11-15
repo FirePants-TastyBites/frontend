@@ -6,6 +6,7 @@ $text-white: #fff;
 $font-family-default: "Poppins", sans-serif;
 $border-color: #395e3c;
 $cta-color: #efa0d2;
+$darker-green: #050e06;
 
 @mixin text-style-400 {
   font-family: $font-family-default;
@@ -40,6 +41,15 @@ $cta-color: #efa0d2;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
+}
+
+@mixin text-style-600-14px {
+  font-family: $font-family-default;
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 @mixin text-style-600 {
   font-family: $font-family-default;
@@ -77,4 +87,20 @@ $cta-color: #efa0d2;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+}
+
+@mixin text-style-h2-32px {
+  font-family: $font-family-default;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 3.2px;
+}
+
+@mixin text-style-h3-24px {
+  font-family: $font-family-default;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
 }
