@@ -1,4 +1,5 @@
 import Button from "../../components/Button";
+import './Home.scss';
 
 const Home = () => {
   return (
