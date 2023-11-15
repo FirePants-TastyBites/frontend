@@ -1,0 +1,55 @@
+@import "../../styles/_variables";
+
+$breakpoint-desktop: 768px;
+
+.menu-page {
+  background-color: $background-color;
+  gap: 1rem;
+
+  h2 {
+    color: #112a13;
+    text-align: center;
+    @include text-style-600-24px;
+  }
+
+  .category-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 1rem 0;
+    gap: 12px;
+    width: 100%;
+
+    button {
+      display: flex;
+      text-transform: capitalize;
+      width: 130px;
+      padding: 8px 12px;
+      justify-content: center;
+      align-items: center;
+      border-radius: 8px;
+      color: $text-white;
+      border: 0.5px solid #9c9999;
+      background: #112a13;
+      margin: 0 5px;
+      cursor: pointer;
+      @include text-style-500-16px;
+
+      &.active {
+        border: 0.5px solid #395e3c;
+        background: $primary-color;
+      }
+    }
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+
+    @media (min-width: $breakpoint-desktop) {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+  }
+}

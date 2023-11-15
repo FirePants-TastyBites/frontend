@@ -1,0 +1,97 @@
+@import "../../styles/_variables";
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 12px;
+}
+
+.modalContent {
+  background: $background-color;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  padding: 1rem;
+  gap: 1rem;
+  box-sizing: border-box;
+  height: 450px;
+
+  @media (min-width: 768px) {
+    height: 550px;
+  }
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modalTitle {
+  color: #111214;
+  @include text-style-700;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  width: 36px;
+  padding: 12px;
+  color: $primary-color;
+  cursor: pointer;
+}
+
+.ingredientsList {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.ingredientsList li {
+  @include text-style-400;
+  color: #111;
+}
+
+.nutritionalInfo {
+  @include text-style-400;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  flex-direction: column;
+}
+
+.nutritionalInfo p {
+  @include text-style-600;
+  display: flex;
+  justify-content: space-between;
+  color: #111;
+}
+
+.nutritionalInfo span {
+  color: #5d5d5d;
+  @include text-style-500-14px;
+}
+
+.addToCartButton {
+  color: $text-white;
+  border: none;
+  padding: 10px;
+  margin-top: auto;
+  width: 100%;
+
+  @include add-to-cart-btn;
+}
