@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import styles from "./Modal.module.scss";
 
 const Modal = ({ isOpen, onClose, item }) => {
@@ -6,19 +7,30 @@ const Modal = ({ isOpen, onClose, item }) => {
   const { ingredients = [], description: { fat, protein, calories } = {} } =
     item;
 
+  const modalAnimation = {
+    hidden: { opacity: 0, scale: 0.95 },
+    visible: { opacity: 1, scale: 1 },
+    transition: { duration: 0.3 }
+  };
+
   return (
-    <aside
+    <motion.aside
       className={styles.modalOverlay}
       onClick={onClose}
       role="dialog"
       aria-modal="true"
+      initial="hidden"
+      animate="visible"
+      exit="hidden"
+      transition={modalAnimation.transition}
     >
-      <article
+      <motion.article
         className={styles.modalContent}
         onClick={(e) => e.stopPropagation()}
+        variants={modalAnimation}
       >
         <header className={styles.modalHeader}>
-          <h2 className={styles.modalTitle}>{item.itemName}</h2>
+          <h3 className={styles.modalTitle}>{item.itemName}</h3>
           <button
             className={styles.closeButton}
             onClick={onClose}
@@ -43,12 +55,11 @@ const Modal = ({ isOpen, onClose, item }) => {
             Total Calories: <span>{calories}cal</span>
           </p>
         </div>
-
         <button className={styles.addToCartButton}>
           <i className="fa-solid fa-cart-shopping"></i> Add to Cart
         </button>
-      </article>
-    </aside>
+      </motion.article>
+    </motion.aside>
   );
 };
 

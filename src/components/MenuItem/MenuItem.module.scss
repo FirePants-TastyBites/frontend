@@ -45,6 +45,7 @@
       color: #111214;
       @include text-style-600;
       word-wrap: break-word;
+      flex-grow: 1;
     }
 
     .itemInfoContainer {

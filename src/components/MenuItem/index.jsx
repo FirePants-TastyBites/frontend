@@ -5,7 +5,6 @@ const MenuItem = ({ name, price, imageUrl, category, onIconClick }) => {
     <section className={styles.menuItem}>
       <article className={styles.itemContainer}>
         <svg
-          onClick={onIconClick}
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
@@ -21,7 +20,7 @@ const MenuItem = ({ name, price, imageUrl, category, onIconClick }) => {
             strokeLinejoin="round"
           />
         </svg>
-        <img src={imageUrl} alt={name} />
+        <img src={imageUrl} alt={name} onClick={onIconClick} />
       </article>
       <article className={styles.itemDetails}>
         <p className={styles.itemName}>{name}</p>
