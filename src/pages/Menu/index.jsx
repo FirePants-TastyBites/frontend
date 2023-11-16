@@ -4,6 +4,7 @@ import axios from "axios";
 import MenuItem from "../../components/MenuItem/";
 import foodImage from "/food.jpg";
 import Modal from "../../components/Modal/";
+import { motion } from "framer-motion";
 
 const Menu = () => {
   const [foods, setFoods] = useState([]);
@@ -65,14 +66,20 @@ const Menu = () => {
       </nav>
       <section className="menu-grid">
         {filteredFoods.map((food) => (
-          <MenuItem
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
             key={food.id}
-            name={food.itemName}
-            price={food.price}
-            imageUrl={food.url || foodImage}
-            category={food.category}
-            onIconClick={() => handleItemClick(food)}
-          />
+          >
+            <MenuItem
+              name={food.itemName}
+              price={food.price}
+              imageUrl={food.url || foodImage}
+              category={food.category}
+              onIconClick={() => handleItemClick(food)}
+            />
+          </motion.div>
         ))}
       </section>
       {isModalOpen && (

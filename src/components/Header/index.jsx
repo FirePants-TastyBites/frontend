@@ -7,7 +7,10 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <div className={styles.header__iconMenu} onClick={() => setIsVisible(!isVisible)}>
+      <div
+        className={styles.header__iconMenu}
+        onClick={() => setIsVisible(!isVisible)}
+      >
         <i className="fa-solid fa-bars"></i>
       </div>
       <HamburgerNav isVisible={isVisible} setIsVisible={setIsVisible} />

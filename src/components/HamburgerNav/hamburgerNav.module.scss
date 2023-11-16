@@ -2,35 +2,34 @@
 
 .hamburgerNav,
 .overlayShadow {
-    position: fixed;
-    left: 0;
-    top: 0;
+  position: fixed;
+  left: 0;
+  top: 0;
 }
 
 .hamburgerNav {
-    width: 60%;
-    height: 100vh;
-    background-color: $primary-color;
-    z-index: 999;
-    padding: 1rem;
+  width: 60%;
+  height: 100vh;
+  background-color: $primary-color;
+  z-index: 999;
+  padding: 1rem;
 
-    li {
-        font-size: 1.5rem;
-        font-weight: 500;
-        letter-spacing: 0.15rem;
-        margin: 1rem 0;
-        padding-left: 20%;
-    }
-
+  li {
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.15rem;
+    margin: 1rem 0;
+    padding-left: 20%;
+  }
 }
 
 .iconClose {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 .overlayShadow {
-    background-color:  rgba(0, 0, 0, 0.4);
-    width: 100%;
-    height: 100vh;
-    z-index: 998;
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100vh;
+  z-index: 998;
 }
