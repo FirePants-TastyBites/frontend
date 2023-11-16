@@ -46,6 +46,21 @@ const AboutPage = () => (
 
     <PinkThingy />
     <section>
+      <h3>Embrace Family Time at Tasty Bites</h3>
+      <p>
+        Tasty Bites, a place where every member of the family, especially the
+        little ones, is cherished. Our restaurant is more than just a dining
+        space; It is a vibrant playground of flavors and fun for children and
+        parents alike!
+      </p>
+    </section>
+
+    <article>
+      <img src="/kids.jpg" alt="" className="img-small" />
+    </article>
+
+    <PinkThingy />
+    <section>
       <h3>Fast Deliveries at Tasty Bites</h3>
       <p>
         At Tasty Bites, we understand that your time is precious. Thats why we
