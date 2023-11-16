@@ -2,13 +2,16 @@
 
 .menuItem {
   display: flex;
-  width: 180px;
   padding: 8px;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   gap: 8px;
   border-radius: 8px;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 180px;
+  max-width: 240px;
+  height: 340px;
   border: 1px solid #112a13;
   background: #fffefe;
 
@@ -37,9 +40,11 @@
     gap: 4px;
     align-self: stretch;
     margin-bottom: 12px;
+    flex-grow: 1;
     .itemName {
       color: #111214;
       @include text-style-600;
+      word-wrap: break-word;
     }
 
     .itemInfoContainer {
@@ -60,7 +65,7 @@
     }
   }
 
-  //update later
+  //Updating later
   .btnContainer {
     display: flex;
     flex-direction: column;
