@@ -69,7 +69,7 @@ const Menu = () => {
             key={food.id}
             name={food.itemName}
             price={food.price}
-            imageUrl={foodImage}
+            imageUrl={food.url || foodImage}
             category={food.category}
             onIconClick={() => handleItemClick(food)}
           />
