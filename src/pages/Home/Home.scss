@@ -19,6 +19,7 @@
 
             h2 {
                 margin-bottom: 1rem;
+                max-width: 270px;
             }
 
             p {
@@ -89,27 +90,38 @@
 }
 
 @media screen and (min-width: 700px) {
-    .home {
-        margin: 0 3rem;
-
+    .home {        
         >section {
             flex-direction: row;
+
+            .info {
+                h2 {
+                    align-self: flex-start;
+                    max-width: 600px;
+                }
+            }
         }
 
+        
         .hero {
             figure {
                 width: 100%;
                 border: none;
                 padding: 0;
+
+                img {
+                    border: none;
+                }
             }
         }
-
+        
         .content-section-01 {
+            text-align: left;
             flex-direction: row-reverse;
-
+            
             figure {
                 flex: 3;
-
+                
                 img {
                     width: 100%;
                     margin-left: 0;
@@ -119,10 +131,12 @@
                 flex: 2;
             }
         }
-
+        
         .content-section-02 {
+            text-align: left;
+
             .image {
-                flex: 1;
+                flex: 1.4;
                 height: 50vh;
             }
             .info {
