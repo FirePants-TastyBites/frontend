@@ -54,19 +54,17 @@ a {
 }
 
 .content {
-  padding: 1rem;
-  margin: auto;
+  margin: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  max-width: 1000px;
 }
 
 @media screen and (min-width: 800px) {
 
   .content {
-    // Not sure if needed?
-    padding: 3rem;
+    max-width: 1000px;
+    margin: auto;
   }
 }
