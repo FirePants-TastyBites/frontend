@@ -76,7 +76,7 @@ function Footer() {
         <a href="/menu" className={styles.navLink}>
           Menu
         </a>
-        <a href="/about-us" className={styles.navLink}>
+        <a href="/about" className={styles.navLink}>
           About Us
         </a>
       </nav>
