@@ -1,17 +1,5 @@
 @import "../../styles/_variables";
 
-.menu-page {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 16px;
-
-  .menu-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-    gap: 16px;
-  }
-}
-
 .menuItem {
   display: flex;
   padding: 8px;
@@ -22,7 +10,7 @@
   justify-content: space-between;
   min-width: 160px;
   width: 100%;
-  max-width: 340px;
+  max-width: 320px;
   height: 330px;
   border: 1px solid #112a13;
   background: #fffefe;
