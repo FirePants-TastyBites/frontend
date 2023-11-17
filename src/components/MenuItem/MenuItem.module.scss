@@ -1,17 +1,13 @@
 @import "../../styles/_variables";
 
-$breakpoint-desktop: 768px;
-$max-container-width: 1000px;
-$container-margin: 16px;
-
 .menu-page {
-  max-width: $max-container-width;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 0 $container-margin;
+  padding: 0 16px;
 
   .menu-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
     gap: 16px;
   }
 }
@@ -24,14 +20,14 @@ $container-margin: 16px;
   gap: 8px;
   border-radius: 8px;
   justify-content: space-between;
-  min-width: 180px;
+  min-width: 160px;
   width: 100%;
   max-width: 340px;
-  min-height: 330px;
+  height: 330px;
   border: 1px solid #112a13;
   background: #fffefe;
 
-  @media (min-width: $breakpoint-desktop) {
+  @media (min-width: 768px) {
     padding: 1rem;
   }
 

@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Menu from "./pages/Menu";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
             <Route path="/menu" element={<Menu />}></Route>
           </Routes>
         </div>
+
+        <Footer />
       </div>
     </>
   );
