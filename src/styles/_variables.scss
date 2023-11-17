@@ -8,6 +8,9 @@ $border-color: #395e3c;
 $cta-color: #efa0d2;
 $darker-green: #050e06;
 
+$breakpoint-desktop: 768px;
+$breakpoint-large: 1024px;
+
 @mixin text-style-400 {
   font-family: $font-family-default;
   font-size: 16px;

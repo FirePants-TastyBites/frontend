@@ -48,8 +48,12 @@ $breakpoint-desktop: 768px;
     gap: 16px;
 
     @media (min-width: $breakpoint-desktop) {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
+    }
+
+    @media (min-width: $breakpoint-large) {
+      grid-template-columns: repeat(3, minmax(350px, 1fr));
     }
   }
 }
