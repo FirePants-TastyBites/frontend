@@ -11,9 +11,18 @@
     gap: 2.25rem;
     margin-bottom: 3rem;
 
-    .text {
+    .info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
       h2 {
         margin-bottom: 1rem;
+        max-width: 270px;
+      }
+
+      p {
+        margin-bottom: 2rem;
       }
     }
   }
@@ -37,6 +46,7 @@
     figure {
       height: 80vw;
       width: 80vw;
+      max-height: 600px;
       max-width: 600px;
       border: 4px solid $primary-color;
       border-radius: 4px;
@@ -61,10 +71,9 @@
 
   .content-section-02 {
     .image {
-      padding: 0 2rem;
       height: 11rem;
       overflow: hidden;
-      width: 100%;
+      width: calc(100% - 4rem);
 
       div {
         width: 100%;
@@ -72,6 +81,79 @@
         background-image: url("https://images.unsplash.com/photo-1482049016688-2d3e1b311543?q=80&w=1310&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
         background-size: cover;
         background-position: center;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $breakpoint-desktop) {
+  // Move to main.scss?
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    header {
+      align-self: stretch;
+    }
+  }
+
+  .content {
+    margin: 1rem;
+  }
+
+  .home {
+    > section {
+      flex-direction: row;
+
+      .info {
+        text-align: left;
+        h2 {
+          max-width: 600px;
+        }
+      }
+    }
+
+    .hero {
+      figure {
+        border: none;
+        padding: 0;
+        width: 50%;
+        height: 60vh;
+
+        img {
+          border: none;
+        }
+      }
+    }
+
+    .content-section-01 {
+      text-align: left;
+
+      figure {
+        flex: 1.5;
+
+        img {
+          // Reset full width img
+          width: 100%;
+          margin-left: 0;
+        }
+      }
+      .info {
+        flex: 1;
+      }
+    }
+    .content-section-02 {
+      flex-direction: row-reverse;
+      max-width: 850px;
+      margin: auto;
+
+      .image {
+        height: 41vh;
+        flex: 1;
+      }
+      .info {
+        flex: 1;
       }
     }
   }
