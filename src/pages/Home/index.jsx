@@ -48,7 +48,11 @@ const Home = () => {
         <section className="info">
           <h2>Delight Your Palate, Bite by Bite!</h2>
           <p>
-            Welcome to a culinary journey where each bite is a delight! Our restaurant is committed to providing nutritious and delicious options, whether you dine in or enjoy our convenient delivery service, we invite you to savor the moments and make our restaurant your home for wholesome and delightful meals.
+            Welcome to a culinary journey where each bite is a delight! Our
+            restaurant is committed to providing nutritious and delicious
+            options, whether you dine in or enjoy our convenient delivery
+            service, we invite you to savor the moments and make our restaurant
+            your home for wholesome and delightful meals.
           </p>
           <a href="/menu">
             <Button
@@ -58,7 +62,6 @@ const Home = () => {
             />
           </a>
         </section>
-
       </section>
 
       <PinkThingy />
@@ -70,11 +73,13 @@ const Home = () => {
         </section>
 
         <section className="info">
-          <h2>
-            Embrace Family Time at Tasy Bites!
-          </h2>
+          <h2>Embrace Family Time at Tasy Bites!</h2>
           <p>
-            We at Tasty Bites believe in providing a delightful dining experience for the whole family. Our menu is crafted with care, offering a range of healthy and flavorful options that both parents and kids will love. Join us in creating cherished moments and savoring delicious meals in a warm and inviting atmosphere.
+            We at Tasty Bites believe in providing a delightful dining
+            experience for the whole family. Our menu is crafted with care,
+            offering a range of healthy and flavorful options that both parents
+            and kids will love. Join us in creating cherished moments and
+            savoring delicious meals in a warm and inviting atmosphere.
           </p>
           <a href="/about">
             <Button
@@ -84,7 +89,6 @@ const Home = () => {
             />
           </a>
         </section>
-
       </section>
     </section>
   );

@@ -3,7 +3,7 @@
 .home {
   text-align: center;
 
-  >section {
+  > section {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -86,9 +86,7 @@
   }
 }
 
-
 @media screen and (min-width: $breakpoint-desktop) {
-
   // Move to main.scss?
   .container {
     display: flex;
@@ -105,7 +103,7 @@
   }
 
   .home {
-    >section {
+    > section {
       flex-direction: row;
 
       .info {
@@ -114,7 +112,6 @@
           max-width: 600px;
         }
       }
-      
     }
 
     .hero {
@@ -158,7 +155,6 @@
       .info {
         flex: 1;
       }
-
     }
   }
 }
