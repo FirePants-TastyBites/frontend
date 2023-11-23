@@ -1,10 +1,8 @@
 @import "../../styles/_variables";
 
-$breakpoint-desktop: 768px;
-
 .menu-page {
   background-color: $background-color;
-  gap: 1rem;
+  width: 100%;
 
   h2 {
     color: #112a13;
@@ -44,12 +42,17 @@ $breakpoint-desktop: 768px;
 
   .menu-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+    margin: 0 auto;
 
     @media (min-width: $breakpoint-desktop) {
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    @media (min-width: $breakpoint-large) {
+      grid-template-columns: repeat(3, minmax(320px, 1fr));
     }
   }
 }
