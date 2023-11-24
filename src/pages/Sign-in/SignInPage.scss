@@ -3,26 +3,21 @@
 .signin {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 325px);
+  min-height: calc(100vh - 68px - 270px - 32px);
+
   box-sizing: border-box;
 
-  .signin-box {
+  .signin-container {
     max-width: 100%;
-    width: calc(390px - 2rem);
+    width: 100%;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 2rem;
-    // .signin-box-content {
-    //   display: flex;
-    //   flex-direction: column;
-    //   justify-content: center;
-    //   align-items: center;
-    //   gap: 2rem;
+
     .title {
       @include text-style-500-32px;
     }
@@ -34,54 +29,48 @@
       line-height: 150%;
     }
   }
-  .input-container {
-    margin-bottom: 20px;
-    .input-with-icon {
-      display: flex;
-      align-items: center;
-      position: relative;
 
-      .icon {
-        position: absolute;
-        left: 10px;
-        z-index: 10;
-        color: $darker-green;
-        font-size: 1.33em;
-      }
-
-      input {
-        width: 320px;
-        padding: 8px 12px;
-        padding-left: calc(1.33em + 1rem + 10px);
-        margin: 1rem 0;
-        border-radius: 8px;
-        border: 1px solid $primary-green-20;
-        font-size: 16px;
-        border-radius: 8px;
-        background: $primary-green-20;
-
-        &:focus {
-          outline: none;
-          border-color: $primary-color;
-        }
-      }
-    }
-  }
-
-  .button-container {
+  .input-with-icon {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 2rem;
-  }
-}
+    position: relative;
 
-@media (min-width: 768px) {
-  .signin .signin-box {
-    width: 50%;
+    .icon {
+      position: absolute;
+      left: 10px;
+      z-index: 10;
+      color: $darker-green;
+      font-size: 1.33em;
+    }
 
     input {
       width: 100%;
+      padding: 8px 12px;
+      padding-left: calc(1.33em + 1rem + 10px);
+      margin: 1rem 0;
+      border-radius: 8px;
+      border: 1px solid $primary-green-20;
+      font-size: 16px;
+      background: $primary-green-20;
+
+      &:focus {
+        outline: none;
+        border-color: $primary-color;
+      }
     }
+  }
+}
+.button-container {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .signin .signin-container {
+    width: 70%;
   }
 }

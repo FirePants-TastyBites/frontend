@@ -15,7 +15,7 @@ const SignInPage = () => {
 
   return (
     <main className="signin">
-      <section className="signin-box">
+      <section className="signin-container">
         <h1 className="title">SIGN IN</h1>
         <GreenLine />
         <p className="subtitle">
@@ -25,26 +25,25 @@ const SignInPage = () => {
         </p>
         <PinkThingy />
         <form onSubmit={handleSubmit}>
-          <section className="input-container">
-            <div className="input-with-icon">
-              <FontAwesomeIcon icon={faEnvelope} className="icon" />
-              <input
-                type="email"
-                placeholder="Enter email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className="input-with-icon">
-              <FontAwesomeIcon icon={faLock} className="icon" />
-              <input
-                type="password"
-                placeholder="Enter password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-          </section>
+          <div className="input-with-icon">
+            <FontAwesomeIcon icon={faEnvelope} className="icon" />
+            <input
+              type="email"
+              placeholder="Enter email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="input-with-icon">
+            <FontAwesomeIcon icon={faLock} className="icon" />
+            <input
+              type="password"
+              placeholder="Enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
           <section className="button-container">
             <Button
               label="Sign In"
@@ -57,7 +56,6 @@ const SignInPage = () => {
             />
           </section>
         </form>
-        <article className="signin-box-content"></article>
       </section>
     </main>
   );
