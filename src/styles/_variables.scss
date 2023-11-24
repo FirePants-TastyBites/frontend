@@ -7,6 +7,7 @@ $font-family-default: "Poppins", sans-serif;
 $border-color: #395e3c;
 $cta-color: #efa0d2;
 $darker-green: #050e06;
+$primary-green-20: rgba(3, 168, 100, 0.2);
 
 $breakpoint-desktop: 768px;
 $breakpoint-large: 1024px;
@@ -70,6 +71,16 @@ $breakpoint-large: 1024px;
   font-weight: 600;
   line-height: normal;
 }
+
+@mixin text-style-500-32px {
+  font-family: $font-family-default;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 3.2px;
+}
+
 @mixin add-to-cart-btn {
   display: flex;
   padding: 8px;
