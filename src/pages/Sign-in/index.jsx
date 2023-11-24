@@ -16,8 +16,10 @@ const SignInPage = () => {
   return (
     <main className="signin">
       <section className="signin-container">
-        <h1 className="title">SIGN IN</h1>
-        <GreenLine />
+        <header>
+          <h1 className="title">SIGN IN</h1>
+          <GreenLine />
+        </header>
         <p className="subtitle">
           Unlock a personalized experience by signing in! Access your order
           history, effortlessly reorder your favorite meals, and enjoy exclusive

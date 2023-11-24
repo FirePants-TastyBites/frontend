@@ -27,7 +27,7 @@ const Home = () => {
               onClick={() => console.log("Primary clicked")}
             />
           </a>
-          <a href="#">
+          <a href="/sign-in">
             <Button
               label="Sign In"
               type="secondary"
