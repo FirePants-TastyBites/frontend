@@ -1,0 +1,57 @@
+@import "../../styles/variables";
+
+.cart {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 3rem;
+    min-height: 88vh;
+
+    header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .details {
+
+        .total-price {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid $primary-color;
+            padding-top: 2rem;
+
+            p {
+                @include text-style-600;
+            }
+        }
+
+        .comment {
+            margin-top: 3rem;
+            
+            textarea {
+                margin-top: 10px;
+                width: 100%;
+                min-height: 5rem;
+                border-radius: 8px;
+                resize: none;
+                padding: 10px;
+                border: 1px solid $secondary-color;
+                color: $secondary-color;
+    
+                &:focus {
+                    outline: none;
+                    border: 1px solid $primary-color;
+                }
+            }
+        }
+    }
+
+
+    a button {
+        margin: 0 auto 1rem
+    }
+
+}
