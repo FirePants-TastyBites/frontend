@@ -17,7 +17,9 @@ const Header = () => {
 
       <div className={styles.header__title}>TASTY BITES</div>
       <div className={styles.header__iconCart}>
-        <i className="fas fa-shopping-cart"></i>
+        <a href="/cart">
+          <i className="fas fa-shopping-cart"></i>
+        </a>
       </div>
     </header>
   );
