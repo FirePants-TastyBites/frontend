@@ -7,11 +7,9 @@ export const cartSlice = createSlice({
     initialState,
     reducers: {
         addItem: (state, action) => {
-            // Payload: complete item object
             state.push(action.payload);
         },
         removeItem: (state, action) => {
-            // Payload: item id
             const index = state.findIndex(item => item.id === action.payload.id);
             state.splice(index, 1);
         }
