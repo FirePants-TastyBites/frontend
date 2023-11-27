@@ -9,15 +9,19 @@ const StaffPage = () => {
     const ordersData = [
       {
         id: "#1234",
-        time: "12:00",
-        customerName: "Michael Brown",
-        imageUrl: "/tuna.png"
+        deliveryTime: "12:00",
+        userId: "Michael Brown",
+        imageUrl: "/tuna.png",
+        orderItems: {},
+        comment: ""
       },
       {
         id: "#1235",
-        time: "12:10",
-        customerName: "Sarah Johnson",
-        imageUrl: "tuna.png"
+        deliveryTime: "12:10",
+        userId: "Sarah Johnson",
+        imageUrl: "tuna.png",
+        orderItems: {},
+        comment: ""
       }
     ];
 
@@ -70,7 +74,7 @@ const StaffPage = () => {
             </div>
             <p className="title">Orders to handle</p>
           </header>
-
+          {/* userId, totalAmount, deliveryTime, orderItems, comment */}
           {orders.map((order) => (
             <article className="order-item" key={order.id}>
               <div className="order-image-container">
@@ -80,9 +84,9 @@ const StaffPage = () => {
               <div className="order-info-container">
                 <div className="order-info">
                   <p className="order-id">{order.id}</p>
-                  <time className="order-time">{order.time}</time>
+                  <time className="order-time">{order.deliveryTime}</time>
                 </div>
-                <p className="customer-name">{order.customerName}</p>
+                <p className="customer-name">{order.userId}</p>
               </div>
             </article>
           ))}
