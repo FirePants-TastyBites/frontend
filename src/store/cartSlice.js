@@ -14,7 +14,7 @@ const initialState = [
         {
             itemName: 'Grilled Salmon',
             id: '45645tgreg',
-            price: 199
+            price: 19
         }
 ];
 
@@ -26,7 +26,7 @@ export const cartSlice = createSlice({
             state.push(action.payload);
         },
         removeItem: (state, action) => {
-            const index = state.findIndex(item => item.id === action.payload.id);
+            const index = state.findIndex(item => item.id === action.payload);
             state.splice(index, 1);
         }
     }

@@ -6,18 +6,22 @@
     gap: 1rem;
     align-items: center;
     margin-bottom: 1rem;
+    color: $secondary-color;
 
     * {
-        @include text-style-600;
+        @include text-style-500;
     }
 
     button {
         background-color: transparent;
-        border: 1px solid $primary-color;
+        border: none;
         padding: 3px;
-        border-radius: 4px;
-        width: 1.3rem;
         color: $primary-color;
+        opacity: 0.5;
+
+        :hover {
+            opacity: 0.8;
+        }
     }
 
 }
@@ -29,5 +33,5 @@
 }
 
 .price {
-    place-self: end;
+   justify-self: end;
 }
