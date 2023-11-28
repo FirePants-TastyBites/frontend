@@ -32,7 +32,7 @@ function Checkout() {
                 <section className="address">
                     <h4>Delivery Address</h4>
                     <div>
-                        <p>Sherwood Forrest 1</p>
+                        <p>Sherwood Forest 1</p>
                         <button>Change</button>
                     </div>
                 </section>
