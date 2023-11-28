@@ -8,7 +8,7 @@ const prioritizeOrders = (orders) => {
   return [...orders]
     .sort(
       (a, b) =>
-        new Date("1970/01/01 " + a.time) - new Date("1970/01/01 " + b.time)
+        new Date("2023/01/01 " + a.time) - new Date("2023/01/01 " + b.time)
     )
     .map((order, index) => ({
       ...order,
