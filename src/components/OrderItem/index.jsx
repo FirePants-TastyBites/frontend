@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import styles from './orderItem.module.scss';
 import { addItem, removeItem } from '../../store/cartSlice';
+import { motion } from 'framer-motion';
 
 function OrderItem({ item }) {
     const { id, qty, itemName, price } = item;
@@ -12,8 +13,8 @@ function OrderItem({ item }) {
                 <p>{qty}</p>
             </div>
             <div className={styles.btnContainer}>
-                <button onClick={() => dispatch(addItem(item))}>+</button>
-                <button onClick={() => dispatch(removeItem(id))}>-</button>
+                <motion.button initial={{ color: '#03a864' }} whileTap={{ color: 'transparent' }} onClick={() => dispatch(addItem(item))}>+</motion.button>
+                <motion.button whileTap={{ scale: 1.2 }} onClick={() => dispatch(removeItem(id))}>-</motion.button>
             </div>
             <div>{itemName}</div>
             <div className={styles.price}>{price} kr</div>
