@@ -1,11 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import HamburgerNav from "../HamburgerNav";
 import styles from "./header.module.scss";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { animate } from "framer-motion";
 
 const Header = () => {
   const [isVisible, setIsVisible] = useState(false);
   const navigate = useNavigate();
+  const cart = useSelector(state => state.cart);
+ 
+  let itemsInCart = 0;
+  let itemsInCartStyle = { display: 'none' };
+
+  useEffect(() => {
+    animate(".items-in-cart", {y: [0, -10, 0]});
+
+  }, [cart])
+  
+  if (cart.length > 0) {
+
+    cart.forEach(item => {
+      itemsInCart += item.qty;
+    });
+
+    itemsInCartStyle = { display: 'flex' }
+  }
+  
 
   return (
     <header className={styles.header}>
@@ -19,6 +40,7 @@ const Header = () => {
 
       <div className={styles.header__title}>TASTY BITES</div>
       <div className={styles.header__iconCart} onClick={() => navigate('/cart')}>
+        <aside className={ `items-in-cart ${styles.itemsInCart}`} style={itemsInCartStyle}>{itemsInCart}</aside>
         <i className="fas fa-shopping-cart"></i>
       </div>
     </header>

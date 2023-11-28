@@ -2,8 +2,8 @@
 
 .orderItem {
     display: grid;
-    grid-template-columns: 1fr 4fr 1fr;
-    gap: 1rem;
+    grid-template-columns: .5fr .5fr 7fr auto;
+    gap: 10px;
     align-items: center;
     margin-bottom: 1rem;
     color: $secondary-color;
@@ -12,25 +12,26 @@
         @include text-style-500;
     }
 
+}
+
+.btnContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
     button {
         background-color: transparent;
         border: none;
-        padding: 3px;
         color: $primary-color;
-        opacity: 0.5;
-
-        :hover {
-            opacity: 0.8;
-        }
+        padding: 2px 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 1.2rem;
     }
-
 }
 
-.qty {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
 
 .price {
    justify-self: end;
