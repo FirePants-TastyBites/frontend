@@ -10,14 +10,14 @@ function Cart() {
     const totalPrice = orderItems.reduce((total, item) => total + item.price, 0);
     const [comment, setComment] = useState('');
 
-    function placeOrder() {
+    function createOrder() {
 
         const order = {
-           userId: 'guest',
-           totalAmount: totalPrice,
-           deliveryTime: new Date(Date.now()).toISOString(), // skapa funktion för uträkning (20 min + counter) => om låst: klockslag
-           orderItems,
-           comment
+            userId: 'guest',
+            totalAmount: totalPrice,
+            deliveryTime: new Date(Date.now()),
+            orderItems,
+            comment
         }
 
         console.log(order);
@@ -32,29 +32,28 @@ function Cart() {
 
             {
                 orderItems.length > 0 ?
-                <>
-                    <section className="details">
-                        {orderItems.map((item, i) => <OrderItem key={i} item={item}/>)}
-                        <div className="total-price">
-                            <p>Total Price</p>
-                            <p>{totalPrice} kr</p>
-                        </div>
-                        <section className="comment">
-                            <p>We're here to cater to your needs! Add allergies or dietary requests below:</p>
-                            <textarea onChange={e => setComment(e.target.value)} value={comment}></textarea>
+                    <>
+                        <section className="details">
+                            {orderItems.map((item, i) => <OrderItem key={i} item={item} />)}
+                            <div className="total-price">
+                                <p>Total Price</p>
+                                <p>{totalPrice} kr</p>
+                            </div>
+                            <section className="comment">
+                                <p>We're here to cater to your needs! Add allergies or dietary requests below:</p>
+                                <textarea onChange={e => setComment(e.target.value)} value={comment}></textarea>
+                            </section>
                         </section>
-                    </section>
-                    <a href="/checkout">
-                        <Button label={"Go to Checkout"} type={"primary"} onClick={placeOrder} />
-                    </a>
-                </>
-                :
-                <>
-                    <p>Your cart is empty!</p>
-                    <a href="/menu">
-                        <Button label={"Show Menu"} type={"primary"} />
-                    </a>
-                </>
+                        <Button label={"Go to Checkout"} type={"primary"} onClick={createOrder} />
+
+                    </>
+                    :
+                    <>
+                        <p>Your cart is empty!</p>
+                        <a href="/menu">
+                            <Button label={"Show Menu"} type={"primary"} />
+                        </a>
+                    </>
             }
         </main>
     );
