@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import { nanoid } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router-dom";
+import { motion, animate } from "framer-motion";
 
 function Cart() {
     const navigate = useNavigate();
@@ -13,7 +14,7 @@ function Cart() {
     const totalPrice = orderItems.reduce((total, item) => total + item.price, 0);
     const [comment, setComment] = useState('');
 
-    function createOrder() {
+    async function createOrder() {
 
         const order = {
             orderId: nanoid(),
@@ -23,7 +24,7 @@ function Cart() {
             orderItems,
             comment
         }
-
+        await animate(".cart", { x: ["0%", "-100%"], opacity: [1, 0]});
         navigate('/checkout', { state: order });
     }
 
@@ -37,17 +38,23 @@ function Cart() {
             {
                 orderItems.length > 0 ?
                     <>
-                        <section className="details">
-                            {orderItems.map((item, i) => <OrderItem key={i} item={item} />)}
-                            <div className="total-price">
-                                <p>Total Price</p>
-                                <p>{totalPrice} kr</p>
-                            </div>
+                        <motion.section
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1, transition: { duration: .3 } }}
+                            className="details"
+                        >
+                            <section className="order-items">
+                                {orderItems.map((item, i) => <OrderItem key={i} item={item} />)}
+                                <div className="total-price">
+                                    <p>Total Price</p>
+                                    <p>{totalPrice} kr</p>
+                                </div>
+                            </section>
                             <section className="comment">
                                 <p>We're here to cater to your needs! Add allergies or dietary requests below:</p>
                                 <textarea onChange={e => setComment(e.target.value)} value={comment}></textarea>
                             </section>
-                        </section>
+                        </motion.section>
                         <Button label={"Go to Checkout"} type={"primary"} onClick={createOrder} />
 
                     </>
