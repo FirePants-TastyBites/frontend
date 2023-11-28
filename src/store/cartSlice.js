@@ -7,11 +7,39 @@ export const cartSlice = createSlice({
     initialState,
     reducers: {
         addItem: (state, action) => {
-            state.push(action.payload);
+            const index = state.findIndex(item => action.payload.id === item.id);
+
+            if (index < 0) {
+                state.push(action.payload);
+            } else {
+                const item = state[index];
+
+                const update = {
+                    ...item,
+                    price: item.price + (item.price / item.qty),
+                    qty: item.qty += 1,
+                };
+
+                state.splice(index, 1, update);
+            }
+
         },
         removeItem: (state, action) => {
             const index = state.findIndex(item => item.id === action.payload);
-            state.splice(index, 1);
+            const item = state[index];
+
+            if (item.qty > 1) {
+                const update = {
+                    ...item,
+                    price: item.price - (item.price / item.qty),
+                    qty: item.qty -= 1
+                };
+
+                state.splice(index, 1, update);
+            } else {
+                state.splice(index, 1);
+            }
+
         }
     }
 });
