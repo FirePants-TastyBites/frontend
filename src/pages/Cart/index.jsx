@@ -4,8 +4,11 @@ import Button from '../../components/Button';
 import './Cart.scss';
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import { nanoid } from "@reduxjs/toolkit";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
+    const navigate = useNavigate();
     const orderItems = useSelector(state => state.cart);
     const totalPrice = orderItems.reduce((total, item) => total + item.price, 0);
     const [comment, setComment] = useState('');
@@ -13,6 +16,7 @@ function Cart() {
     function createOrder() {
 
         const order = {
+            orderId: nanoid(),
             userId: 'guest',
             totalAmount: totalPrice,
             deliveryTime: new Date(Date.now()),
@@ -20,7 +24,7 @@ function Cart() {
             comment
         }
 
-        console.log(order);
+        navigate('/checkout', { state: order });
     }
 
     return (
