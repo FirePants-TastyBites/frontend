@@ -1,9 +1,11 @@
 import { useState } from "react";
 import HamburgerNav from "../HamburgerNav";
 import styles from "./header.module.scss";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <header className={styles.header}>
@@ -16,10 +18,8 @@ const Header = () => {
       <HamburgerNav isVisible={isVisible} setIsVisible={setIsVisible} />
 
       <div className={styles.header__title}>TASTY BITES</div>
-      <div className={styles.header__iconCart}>
-        <a href="/cart">
-          <i className="fas fa-shopping-cart"></i>
-        </a>
+      <div className={styles.header__iconCart} onClick={() => navigate('/cart')}>
+        <i className="fas fa-shopping-cart"></i>
       </div>
     </header>
   );

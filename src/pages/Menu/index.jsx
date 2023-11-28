@@ -73,6 +73,7 @@ const Menu = () => {
             key={food.id}
           >
             <MenuItem
+              item={food}
               name={food.itemName}
               price={food.price}
               imageUrl={food.url || foodImage}
