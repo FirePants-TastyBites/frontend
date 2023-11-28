@@ -34,7 +34,7 @@ function Cart() {
                 orderItems.length > 0 ?
                 <>
                     <section className="details">
-                        {orderItems.map((item, i) => <OrderItem key={i} {...item} />)}
+                        {orderItems.map((item, i) => <OrderItem key={i} item={item}/>)}
                         <div className="total-price">
                             <p>Total Price</p>
                             <p>{totalPrice} kr</p>

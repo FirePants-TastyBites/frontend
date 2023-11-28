@@ -16,8 +16,8 @@ export const cartSlice = createSlice({
 
                 const update = {
                     ...item,
+                    price: item.price + (item.price / item.qty),
                     qty: item.qty += 1,
-                    price: action.payload.price * item.qty
                 };
 
                 state.splice(index, 1, update);
