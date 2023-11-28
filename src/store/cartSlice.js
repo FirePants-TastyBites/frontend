@@ -1,22 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = [
-            {
-            itemName: 'Grilled Chicken',
-            id: '78329473829',
-            price: 199
-        },
-        {
-            itemName: 'Grilled Tuna',
-            id: 'dsawes65',
-            price: 199
-        },
-        {
-            itemName: 'Grilled Salmon',
-            id: '45645tgreg',
-            price: 19
-        }
-];
+const initialState = [];
 
 export const cartSlice = createSlice({
     name: 'cart',

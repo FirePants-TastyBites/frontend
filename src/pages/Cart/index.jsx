@@ -13,9 +13,9 @@ function Cart() {
     function placeOrder() {
 
         const order = {
-           userId: 'dummy@data.com',
+           userId: 'guest',
            totalAmount: totalPrice,
-           deliveryTime: new Date(Date.now()).toDateString(),
+           deliveryTime: new Date(Date.now()).toISOString(), // skapa funktion för uträkning (20 min + counter) => om låst: klockslag
            orderItems,
            comment
         }
