@@ -8,7 +8,8 @@ import Footer from "./components/Footer";
 import SignInPage from "./pages/Sign-in";
 import Cart from "./pages/Cart";
 import StaffPage from "./pages/Staff";
-
+import StaffLayout from "./components/StaffLayout";
+import StaffOrdersPage from "./pages/StaffOrders";
 function App() {
   return (
     <>
@@ -21,7 +22,10 @@ function App() {
             <Route path="/menu" element={<Menu />}></Route>
             <Route path="/sign-in" element={<SignInPage />}></Route>
             <Route path="/cart" element={<Cart />} />
-            <Route path="/staff" element={<StaffPage />}></Route>
+            <Route path="/staff" element={<StaffLayout />}>
+              <Route index element={<StaffPage />} />
+              <Route path="orders" element={<StaffOrdersPage />} />
+            </Route>
           </Routes>
         </div>
 
