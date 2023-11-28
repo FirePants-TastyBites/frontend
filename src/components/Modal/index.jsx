@@ -59,7 +59,7 @@ const Modal = ({ isOpen, onClose, item }) => {
             Total Calories: <span>{calories}cal</span>
           </p>
         </div>
-        <button className={styles.addToCartButton} onClick={() => dispatch(addItem(item))}>
+        <button className={styles.addToCartButton} onClick={() => dispatch(addItem({...item, qty: 1}))}>
           <i className="fa-solid fa-cart-shopping"></i> Add to Cart
         </button>
       </motion.article>

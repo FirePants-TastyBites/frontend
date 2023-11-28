@@ -2,13 +2,13 @@ import { useDispatch } from 'react-redux';
 import styles from './orderItem.module.scss';
 import { removeItem } from '../../store/cartSlice';
 
-function OrderItem({id, itemName, price }) {
+function OrderItem({id, itemName, price, qty }) {
     const dispatch = useDispatch();
 
     return (
         <li className={styles.orderItem}>
             <div className={styles.qty}>
-                <p>{1}</p>
+                <p>{qty}</p>
                 <button onClick={() => dispatch(removeItem(id))}>
                     <i className="fa-solid fa-trash"></i>
                 </button>
