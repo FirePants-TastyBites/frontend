@@ -54,9 +54,8 @@ function Cart() {
                     :
                     <>
                         <p>Your cart is empty!</p>
-                        <a href="/menu">
-                            <Button label={"Show Menu"} type={"primary"} />
-                        </a>
+                        <Button label={"Show Menu"} type={"primary"} onClick={() => navigate('/menu')}/>
+
                     </>
             }
         </main>
