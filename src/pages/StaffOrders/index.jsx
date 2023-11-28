@@ -5,17 +5,27 @@ import StaffOrdersCard from "../../components/StaffOrdersCard";
 import OrderModal from "../../components/OrderModal";
 
 const prioritizeOrders = (orders) => {
-  return [...orders]
-    .sort(
-      (a, b) =>
-        new Date("2023/01/01 " + a.time) - new Date("2023/01/01 " + b.time)
-    )
-    .map((order, index) => ({
-      ...order,
-      priority: index + 1
-    }));
-};
+  const pendingOrders = orders.filter((order) => order.status === "pending");
+  const completedOrders = orders.filter(
+    (order) => order.status === "completed" || order.status === "delivered"
+  );
 
+  pendingOrders.sort(
+    (a, b) =>
+      new Date("2023/01/01 " + a.time) - new Date("2023/01/01 " + b.time)
+  );
+  completedOrders.sort(
+    (a, b) =>
+      new Date("2023/01/01 " + a.time) - new Date("2023/01/01 " + b.time)
+  );
+
+  const prioritizedPendingOrders = pendingOrders.map((order, index) => ({
+    ...order,
+    priority: index + 1
+  }));
+
+  return [...prioritizedPendingOrders, ...completedOrders];
+};
 const initialOrders = [
   {
     id: "1234",
@@ -29,7 +39,7 @@ const initialOrders = [
   {
     id: "1235",
     totalAmount: 199,
-    time: "12:30",
+    time: "9:30",
     orderItems: ["Heavenly Tuna"],
     comment: "",
     status: "delivered",
@@ -72,10 +82,17 @@ const StaffOrdersPage = () => {
     setActiveTab(tab);
   };
 
-  const filteredOrders =
-    activeTab === "all"
-      ? orders
-      : orders.filter((order) => order.status === activeTab);
+  const filteredOrders = () => {
+    if (activeTab === "all") {
+      return orders;
+    } else if (activeTab === "pending") {
+      return orders.filter((order) => order.status === "pending");
+    } else {
+      return orders.filter(
+        (order) => order.status === "completed" || order.status === "delivered"
+      );
+    }
+  };
 
   const handleCloseModal = () => {
     setSelectedOrder(null);
@@ -106,8 +123,8 @@ const StaffOrdersPage = () => {
 
       <strong>Orders to handle</strong>
       <section className="orders-container">
-        {filteredOrders.length > 0 ? (
-          filteredOrders.map((order) => (
+        {filteredOrders().length > 0 ? (
+          filteredOrders().map((order) => (
             <StaffOrdersCard
               key={order.id}
               id={order.id}
@@ -115,7 +132,7 @@ const StaffOrdersPage = () => {
               status={order.status}
               userId={order.userId}
               comment={order.comment}
-              priority={order.priority}
+              priority={order.status === "pending" ? order.priority : undefined}
               onOpenModal={() => handleOpenModal(order.id)}
               onProcessOrder={handleProcessOrder}
             />

@@ -19,7 +19,7 @@ const StaffOrdersCard = ({
       <header onClick={() => onOpenModal(id)}>
         <div className="image-container">
           <img src="/tuna.png" alt="Order Image" className="order-image" />
-          <strong className="priority">{priority}</strong>
+          {isPending && <strong className="priority">{priority}</strong>}
         </div>
 
         <section className="order-details-container">
