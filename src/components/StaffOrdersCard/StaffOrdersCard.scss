@@ -10,13 +10,7 @@
   border-radius: 16px;
   gap: 12px;
   width: 100%;
-  .orders-card.pending {
-    border: 2px solid $yellow;
-  }
 
-  .orders-card.processed {
-    border: 1px solid $primary-color;
-  }
   header {
     width: 100%;
     display: flex;
@@ -24,19 +18,36 @@
     justify-content: space-between;
     gap: 12px;
 
-    strong {
-      width: 64px;
-      height: 64px;
-      border-radius: 8px;
-      background-color: $primary-color;
-      color: $text-white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1.5em;
-      font-weight: bold;
-      padding: 1rem;
+    .image-container {
+      position: relative;
+      .order-image {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+
+      strong.priority {
+        position: absolute;
+        top: 0;
+        right: 70%;
+        z-index: 1;
+        width: 32px;
+        height: 32px;
+        padding: 10px;
+        border-radius: 50%;
+        background-color: $yellow;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+
+        @include text-style-500-14px;
+        color: $text-white;
+      }
     }
+
     .order-details-container {
       width: 100%;
       display: flex;

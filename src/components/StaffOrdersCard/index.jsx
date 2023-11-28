@@ -17,7 +17,11 @@ const StaffOrdersCard = ({
   return (
     <article className={`orders-card ${isPending ? "pending" : "processed"}`}>
       <header onClick={() => onOpenModal(id)}>
-        <strong className="priority">{priority}</strong>
+        <div className="image-container">
+          <img src="/tuna.png" alt="Order Image" className="order-image" />
+          {isPending && <strong className="priority">{priority}</strong>}
+        </div>
+
         <section className="order-details-container">
           <div>
             <p>#{id}</p>

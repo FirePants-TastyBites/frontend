@@ -24,7 +24,7 @@ const StaffPage = () => {
         id: "#1235",
         deliveryTime: "12:10",
         userId: "Sarah Johnson",
-        imageUrl: "tuna.png",
+        imageUrl: "/tuna.png",
         orderItems: {},
         comment: "",
         priority: 2
