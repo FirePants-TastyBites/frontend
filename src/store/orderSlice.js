@@ -31,9 +31,9 @@ export const orderSlice = createSlice({
         },
         removeItem: (state, action) => {
             const index = state.orderItems.findIndex(item => action.payload === item.id);
+            const item = state.orderItems[index];
             
             if (item.qty > 1) {
-                const item = state.orderItems[index];
                 const update = {
                     ...item,
                     price: item.price - (item.price / item.qty),
