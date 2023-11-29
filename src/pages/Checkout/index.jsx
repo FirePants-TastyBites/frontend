@@ -1,27 +1,44 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import GreenLine from "../../components/GreenLine";
 import Button from "../../components/Button";
 import './Checkout.scss';
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { removeAll } from "../../store/cartSlice";
-import { animate, motion } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
+import { resetOrder } from "../../store/orderSlice";
+import { animate } from "framer-motion";
 
 function Checkout() {
-    const order = useLocation().state;
-    console.log("order: ", order);
-
+    const order = useSelector(state => state.order);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     async function placeOrder() {
-        // skicka order till databas
-        console.log('place order')
-        // Töm cart
-        dispatch(removeAll());
-        // Navigera till confirmation
+        // skicka order till databas och invänta svar 
+        // om allt gick bra => lagra i location.state och navigera till confirmation
+        const orderFromDatabase = {
+            comment: "",
+            deliveryTime: "2023-11-29T11:24:31.747Z",
+            orderId:"wcl01KagFKBpNM3TyrsTw",
+            orderItems: [
+                {
+                    qty: 1,
+                    itemName: 'Cheesy Rainbow Veggie Wrap'
+                },
+                {
+                    qty: 1,
+                    itemName: "Mediterranean Delight"
+                }
+            ],
+            totalAmount: 200,
+            status: 'pending'
+        }
+
         await animate(".checkout", { x: ["0%", "-100%"], opacity: [1, 0]});
-        navigate(`/confirmation/${order.orderId}`);
+        navigate(`/confirmation/${order.orderId}`, { state: orderFromDatabase });
+        dispatch(resetOrder());
+
+        // annars => navigera till errorPage?
+
     }
 
     useEffect(() => {

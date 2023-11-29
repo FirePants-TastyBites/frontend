@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import styles from "./MenuItem.module.scss";
-import { addItem } from "../../store/cartSlice";
+import { addItem } from "../../store/orderSlice";
 
 const MenuItem = ({ item, name, price, imageUrl, category, onIconClick }) => {
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ const MenuItem = ({ item, name, price, imageUrl, category, onIconClick }) => {
         </article>
       </article>
       <article className={styles.btnContainer}>
-        <button onClick={() => dispatch(addItem({...item, qty: 1}))} className={styles.addToCart}>Add to Cart</button>
+        <button onClick={() => dispatch(addItem(item))} className={styles.addToCart}>Add to Cart</button>
       </article>
     </section>
   );

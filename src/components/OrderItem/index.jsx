@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import styles from './orderItem.module.scss';
-import { addItem, removeItem } from '../../store/cartSlice';
+import { addItem, removeItem } from '../../store/orderSlice';
 import { motion } from 'framer-motion';
 
 function OrderItem({ item }) {
