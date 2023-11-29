@@ -20,7 +20,7 @@ function Checkout() {
         // Töm cart
         dispatch(removeAll());
         // Navigera till confirmation
-        // navigate('/confirmation');
+        navigate(`/confirmation/${order.orderId}`);
     }
 
     return (
