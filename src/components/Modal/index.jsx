@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import styles from "./Modal.module.scss";
 import { useDispatch } from "react-redux";
-import { addItem } from "../../store/cartSlice";
+import { addItem } from "../../store/orderSlice";
 
 const Modal = ({ isOpen, onClose, item }) => {
   const dispatch = useDispatch();

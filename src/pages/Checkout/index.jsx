@@ -4,7 +4,7 @@ import Button from "../../components/Button";
 import './Checkout.scss';
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { removeAll } from "../../store/cartSlice";
+import { removeAll } from "../../store/orderSlice";
 import { animate, motion } from "framer-motion";
 
 function Checkout() {

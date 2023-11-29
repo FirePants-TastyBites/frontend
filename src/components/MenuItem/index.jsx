@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import styles from "./MenuItem.module.scss";
-import { addItem } from "../../store/cartSlice";
+import { addItem } from "../../store/orderSlice";
 
 const MenuItem = ({ item, name, price, imageUrl, category, onIconClick }) => {
   const dispatch = useDispatch();

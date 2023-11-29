@@ -8,7 +8,7 @@ import { animate } from "framer-motion";
 const Header = () => {
   const [isVisible, setIsVisible] = useState(false);
   const navigate = useNavigate();
-  const cart = useSelector(state => state.cart);
+  const cart = useSelector(state => state.order.orderItems);
  
   let itemsInCart = 0;
   let itemsInCartStyle = { display: 'none' };

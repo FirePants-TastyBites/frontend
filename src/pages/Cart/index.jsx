@@ -10,7 +10,7 @@ import { motion, animate } from "framer-motion";
 
 function Cart() {
     const navigate = useNavigate();
-    const orderItems = useSelector(state => state.cart);
+    const orderItems = useSelector(state => state.order.orderItems);
     const totalPrice = orderItems.reduce((total, item) => total + item.price, 0);
     const [comment, setComment] = useState('');
 
