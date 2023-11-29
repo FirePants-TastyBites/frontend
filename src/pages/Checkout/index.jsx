@@ -5,6 +5,7 @@ import './Checkout.scss';
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { removeAll } from "../../store/cartSlice";
+import { animate, motion } from "framer-motion";
 
 function Checkout() {
     const order = useLocation().state;
@@ -13,15 +14,19 @@ function Checkout() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    function placeOrder() {
-        // Sätt timer?
+    async function placeOrder() {
         // skicka order till databas
         console.log('place order')
         // Töm cart
         dispatch(removeAll());
         // Navigera till confirmation
+        await animate(".checkout", { x: ["0%", "-100%"], opacity: [1, 0]});
         navigate(`/confirmation/${order.orderId}`);
     }
+
+    useEffect(() => {
+        animate("section", { opacity: [0, 1], transition: { duration: .3} })
+    }, [])
 
     return (
         <main className="checkout">
