@@ -4,7 +4,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 2rem;
     min-height: 88vh;
 
     header {
@@ -26,6 +26,22 @@
             align-items: center;
             text-align: center;
             gap: 2rem;
+        }
+
+        .details {
+            margin-top: 10px;
+            padding: 1rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            @include text-style-400-14px;
+            border-bottom: 1px solid $primary-color;
+            border-top: 1px solid $primary-color;
+
+            > p {
+                align-self: flex-end;
+                color: $cta-color;
+            }
         }
         
         

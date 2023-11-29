@@ -16,11 +16,12 @@ function OrderConfirmation() {
     const orderItems = order.orderItems.map((item, i) => {
         return (
             <li key={i}>
-                <p>{item.qty}</p>
-                <p>{item.itemName}</p>
+                <p>{item.qty} {item.itemName}</p>
             </li>
         )
-    })
+    });
+
+    const orderStatus = order.status === 'pending' ? 'Pending' : "In progress"
 
     return (
         <main className="confirmation">
@@ -43,7 +44,7 @@ function OrderConfirmation() {
                         <p>12.57</p>
                     </div>
                 </section>
-                <section className="address">
+                <section className="order-id">
                     <h4>Order ID</h4>
                     <div>
                         <p>{id}</p>
@@ -62,12 +63,11 @@ function OrderConfirmation() {
                                 exit={{ opacity: 0, y: -10 }}
                                 transition={{ duration: 0.2 }}
                             >
-                                <section>
+                                <section className='details'>
                                     <ul>
                                         {orderItems}
                                     </ul>
-                                    <p>Total price: {order.totalAmount} kr</p>
-                                    <p>Status: {order.status}</p>
+                                        <p>{orderStatus}</p>
                                 </section>
                             </motion.section>
                         }
