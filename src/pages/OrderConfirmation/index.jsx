@@ -3,6 +3,7 @@ import PinkThingy from '../../components/PinkThingy';
 import GreenLine from '../../components/GreenLine';
 import Button from '../../components/Button';
 import './OrderConfirmation.scss'
+import DetailsButton from '../../components/DetailsButton';
 
 function OrderConfirmation() {
     const navigate = useNavigate();
@@ -32,7 +33,7 @@ function OrderConfirmation() {
                     <h4>Order ID</h4>
                     <div>
                         <p>{id}</p>
-                        <button>Show more</button>
+                        <DetailsButton>Show more</DetailsButton>
                     </div>
                 </section>
             </section>
