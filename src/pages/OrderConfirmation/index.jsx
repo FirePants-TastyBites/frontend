@@ -10,17 +10,31 @@ import { AnimatePresence, motion } from 'framer-motion';
 function OrderConfirmation() {
     const order = useLocation().state;
     const [showMore, setShowMore] = useState(false);
+    const [openModal, setOpenModal] = useState(false);
+    const [isLocked, setIsLocked] = useState(false);
     const navigate = useNavigate();
     const id = useParams().id;
 
     const orderItems = order.orderItems.map((item, i) => {
         return (
             <li key={i}>
-                <p>{item.qty}</p>
-                <p>{item.itemName}</p>
+                <p>{item.qty} {item.itemName}</p>
             </li>
         )
-    })
+    });
+
+    const orderStatus = order.status === 'pending' ? 'Pending' : "In progress";
+
+    function cancelOrder() {
+        console.log('Canceling order');
+        toggleModal();
+        // Skicka till databasen
+        navigate('/cancel-order')
+    }
+
+    function toggleModal() {
+        setOpenModal(!openModal);
+    }
 
     return (
         <main className="confirmation">
@@ -43,7 +57,7 @@ function OrderConfirmation() {
                         <p>12.57</p>
                     </div>
                 </section>
-                <section className="address">
+                <section className="order-id">
                     <h4>Order ID</h4>
                     <div>
                         <p>{id}</p>
@@ -54,20 +68,18 @@ function OrderConfirmation() {
                         </DetailsButton>
                     </div>
                     <AnimatePresence>
-                        {
-                            showMore &&
+                        { showMore &&
                             <motion.section
                                 initial={{ opacity: 0, y: -10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -10 }}
                                 transition={{ duration: 0.2 }}
                             >
-                                <section>
+                                <section className='details'>
                                     <ul>
                                         {orderItems}
                                     </ul>
-                                    <p>Total price: {order.totalAmount} kr</p>
-                                    <p>Status: {order.status}</p>
+                                    <p>{orderStatus}</p>
                                 </section>
                             </motion.section>
                         }
@@ -75,9 +87,32 @@ function OrderConfirmation() {
                 </section>
             </motion.section>
 
-            <Button label={"Go to Home Page"} type={"primary"} onClick={() => navigate('/home')} />
+            <Button label={"Go to Home Page"} type={"primary"} onClick={() => navigate('/')} />
 
+            { !isLocked &&
+                <section className='cancel-order'>
+                    <p>Unexpected change of plans? No problem! You can cancel your order anytime before our chefs hit the kitchen stage.</p>
+                    <DetailsButton onClick={toggleModal}>Cancel Order</DetailsButton>
+                </section>
+            }
+            { openModal &&
+                <article className='cancel-modal'>
+                    <div>
+                        <div aria-label='close' onClick={toggleModal}>
+                            <i className="fa-solid fa-x"></i>
+                        </div>
+                        <h2>Canceling You Order? We Understand.</h2>
+                        <section>
+                            <p>Are you sure you want to cancel your order? If unexpected cravings return, you can always reorder.</p>
+                            <p>Do you want to cancel your order?</p>
+                        </section>
+                        <Button label={"Yes"} type={"primary"} onClick={cancelOrder} />
+                        <Button label={"No"} type={"secondary"} onClick={toggleModal} />
+                    </div>
+                </article>
+            }
         </main>
+
     );
 }
 

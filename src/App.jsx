@@ -13,6 +13,7 @@ import StaffLayout from "./components/StaffLayout";
 import StaffOrdersPage from "./pages/StaffOrders";
 import StaffMenuPage from "./pages/StaffMenu";
 import OrderConfirmation from "./pages/OrderConfirmation";
+import OrderCancellation from "./pages/OrderCancellation";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/confirmation/:id" element={<OrderConfirmation />} />
+            <Route path="/cancel-order" element={<OrderCancellation />} />
             <Route path="/staff" element={<StaffLayout />}>
               <Route index element={<StaffPage />} />
               <Route path="orders" element={<StaffOrdersPage />} />

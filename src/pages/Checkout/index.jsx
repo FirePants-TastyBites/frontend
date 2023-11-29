@@ -30,7 +30,8 @@ function Checkout() {
                 }
             ],
             totalAmount: 200,
-            status: 'pending'
+            status: 'pending',
+            isLocked: true
         }
 
         await animate(".checkout", { x: ["0%", "-100%"], opacity: [1, 0]});
