@@ -88,7 +88,7 @@ function OrderConfirmation() {
                 </section>
             </motion.section>
 
-            <Button label={"Go to Home Page"} type={"primary"} onClick={() => navigate('/home')} />
+            <Button label={"Go to Home Page"} type={"primary"} onClick={() => navigate('/')} />
 
             <section className='cancel-order'>
                 <p>Unexpected change of plans? No problem! You can cancel your order anytime before our chefs hit the kitchen stage.</p>

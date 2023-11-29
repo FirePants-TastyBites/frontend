@@ -74,10 +74,7 @@
 
 .cancel-modal {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
@@ -92,12 +89,8 @@
         width: 100%;
         max-width: 500px;
         border-radius: 8px;
-        overflow: hidden;
-        position: relative;
-        padding: 1rem;
+        padding: 1rem 1rem 2rem;
         gap: 1rem;
-        box-sizing: border-box;
-        max-height: 550px;
 
         align-items: center;
         text-align: center;
