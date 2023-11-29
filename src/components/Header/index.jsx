@@ -8,23 +8,23 @@ import { animate } from "framer-motion";
 const Header = () => {
   const [isVisible, setIsVisible] = useState(false);
   const navigate = useNavigate();
-  const cart = useSelector(state => state.cart);
+  const orderItems = useSelector(state => state.order.orderItems);
  
   let itemsInCart = 0;
-  let itemsInCartStyle = { display: 'none' };
+  let displayItemsInCart = { display: 'none' };
 
   useEffect(() => {
     animate(".items-in-cart", {y: [0, -10, 0]});
 
-  }, [cart])
+  }, [orderItems])
   
-  if (cart.length > 0) {
+  if (orderItems.length > 0) {
 
-    cart.forEach(item => {
+    orderItems.forEach(item => {
       itemsInCart += item.qty;
     });
 
-    itemsInCartStyle = { display: 'flex' }
+    displayItemsInCart = { display: 'flex' }
   }
   
 
@@ -40,7 +40,7 @@ const Header = () => {
 
       <div className={styles.header__title}>TASTY BITES</div>
       <div className={styles.header__iconCart} onClick={() => navigate('/cart')}>
-        <aside className={ `items-in-cart ${styles.itemsInCart}`} style={itemsInCartStyle}>{itemsInCart}</aside>
+        <aside className={ `items-in-cart ${styles.itemsInCart}`} style={displayItemsInCart}>{itemsInCart}</aside>
         <i className="fas fa-shopping-cart"></i>
       </div>
     </header>

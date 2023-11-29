@@ -1,10 +1,9 @@
 @import "../../styles/variables";
 
-.checkout {
+.confirmation {
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     gap: 3rem;
     min-height: 88vh;
 
@@ -15,38 +14,35 @@
         gap: 1.5rem;
     }
 
-    p {
-        @include text-style-600
-    }
-
-    .delivery-info {
+    
+    .confirmation-info {
         display: flex;
         flex-direction: column;
         gap: 2rem;
 
-
+        .message {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 2rem;
+        }
+        
+        
         div {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-top: 10px;
-
-            button {
-                padding: 2px 6px;
-                border-radius: 4px;
-                border: .5px solid $secondary-color;
-                color: $text-color;
+            
+            p {
+                @include text-style-600
             }
 
         }
     }
 
-    .total-price {
-        // margin-top: 4rem;
-        display: flex;
-        justify-content: space-between;
-    }
     > button {
-        margin: 0 auto 1rem
+        margin: auto auto 1rem
     }
 }
