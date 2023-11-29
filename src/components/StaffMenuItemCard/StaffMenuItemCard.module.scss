@@ -1,0 +1,54 @@
+@import "../../styles/variables";
+
+.menuItem {
+  border-radius: 8px;
+  border: 1px solid #181818;
+  background: $bg-off-white;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: space-between;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+  max-width: 169px;
+  min-height: 277px;
+  width: 100%;
+  height: auto;
+  img {
+    width: 100%;
+    height: auto;
+    max-height: 145px;
+    align-self: center;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  p {
+    @include text-style-600;
+    text-align: left;
+  }
+
+  .availabilityContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 8px;
+
+    span {
+      @include text-style-600;
+      text-align: left;
+    }
+  }
+
+  &.unavailable {
+    border-radius: 8px;
+    border: 1px solid #cbcbcb;
+    background: #e6e6e6;
+
+    img {
+      opacity: 0.5;
+    }
+  }
+}

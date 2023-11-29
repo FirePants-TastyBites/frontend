@@ -11,6 +11,7 @@ import Checkout from "./pages/Checkout";
 import StaffPage from "./pages/Staff";
 import StaffLayout from "./components/StaffLayout";
 import StaffOrdersPage from "./pages/StaffOrders";
+import StaffMenuPage from "./pages/StaffMenu";
 import OrderConfirmation from "./pages/OrderConfirmation";
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <Route path="/staff" element={<StaffLayout />}>
               <Route index element={<StaffPage />} />
               <Route path="orders" element={<StaffOrdersPage />} />
+              <Route path="menu" element={<StaffMenuPage />} />
             </Route>
           </Routes>
         </div>

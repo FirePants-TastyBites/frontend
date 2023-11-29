@@ -1,9 +1,9 @@
 import "./TabButtons.scss";
 
-const TabButtons = ({ tabs, activeTab, onClick }) => {
+const TabButtons = ({ tabs, activeTab, onClick, caption }) => {
   return (
     <section className="buttons-container">
-      <p>Orders to handle</p>
+      <p>{caption}</p>
       <nav>
         {tabs.map((tab) => (
           <button
