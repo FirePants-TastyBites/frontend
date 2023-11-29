@@ -19,6 +19,7 @@
         display: flex;
         flex-direction: column;
         gap: 2rem;
+        min-height: 60vh;
 
         .message {
             display: flex;
@@ -58,7 +59,62 @@
         }
     }
 
+    .cancel-order {
+        text-align: center;
+
+        p {
+            margin-bottom: 1rem;
+        }
+    }
+
     > button {
         margin: auto auto 1rem
+    }
+}
+
+.cancel-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 12px;
+
+    > div {
+        background: $background-color;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 500px;
+        border-radius: 8px;
+        overflow: hidden;
+        position: relative;
+        padding: 1rem;
+        gap: 1rem;
+        box-sizing: border-box;
+        max-height: 550px;
+
+        align-items: center;
+        text-align: center;
+
+        > div {
+            align-self: flex-end;
+            color: $cta-color;
+        }
+        > section {
+
+            p {
+                margin: 1rem 0;
+            }
+        }
+      
+        @media (min-width: 768px) {
+          height: 550px;
+        }
     }
 }
