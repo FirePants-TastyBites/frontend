@@ -119,7 +119,12 @@ const StaffOrdersPage = () => {
           this time that need your attention.
         </p>
       </header>
-      <TabButtons activeTab={activeTab} onClick={sortOrders} tabs={tabs} />
+      <TabButtons
+        activeTab={activeTab}
+        onClick={sortOrders}
+        tabs={tabs}
+        caption="Orders to handle"
+      />
 
       <strong>Orders to handle</strong>
       <section className="orders-container">
