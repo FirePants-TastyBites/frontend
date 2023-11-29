@@ -9,6 +9,7 @@ const Header = () => {
   const [isVisible, setIsVisible] = useState(false);
   const navigate = useNavigate();
   const cart = useSelector(state => state.order.orderItems);
+  console.log(cart)
  
   let itemsInCart = 0;
   let itemsInCartStyle = { display: 'none' };

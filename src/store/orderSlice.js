@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 const initialState = {
     orderId: null,
@@ -17,7 +17,7 @@ export const orderSlice = createSlice({
             const index = state.orderItems.findIndex(item => action.payload.id === item.id);
 
             if (index < 0) {
-                state.orderItems.push(action.payload);
+                state.orderItems.push({...action.payload, qty: 1});
             } else {
                 const item = state.orderItems[index];
 
@@ -48,11 +48,28 @@ export const orderSlice = createSlice({
             }
 
         },
-        removeAll: () => initialState.orderItems,
-        reset: () => initialState
+        removeAll: (state) => {
+            console.log(initialState.orderItems);
+            state.orderItems = initialState.orderItems;
+        },
+        setOrder: (state, action) => {
+            const timestamp = Date.now();
+            const deliveryTime = new Date(timestamp);
+
+            const newOrder = {
+                orderId: nanoid(),
+                deliveryTime, 
+                ...action.payload
+            }
+
+
+            console.log( "New order: ", newOrder)
+            state = newOrder;
+        },
+        resetOrder: () => initialState
     }
 });
 
-export const { addItem, removeItem, removeAll } = orderSlice.actions;
+export const { addItem, removeItem, removeAll, setOrder, resetOrder } = orderSlice.actions;
 
 export default orderSlice.reducer;

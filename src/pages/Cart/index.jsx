@@ -2,14 +2,16 @@ import GreenLine from "../../components/GreenLine";
 import OrderItem from "../../components/OrderItem";
 import Button from '../../components/Button';
 import './Cart.scss';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { nanoid } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router-dom";
 import { motion, animate } from "framer-motion";
+import { setOrder } from "../../store/orderSlice";
 
 function Cart() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const orderItems = useSelector(state => state.order.orderItems);
     const totalPrice = orderItems.reduce((total, item) => total + item.price, 0);
     const [comment, setComment] = useState('');
@@ -17,13 +19,14 @@ function Cart() {
     async function createOrder() {
 
         const order = {
-            orderId: nanoid(),
             userId: 'guest',
             totalAmount: totalPrice,
-            deliveryTime: new Date(Date.now()),
             orderItems,
             comment
         }
+
+        dispatch(setOrder(order));
+
         await animate(".cart", { x: ["0%", "-100%"], opacity: [1, 0]});
         navigate('/checkout', { state: order });
     }
