@@ -1,18 +1,26 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import GreenLine from "../../components/GreenLine";
 import Button from "../../components/Button";
 import './Checkout.scss';
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { removeAll } from "../../store/cartSlice";
 
 function Checkout() {
     const order = useLocation().state;
     console.log("order: ", order);
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     function placeOrder() {
         // Sätt timer?
         // skicka order till databas
+        console.log('place order')
         // Töm cart
+        dispatch(removeAll());
         // Navigera till confirmation
+        // navigate('/confirmation');
     }
 
     return (
