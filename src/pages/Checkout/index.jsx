@@ -1,26 +1,24 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import GreenLine from "../../components/GreenLine";
 import Button from "../../components/Button";
 import './Checkout.scss';
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { removeAll } from "../../store/orderSlice";
-import { animate, motion } from "framer-motion";
+import { animate } from "framer-motion";
 
 function Checkout() {
-    const order = useLocation().state;
-    console.log("order: ", order);
-
+    const order = useSelector(state => state.order);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     async function placeOrder() {
         // skicka order till databas
         console.log('place order')
-        // Töm cart
-        dispatch(removeAll());
-        // Navigera till confirmation
+
         await animate(".checkout", { x: ["0%", "-100%"], opacity: [1, 0]});
+
+        dispatch(removeAll());
         navigate(`/confirmation/${order.orderId}`);
     }
 

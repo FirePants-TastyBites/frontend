@@ -4,7 +4,6 @@ import Button from '../../components/Button';
 import './Cart.scss';
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { nanoid } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router-dom";
 import { motion, animate } from "framer-motion";
 import { setOrder } from "../../store/orderSlice";
@@ -26,9 +25,8 @@ function Cart() {
         }
 
         dispatch(setOrder(order));
-
         await animate(".cart", { x: ["0%", "-100%"], opacity: [1, 0]});
-        navigate('/checkout', { state: order });
+        navigate('/checkout');
     }
 
     return (

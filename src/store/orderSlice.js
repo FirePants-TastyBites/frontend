@@ -1,10 +1,10 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 const initialState = {
-    orderId: null,
-    userId: null,
+    orderId: '',
+    userId: '',
     totalAmount: 0,
-    deliveryTime: null,
+    deliveryTime: '',
     orderItems: [],
     comment: ''
 };
@@ -54,7 +54,7 @@ export const orderSlice = createSlice({
         },
         setOrder: (state, action) => {
             const timestamp = Date.now();
-            const deliveryTime = new Date(timestamp);
+            const deliveryTime = new Date(timestamp).toISOString();
 
             const newOrder = {
                 orderId: nanoid(),
@@ -62,9 +62,8 @@ export const orderSlice = createSlice({
                 ...action.payload
             }
 
-
             console.log( "New order: ", newOrder)
-            state = newOrder;
+            return newOrder;
         },
         resetOrder: () => initialState
     }
