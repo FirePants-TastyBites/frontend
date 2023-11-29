@@ -11,6 +11,7 @@ function OrderConfirmation() {
     const order = useLocation().state;
     const [showMore, setShowMore] = useState(false);
     const [openModal, setOpenModal] = useState(false);
+    const [isLocked, setIsLocked] = useState(false);
     const navigate = useNavigate();
     const id = useParams().id;
 
@@ -22,13 +23,13 @@ function OrderConfirmation() {
         )
     });
 
-    const orderStatus = order.status === 'pending' ? 'Pending' : "In progress"
+    const orderStatus = order.status === 'pending' ? 'Pending' : "In progress";
 
     function cancelOrder() {
-        // cancel order
         console.log('Canceling order');
         toggleModal();
-        // Navigera till Canceling bla bla
+        // Skicka till databasen
+        // Navigera till cancel
     }
 
     function toggleModal() {
@@ -36,7 +37,6 @@ function OrderConfirmation() {
     }
 
     return (
-
         <main className="confirmation">
             <header>
                 <h1>Success</h1>
@@ -68,8 +68,7 @@ function OrderConfirmation() {
                         </DetailsButton>
                     </div>
                     <AnimatePresence>
-                        {
-                            showMore &&
+                        { showMore &&
                             <motion.section
                                 initial={{ opacity: 0, y: -10 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -90,12 +89,13 @@ function OrderConfirmation() {
 
             <Button label={"Go to Home Page"} type={"primary"} onClick={() => navigate('/')} />
 
-            <section className='cancel-order'>
-                <p>Unexpected change of plans? No problem! You can cancel your order anytime before our chefs hit the kitchen stage.</p>
-                <DetailsButton onClick={toggleModal}>Cancel Order</DetailsButton>
-            </section>
-            {
-                openModal &&
+            { !isLocked &&
+                <section className='cancel-order'>
+                    <p>Unexpected change of plans? No problem! You can cancel your order anytime before our chefs hit the kitchen stage.</p>
+                    <DetailsButton onClick={toggleModal}>Cancel Order</DetailsButton>
+                </section>
+            }
+            { openModal &&
                 <article className='cancel-modal'>
                     <div>
                         <div aria-label='close' onClick={toggleModal}>

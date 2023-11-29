@@ -86,11 +86,10 @@
         background: $background-color;
         display: flex;
         flex-direction: column;
-        width: 100%;
-        max-width: 500px;
         border-radius: 8px;
         padding: 1rem 1rem 2rem;
         gap: 1rem;
+        max-width: 600px;
 
         align-items: center;
         text-align: center;
@@ -107,7 +106,7 @@
         }
       
         @media (min-width: 768px) {
-          height: 550px;
+          padding: 3rem;
         }
     }
 }
