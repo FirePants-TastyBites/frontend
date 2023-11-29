@@ -4,13 +4,17 @@ import GreenLine from '../../components/GreenLine';
 import Button from '../../components/Button';
 import './OrderConfirmation.scss'
 import DetailsButton from '../../components/DetailsButton';
+import { useEffect, useState } from 'react';
 
 function OrderConfirmation() {
+    const [showMore, setShowMore] = useState(false);
     const navigate = useNavigate();
     const id = useParams().id;
-    const location = useLocation();
 
-    console.log(id);
+    // useEffect(async () => {
+    //     await null;
+        
+    // }, [])
 
     return (
         <main className="confirmation">
@@ -33,8 +37,20 @@ function OrderConfirmation() {
                     <h4>Order ID</h4>
                     <div>
                         <p>{id}</p>
-                        <DetailsButton>Show more</DetailsButton>
+                        <DetailsButton onClick={() => setShowMore(!showMore)}>
+                            {
+                                showMore ? 'Show less' : 'Show more'
+                            }
+                        </DetailsButton>
                     </div>
+                    {
+                        showMore &&
+                        <section>
+                            More info here <br/>
+                            More info here <br/>
+                            More info here
+                        </section>
+                    }
                 </section>
             </section>
 
