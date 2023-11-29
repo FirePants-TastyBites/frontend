@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, animate } from "framer-motion";
 import { setOrder } from "../../store/orderSlice";
+import { nanoid } from "@reduxjs/toolkit";
 
 function Cart() {
     const navigate = useNavigate();
@@ -17,14 +18,19 @@ function Cart() {
 
     async function createOrder() {
 
-        const order = {
+        const timestamp = Date.now();
+        const deliveryTime = new Date(timestamp).toISOString();
+
+        const newOrder = {
+            orderId: nanoid(),
             userId: 'guest',
+            deliveryTime, 
             totalAmount: totalPrice,
             orderItems,
             comment
         }
 
-        dispatch(setOrder(order));
+        dispatch(setOrder(newOrder));
         await animate(".cart", { x: ["0%", "-100%"], opacity: [1, 0]});
         navigate('/checkout');
     }
@@ -63,7 +69,6 @@ function Cart() {
                     <>
                         <p>Your cart is empty!</p>
                         <Button label={"Show Menu"} type={"primary"} onClick={() => navigate('/menu')}/>
-
                     </>
             }
         </main>

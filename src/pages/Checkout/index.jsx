@@ -4,7 +4,7 @@ import Button from "../../components/Button";
 import './Checkout.scss';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { removeAll } from "../../store/orderSlice";
+import { resetOrder } from "../../store/orderSlice";
 import { animate } from "framer-motion";
 
 function Checkout() {
@@ -13,13 +13,32 @@ function Checkout() {
     const navigate = useNavigate();
 
     async function placeOrder() {
-        // skicka order till databas
-        console.log('place order')
+        // skicka order till databas och invänta svar 
+        // om allt gick bra => lagra i location.state och navigera till confirmation
+        const orderFromDatabase = {
+            comment: "",
+            deliveryTime: "2023-11-29T11:24:31.747Z",
+            orderId:"wcl01KagFKBpNM3TyrsTw",
+            orderItems: [
+                {
+                    qty: 1,
+                    itemName: 'Cheesy Rainbow Veggie Wrap'
+                },
+                {
+                    qty: 1,
+                    itemName: "Mediterranean Delight"
+                }
+            ],
+            totalAmount: 200,
+            status: 'pending'
+        }
 
         await animate(".checkout", { x: ["0%", "-100%"], opacity: [1, 0]});
+        navigate(`/confirmation/${order.orderId}`, { state: orderFromDatabase });
+        dispatch(resetOrder());
 
-        dispatch(removeAll());
-        navigate(`/confirmation/${order.orderId}`);
+        // annars => navigera till errorPage?
+
     }
 
     useEffect(() => {

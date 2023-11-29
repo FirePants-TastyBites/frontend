@@ -1,4 +1,4 @@
-import { createSlice, nanoid } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     orderId: '',
@@ -15,12 +15,11 @@ export const orderSlice = createSlice({
     reducers: {
         addItem: (state, action) => {
             const index = state.orderItems.findIndex(item => action.payload.id === item.id);
-
+            
             if (index < 0) {
                 state.orderItems.push({...action.payload, qty: 1});
             } else {
                 const item = state.orderItems[index];
-
                 const update = {
                     ...item,
                     price: item.price + (item.price / item.qty),
@@ -29,13 +28,12 @@ export const orderSlice = createSlice({
 
                 state.orderItems.splice(index, 1, update);
             }
-
         },
         removeItem: (state, action) => {
-            const index = state.orderItems.findIndex(item => item.id === action.payload);
-            const item = state.orderItems[index];
-
+            const index = state.orderItems.findIndex(item => action.payload === item.id);
+            
             if (item.qty > 1) {
+                const item = state.orderItems[index];
                 const update = {
                     ...item,
                     price: item.price - (item.price / item.qty),
@@ -46,29 +44,14 @@ export const orderSlice = createSlice({
             } else {
                 state.orderItems.splice(index, 1);
             }
-
-        },
-        removeAll: (state) => {
-            console.log(initialState.orderItems);
-            state.orderItems = initialState.orderItems;
         },
         setOrder: (state, action) => {
-            const timestamp = Date.now();
-            const deliveryTime = new Date(timestamp).toISOString();
-
-            const newOrder = {
-                orderId: nanoid(),
-                deliveryTime, 
-                ...action.payload
-            }
-
-            console.log( "New order: ", newOrder)
-            return newOrder;
+            return action.payload;
         },
         resetOrder: () => initialState
     }
 });
 
-export const { addItem, removeItem, removeAll, setOrder, resetOrder } = orderSlice.actions;
+export const { addItem, removeItem, setOrder, resetOrder } = orderSlice.actions;
 
 export default orderSlice.reducer;

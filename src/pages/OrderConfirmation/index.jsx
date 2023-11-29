@@ -1,23 +1,24 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import PinkThingy from '../../components/PinkThingy';
 import GreenLine from '../../components/GreenLine';
 import Button from '../../components/Button';
-import OrderItem from '../../components/OrderItem';
 import './OrderConfirmation.scss'
 import DetailsButton from '../../components/DetailsButton';
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useSelector } from 'react-redux';
 
 function OrderConfirmation() {
-    const order = useSelector(state => state.order)
+    const order = useLocation().state;
     const [showMore, setShowMore] = useState(false);
     const navigate = useNavigate();
     const id = useParams().id;
 
     const orderItems = order.orderItems.map((item, i) => {
         return (
-            <OrderItem item={item} />
+            <li key={i}>
+                <p>{item.qty}</p>
+                <p>{item.itemName}</p>
+            </li>
         )
     })
 
@@ -61,7 +62,13 @@ function OrderConfirmation() {
                                 exit={{ opacity: 0, y: -10 }}
                                 transition={{ duration: 0.2 }}
                             >
-                                {orderItems}
+                                <section>
+                                    <ul>
+                                        {orderItems}
+                                    </ul>
+                                    <p>Total price: {order.totalAmount} kr</p>
+                                    <p>Status: {order.status}</p>
+                                </section>
                             </motion.section>
                         }
                     </AnimatePresence>
