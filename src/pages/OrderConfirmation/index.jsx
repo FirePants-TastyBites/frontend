@@ -2,6 +2,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import PinkThingy from '../../components/PinkThingy';
 import GreenLine from '../../components/GreenLine';
 import Button from '../../components/Button';
+import './OrderConfirmation.scss'
 
 function OrderConfirmation() {
     const navigate = useNavigate();
@@ -16,11 +17,12 @@ function OrderConfirmation() {
                 <h1>Success</h1>
                 <GreenLine />
             </header>
-            <section className="confirmaiton-info">
-                <p>Your Tasty Bites order is on it’s way. Thanks for choosing us!</p>
-                <PinkThingy />
-            </section>
-            <section className="time">
+            <section className="confirmation-info">
+                <section className="message">
+                    <p>Your Tasty Bites order is on it’s way. Thanks for choosing us!</p>
+                    <PinkThingy />
+                </section>
+                <section className="time">
                     <h4>Estimated Delivery Time</h4>
                     <div>
                         <p>12.57</p>
@@ -29,10 +31,11 @@ function OrderConfirmation() {
                 <section className="address">
                     <h4>Order ID</h4>
                     <div>
-                        <p>order id here</p>
+                        <p>{id}</p>
                         <button>Show more</button>
                     </div>
                 </section>
+            </section>
 
             <Button label={"Go to Home Page"} type={"primary"} onClick={() => navigate('/home')} />
 
