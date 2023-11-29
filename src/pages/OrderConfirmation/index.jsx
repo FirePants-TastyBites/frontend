@@ -29,7 +29,7 @@ function OrderConfirmation() {
         console.log('Canceling order');
         toggleModal();
         // Skicka till databasen
-        // Navigera till cancel
+        navigate('/cancel-order')
     }
 
     function toggleModal() {
