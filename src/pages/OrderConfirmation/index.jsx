@@ -1,20 +1,16 @@
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import PinkThingy from '../../components/PinkThingy';
 import GreenLine from '../../components/GreenLine';
 import Button from '../../components/Button';
 import './OrderConfirmation.scss'
 import DetailsButton from '../../components/DetailsButton';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 function OrderConfirmation() {
     const [showMore, setShowMore] = useState(false);
     const navigate = useNavigate();
     const id = useParams().id;
-
-    // useEffect(async () => {
-    //     await null;
-        
-    // }, [])
 
     return (
         <main className="confirmation">
@@ -22,7 +18,11 @@ function OrderConfirmation() {
                 <h1>Success</h1>
                 <GreenLine />
             </header>
-            <section className="confirmation-info">
+            <motion.section
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1, transition: { duration: .3 } }}
+                className="confirmation-info"
+            >
                 <section className="message">
                     <p>Your Tasty Bites order is on it’s way. Thanks for choosing us!</p>
                     <PinkThingy />
@@ -43,16 +43,23 @@ function OrderConfirmation() {
                             }
                         </DetailsButton>
                     </div>
-                    {
-                        showMore &&
-                        <section>
-                            More info here <br/>
-                            More info here <br/>
-                            More info here
-                        </section>
-                    }
+                    <AnimatePresence>
+                        {
+                            showMore &&
+                            <motion.section
+                                initial={{ opacity: 0, y: -10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.2 }}
+                            >
+                                <p>More info here </p>
+                                <p>More info here </p>
+                                <p>More info here </p>
+                            </motion.section>
+                        }
+                    </AnimatePresence>
                 </section>
-            </section>
+            </motion.section>
 
             <Button label={"Go to Home Page"} type={"primary"} onClick={() => navigate('/home')} />
 
