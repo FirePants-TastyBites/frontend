@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation, useParams } from "react-router-dom";
 import "./styles/main.scss";
 import Header from "./components/Header";
 import Home from "./pages/Home";
@@ -14,8 +14,15 @@ import StaffOrdersPage from "./pages/StaffOrders";
 import StaffMenuPage from "./pages/StaffMenu";
 import OrderConfirmation from "./pages/OrderConfirmation";
 import OrderCancellation from "./pages/OrderCancellation";
+import { useEffect } from "react";
 
 function App() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
   return (
     <>
       <div className="container">

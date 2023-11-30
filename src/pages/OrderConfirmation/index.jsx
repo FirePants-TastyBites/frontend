@@ -16,6 +16,9 @@ function OrderConfirmation() {
     const navigate = useNavigate();
     const id = useParams().id;
     
+    // Ska vara ett state?
+    const orderStatus = order.status === 'pending' ? 'Pending' : "In progress";
+
     console.log('isLocked: ', isLocked);
     
     useEffect(() => {
@@ -28,13 +31,12 @@ function OrderConfirmation() {
         function calcDeliveryTimeWithInterval() {
             if (!order.isLocked) {
                 calcDeliveryTime();
-                timeoutId = setTimeout(calcDeliveryTimeWithInterval, 1000)
+                timeoutId = setTimeout(calcDeliveryTimeWithInterval, 1000);
             }
         }
 
         calcDeliveryTimeWithInterval();
 
-        // Ska den verkligen tömmas här?
         return () => {
             clearTimeout(timeoutId);
         }
@@ -60,7 +62,6 @@ function OrderConfirmation() {
         )
     });
 
-    const orderStatus = order.status === 'pending' ? 'Pending' : "In progress";
 
     function cancelOrder() {
         console.log('Canceling order');
