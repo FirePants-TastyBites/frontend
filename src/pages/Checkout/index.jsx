@@ -9,15 +9,17 @@ import { animate } from "framer-motion";
 
 function Checkout() {
     const order = useSelector(state => state.order);
+    let isLocked = order.isLocked;
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     async function placeOrder() {
         // skicka order till databas och invänta svar 
         // om allt gick bra => lagra i location.state och navigera till confirmation
-        const orderFromDatabase = {
+        
+        const response = {
             comment: "",
-            deliveryTime: "2023-11-29T11:24:31.747Z",
+            createdAt: "2023-11-29T11:24:31.747Z",
             orderId:"wcl01KagFKBpNM3TyrsTw",
             orderItems: [
                 {
@@ -31,11 +33,11 @@ function Checkout() {
             ],
             totalAmount: 200,
             status: 'pending',
-            isLocked: true
+            isLocked: false
         }
 
         await animate(".checkout", { x: ["0%", "-100%"], opacity: [1, 0]});
-        navigate(`/confirmation/${order.orderId}`, { state: orderFromDatabase });
+        navigate(`/confirmation/${order.orderId}`, { state: response });
         dispatch(resetOrder());
 
         // annars => navigera till errorPage?
