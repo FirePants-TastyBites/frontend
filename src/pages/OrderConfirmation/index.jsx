@@ -11,12 +11,46 @@ function OrderConfirmation() {
     const order = useLocation().state;
     const [showMore, setShowMore] = useState(false);
     const [openModal, setOpenModal] = useState(false);
-    // Måste prata med databasen
     const [isLocked, setIsLocked] = useState(false);
+    const [deliveryTime, setDeliveryTime] = useState(null);
     const navigate = useNavigate();
     const id = useParams().id;
     
-    console.log('isLocked: ', isLocked)
+    console.log('isLocked: ', isLocked);
+    
+    useEffect(() => {
+        let timeoutId;
+        console.log('order.isLocked: ', order.isLocked);
+
+        // Måste prata med databasen?
+        setIsLocked(order.isLocked);
+
+        function calcDeliveryTimeWithInterval() {
+            if (!order.isLocked) {
+                calcDeliveryTime();
+                timeoutId = setTimeout(calcDeliveryTimeWithInterval, 1000)
+            }
+        }
+
+        calcDeliveryTimeWithInterval();
+
+        // Ska den verkligen tömmas här?
+        return () => {
+            clearTimeout(timeoutId);
+        }
+
+    }, [order.isLocked])
+
+    function calcDeliveryTime() {
+        const timestamp = Date.now();
+        let estimatedTime = new Date(timestamp) + 25*60*1000;
+        estimatedTime = new Date(estimatedTime).toLocaleString();
+    
+        console.log('createdAt: ', order.createdAt);
+        console.log('estimatedTime: ', estimatedTime);
+        
+        setDeliveryTime(estimatedTime);
+    }
 
     const orderItems = order.orderItems.map((item, i) => {
         return (
@@ -28,17 +62,11 @@ function OrderConfirmation() {
 
     const orderStatus = order.status === 'pending' ? 'Pending' : "In progress";
 
-    let deliveryTime = new Date(order.createdAt).getTime() + 20*60*1000 ;
-    deliveryTime = new Date(deliveryTime).toLocaleString();
-
-    console.log('createdAt: ', order.createdAt);
-    console.log('deliveryTime: ', deliveryTime);
-
     function cancelOrder() {
         console.log('Canceling order');
         toggleModal();
         // Skicka till databasen
-        navigate('/cancel-order')
+        navigate('/cancel-order');
     }
 
     function toggleModal() {

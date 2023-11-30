@@ -19,7 +19,6 @@ function Checkout() {
         
         const response = {
             comment: "",
-            // deliveryTime: "2023-11-29T13:24:31.747Z",
             createdAt: "2023-11-29T11:24:31.747Z",
             orderId:"wcl01KagFKBpNM3TyrsTw",
             orderItems: [
