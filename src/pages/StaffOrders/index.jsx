@@ -26,6 +26,7 @@ const prioritizeOrders = (orders) => {
 
   return [...prioritizedPendingOrders, ...completedOrders];
 };
+
 const initialOrders = [
   {
     id: "1234",
@@ -94,6 +95,10 @@ const StaffOrdersPage = () => {
     }
   };
 
+  const pendingOrderCount = orders.filter(
+    (order) => order.status === "pending"
+  ).length;
+
   const handleCloseModal = () => {
     setSelectedOrder(null);
   };
@@ -104,19 +109,40 @@ const StaffOrdersPage = () => {
   };
 
   const handleProcessOrder = (orderId) => {
-    setOrders((prevOrders) =>
-      prevOrders.map((order) =>
+    setOrders((prevOrders) => {
+      const updatedOrders = prevOrders.map((order) =>
         order.id === orderId ? { ...order, status: "completed" } : order
-      )
-    );
+      );
+      const updatedPendingOrders = updatedOrders.filter(
+        (order) => order.status === "pending"
+      );
+
+      const updatedPrioritizedPendingOrders = updatedPendingOrders.map(
+        (order, index) => ({
+          ...order,
+          priority: index + 1
+        })
+      );
+
+      const updatedAllOrders = [
+        ...updatedPrioritizedPendingOrders,
+        ...updatedOrders.filter(
+          (order) =>
+            order.status === "completed" || order.status === "delivered"
+        )
+      ];
+
+      return updatedAllOrders;
+    });
   };
+
   return (
     <main className="staff-order-page">
       <header>
         <h6>Welcome Maria Gomez!</h6>
         <p>
-          There are ongoing <span> {filteredOrders.length} </span> orders at
-          this time that need your attention.
+          There are ongoing <span>{pendingOrderCount}</span> orders at this time
+          that need your attention.
         </p>
       </header>
       <TabButtons
