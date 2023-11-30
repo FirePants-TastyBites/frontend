@@ -1,8 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import PinkThingy from "../../components/PinkThingy";
 import "./Home.scss";
 
 const Home = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="home">
       <section className="hero">
@@ -20,20 +23,19 @@ const Home = () => {
             <p>Where Flavor Meets Freshness!</p>
           </section>
 
-          <a href="/menu">
             <Button
               label="Order Here"
               type="primary"
-              onClick={() => console.log("Primary clicked")}
+              onClick={() => navigate('/menu')}
             />
-          </a>
-          <a href="#">
+      
+          
             <Button
               label="Sign In"
               type="secondary"
-              onClick={() => console.log("Secondary clicked")}
+              onClick={() => navigate('/sign-in')}
             />
-          </a>
+          
         </div>
       </section>
 
@@ -54,13 +56,13 @@ const Home = () => {
             service, we invite you to savor the moments and make our restaurant
             your home for wholesome and delightful meals.
           </p>
-          <a href="/menu">
+        
             <Button
               label="View Our Menu"
               type="primary"
-              onClick={() => console.log("Primary clicked")}
+              onClick={() => navigate('/menu')}
             />
-          </a>
+          
         </section>
       </section>
 
@@ -81,13 +83,13 @@ const Home = () => {
             and kids will love. Join us in creating cherished moments and
             savoring delicious meals in a warm and inviting atmosphere.
           </p>
-          <a href="/about">
+     
             <Button
               label="Explore Our Story"
               type="primary"
-              onClick={() => console.log("Primary clicked")}
+              onClick={() => navigate('/about')}
             />
-          </a>
+      
         </section>
       </section>
     </section>

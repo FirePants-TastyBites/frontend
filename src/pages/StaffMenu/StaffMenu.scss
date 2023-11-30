@@ -1,0 +1,44 @@
+@import "../../styles/_variables";
+
+.staff-menu-page {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+
+  header {
+    display: block;
+    h6 {
+      @include text-style-600-18px;
+    }
+    p {
+      @include text-style-400;
+    }
+  }
+
+  .staff-menu-container {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  p {
+    margin: 1rem 0;
+    @include text-style-600-18px;
+  }
+}
+
+@media (min-width: 768px) {
+  .staff-menu-page {
+    width: 800px;
+  }
+
+  .staff-menu-container {
+    max-width: 800px;
+  }
+}

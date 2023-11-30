@@ -1,7 +1,11 @@
 import { motion } from "framer-motion";
 import styles from "./Modal.module.scss";
+import { useDispatch } from "react-redux";
+import { addItem } from "../../store/orderSlice";
 
 const Modal = ({ isOpen, onClose, item }) => {
+  const dispatch = useDispatch();
+
   if (!isOpen || !item) return null;
 
   const { ingredients = [], description: { fat, protein, calories } = {} } =
@@ -55,7 +59,7 @@ const Modal = ({ isOpen, onClose, item }) => {
             Total Calories: <span>{calories}cal</span>
           </p>
         </div>
-        <button className={styles.addToCartButton}>
+        <button className={styles.addToCartButton} onClick={() => dispatch(addItem(item))}>
           <i className="fa-solid fa-cart-shopping"></i> Add to Cart
         </button>
       </motion.article>

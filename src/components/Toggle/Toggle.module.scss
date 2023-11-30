@@ -1,0 +1,39 @@
+@import "../../styles/variables";
+
+.toggleSwitch {
+  width: 48px;
+  height: 24px;
+  border-radius: 12px;
+  position: relative;
+  cursor: pointer;
+  background: $primary-color;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+
+  &.on {
+    background-color: $primary-color;
+  }
+
+  &.off {
+    background-color: $bg-white;
+    border: 2px solid $bg-red;
+  }
+
+  .switch {
+    width: calc(1.5rem - 8px);
+    height: calc(1.5rem - 8px);
+    border-radius: 50%;
+    background-color: $bg-white;
+    position: absolute;
+    transition: all 0.3s ease;
+
+    top: 50%;
+    transform: translateY(-50%);
+    right: 4px;
+
+    &.off {
+      left: 4px;
+      right: auto;
+      background-color: $bg-red;
+    }
+  }
+}

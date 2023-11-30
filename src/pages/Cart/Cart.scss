@@ -1,0 +1,83 @@
+@import "../../styles/variables";
+
+.cart {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 3rem;
+    min-height: 88vh;
+
+    header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .details {
+
+        .total-price {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid $primary-color;
+            padding-top: 2rem;
+
+            p {
+                @include text-style-600;
+            }
+        }
+
+        .comment {
+            margin-top: 3rem;
+
+            textarea {
+                margin-top: 10px;
+                width: 100%;
+                min-height: 5rem;
+                border-radius: 8px;
+                resize: none;
+                padding: 10px;
+                border: 1px solid $secondary-color;
+                color: $secondary-color;
+
+                &:focus {
+                    outline: none;
+                    border: 1px solid $primary-color;
+                }
+            }
+        }
+    }
+
+    >p {
+        margin: 3rem auto;
+    }
+
+    >button {
+        margin: 0 auto 1rem
+    }
+
+}
+
+@media screen and (min-width: $breakpoint-desktop) {
+
+    .cart {
+        justify-content: flex-start;
+
+        .details {
+            display: flex;
+            gap: 3rem;
+            margin: 6rem 2rem;
+
+            .order-items {
+                flex: 50%;
+            }
+
+            .comment {
+                flex: 50%;
+                margin-top: 0;
+            }
+        }
+
+    }
+}

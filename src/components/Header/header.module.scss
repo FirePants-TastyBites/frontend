@@ -11,6 +11,7 @@
   .header__iconMenu,
   .header__iconCart {
     font-size: 1.5rem;
+    position: relative;
   }
 
   .header__title {
@@ -20,5 +21,21 @@
     font-weight: 600;
     line-height: normal;
     letter-spacing: 1.6px;
+  }
+
+  .itemsInCart {
+    position: absolute;
+    background-color: $primary-color;
+    height: 1.2rem;
+    width: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+    color: $text-white;
+    font-weight: 600;
+    font-size: 14px;
+    right: 7%;
+    top: -9%
   }
 }

@@ -10,7 +10,7 @@ function HamburgerNav({ isVisible, setIsVisible }) {
     },
     {
       label: "My Profile",
-      path: "/profile"
+      path: "/sign-in"
     },
     {
       label: "Menu",

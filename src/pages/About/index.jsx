@@ -102,7 +102,7 @@ const AboutPage = () => (
       </article>
       <article className="cta">
         <p>Our Location</p>
-        <a>123 34 Somewhere Over the Rainbow</a>
+        <p>123 34 Somewhere Over the Rainbow</p>
       </article>
       <article className="cta">
         <p>Email Us</p>
