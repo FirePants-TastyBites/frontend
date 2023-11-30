@@ -4,16 +4,19 @@ import GreenLine from '../../components/GreenLine';
 import Button from '../../components/Button';
 import './OrderConfirmation.scss'
 import DetailsButton from '../../components/DetailsButton';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 function OrderConfirmation() {
     const order = useLocation().state;
     const [showMore, setShowMore] = useState(false);
     const [openModal, setOpenModal] = useState(false);
+    // Måste prata med databasen
     const [isLocked, setIsLocked] = useState(false);
     const navigate = useNavigate();
     const id = useParams().id;
+    
+    console.log('isLocked: ', isLocked)
 
     const orderItems = order.orderItems.map((item, i) => {
         return (
@@ -24,6 +27,12 @@ function OrderConfirmation() {
     });
 
     const orderStatus = order.status === 'pending' ? 'Pending' : "In progress";
+
+    let deliveryTime = new Date(order.createdAt).getTime() + 20*60*1000 ;
+    deliveryTime = new Date(deliveryTime).toLocaleString();
+
+    console.log('createdAt: ', order.createdAt);
+    console.log('deliveryTime: ', deliveryTime);
 
     function cancelOrder() {
         console.log('Canceling order');
@@ -54,7 +63,7 @@ function OrderConfirmation() {
                 <section className="time">
                     <h4>Estimated Delivery Time</h4>
                     <div>
-                        <p>12.57</p>
+                        <p>{deliveryTime}</p>
                     </div>
                 </section>
                 <section className="order-id">

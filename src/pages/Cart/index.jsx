@@ -18,13 +18,13 @@ function Cart() {
 
     async function createOrder() {
 
-        const timestamp = Date.now();
-        const deliveryTime = new Date(timestamp).toISOString();
+        // const timestamp = Date.now();
+        // const deliveryTime = new Date(timestamp).toISOString();
 
         const newOrder = {
             orderId: nanoid(),
             userId: 'guest',
-            deliveryTime, 
+            // deliveryTime, 
             totalAmount: totalPrice,
             orderItems,
             comment
