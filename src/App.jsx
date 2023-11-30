@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation, useParams } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import "./styles/main.scss";
 import Header from "./components/Header";
 import Home from "./pages/Home";
@@ -20,8 +20,18 @@ function App() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [pathname])
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  useEffect(() => {
+    const body = document.querySelector("body");
+
+    if (pathname.startsWith("/staff")) {
+      body.classList.add("staff-bg");
+    } else {
+      body.classList.remove("staff-bg");
+    }
+  }, [pathname]);
 
   return (
     <>
