@@ -15,6 +15,8 @@ import StaffMenuPage from "./pages/StaffMenu";
 import OrderConfirmation from "./pages/OrderConfirmation";
 import OrderCancellation from "./pages/OrderCancellation";
 import { useEffect } from "react";
+import ProtectedRoute from "./components/ProtectedRoute";
+import ErrorBoundary from "./pages/ErrorBoundary";
 
 function App() {
   const { pathname } = useLocation();
@@ -44,14 +46,17 @@ function App() {
             <Route path="/menu" element={<Menu />}></Route>
             <Route path="/sign-in" element={<SignInPage />}></Route>
             <Route path="/cart" element={<Cart />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/confirmation/:id" element={<OrderConfirmation />} />
-            <Route path="/cancel-order" element={<OrderCancellation />} />
+            <Route element={<ProtectedRoute />}>
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/confirmation/:id" element={<OrderConfirmation />} />
+              <Route path="/cancel-order" element={<OrderCancellation />} />
+            </Route>
             <Route path="/staff" element={<StaffLayout />}>
               <Route index element={<StaffPage />} />
               <Route path="orders" element={<StaffOrdersPage />} />
               <Route path="menu" element={<StaffMenuPage />} />
             </Route>
+            <Route path="/*" element={<ErrorBoundary />} />
           </Routes>
         </div>
 
