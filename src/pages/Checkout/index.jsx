@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import GreenLine from "../../components/GreenLine";
 import Button from "../../components/Button";
+import DetailsButton from '../../components/DetailsButton';
 import './Checkout.scss';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +10,6 @@ import { animate } from "framer-motion";
 
 function Checkout() {
     const order = useSelector(state => state.order);
-    let isLocked = order.isLocked;
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -59,21 +59,28 @@ function Checkout() {
                     <h4>Estimated Delivery Time</h4>
                     <div>
                         <p>ASAP (25min)</p>
-                        <button>Change</button>
+                        <DetailsButton>Change</DetailsButton>
+                    </div>
+                </section>
+                <section className="time">
+                    <h4>Email</h4>
+                    <div>
+                        <p>user@example.com</p>
+                        <DetailsButton>Change</DetailsButton>
                     </div>
                 </section>
                 <section className="address">
                     <h4>Delivery Address</h4>
                     <div>
                         <p>Sherwood Forest 1</p>
-                        <button>Change</button>
+                        <DetailsButton>Change</DetailsButton>
                     </div>
                 </section>
                 <section className="payment">
                     <h4>Payment Method</h4>
                     <div>
                         <p>Apple Pay</p>
-                        <button>Change</button>
+                        <DetailsButton>Change</DetailsButton>
                     </div>
                 </section>
             </section>
