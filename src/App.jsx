@@ -15,6 +15,7 @@ import StaffMenuPage from "./pages/StaffMenu";
 import OrderConfirmation from "./pages/OrderConfirmation";
 import OrderCancellation from "./pages/OrderCancellation";
 import { useEffect } from "react";
+import ErrorBoundary from "./pages/ErrorBoundary";
 import SingUpPage from "./pages/Sign-up";
 
 function App() {
@@ -49,11 +50,12 @@ function App() {
             <Route path="/confirmation/:id" element={<OrderConfirmation />} />
             <Route path="/cancel-order" element={<OrderCancellation />} />
             <Route path="/sign-up" element={<SingUpPage />}></Route>
-            <Route path="/staff" element={<StaffLayout />}>
+            <Route path="/staff" element={<StaffLayout />} errorElement={<ErrorBoundary/>} >
               <Route index element={<StaffPage />} />
               <Route path="orders" element={<StaffOrdersPage />} />
               <Route path="menu" element={<StaffMenuPage />} />
             </Route>
+            <Route path="/*" element={<ErrorBoundary />} />
           </Routes>
         </div>
 

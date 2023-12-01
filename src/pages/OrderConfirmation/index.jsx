@@ -8,13 +8,32 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 function OrderConfirmation() {
-    const order = useLocation().state;
     const [showMore, setShowMore] = useState(false);
     const [openModal, setOpenModal] = useState(false);
     const [isLocked, setIsLocked] = useState(false);
     const [deliveryTime, setDeliveryTime] = useState(null);
     const navigate = useNavigate();
     const id = useParams().id;
+
+    // Hämta från databas
+    const order = {
+        comment: "",
+        createdAt: "2023-11-29T11:24:31.747Z",
+        orderId:"wcl01KagFKBpNM3TyrsTw",
+        orderItems: [
+            {
+                qty: 1,
+                itemName: 'Cheesy Rainbow Veggie Wrap'
+            },
+            {
+                qty: 1,
+                itemName: "Mediterranean Delight"
+            }
+        ],
+        totalAmount: 200,
+        status: 'pending',
+        isLocked: false
+    }
 
     // Ska vara ett state?
     const orderStatus = order.status === 'pending' ? 'Pending' : "In progress";
