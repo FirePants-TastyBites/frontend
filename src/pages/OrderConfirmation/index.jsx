@@ -86,7 +86,7 @@ function OrderConfirmation() {
         console.log('Canceling order');
         toggleModal();
         // Skicka till databasen
-        navigate('/cancel-order', { state: { canCancel: true } });
+        navigate('/cancel-order');
     }
 
     function toggleModal() {

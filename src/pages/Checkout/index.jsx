@@ -19,7 +19,7 @@ function Checkout() {
 
 
         await animate(".checkout", { x: ["0%", "-100%"], opacity: [1, 0]});
-        navigate(`/confirmation/${order.orderId}`, { state: { canConfirm: true } });
+        navigate(`/confirmation/${order.orderId}`);
         dispatch(resetOrder());
 
         // annars => navigera till errorPage?
