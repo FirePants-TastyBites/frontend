@@ -16,6 +16,7 @@ import OrderConfirmation from "./pages/OrderConfirmation";
 import OrderCancellation from "./pages/OrderCancellation";
 import { useEffect } from "react";
 import ErrorBoundary from "./pages/ErrorBoundary";
+import SingUpPage from "./pages/Sign-up";
 
 function App() {
   const { pathname } = useLocation();
@@ -48,6 +49,7 @@ function App() {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/confirmation/:id" element={<OrderConfirmation />} />
             <Route path="/cancel-order" element={<OrderCancellation />} />
+            <Route path="/sign-up" element={<SingUpPage />}></Route>
             <Route path="/staff" element={<StaffLayout />} errorElement={<ErrorBoundary/>} >
               <Route index element={<StaffPage />} />
               <Route path="orders" element={<StaffOrdersPage />} />

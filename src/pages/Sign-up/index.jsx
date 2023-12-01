@@ -8,33 +8,35 @@ import GreenLine from "../../components/GreenLine";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const SignInPage = () => {
+const SingUpPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const [isAdmin, setIsAdmin] = useState(false);
 
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/user",
+        "https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/user/create",
         {
           email: email,
-          password: password
+          password: password,
+          isAdmin: isAdmin
         }
       );
 
       if (response.data.success) {
-        if (response.data.isAdmin) {
+        if (isAdmin) {
           navigate("/staff");
         } else {
           navigate("/my-profile");
         }
       } else {
-        console.error("Sign in failed:", response.data.message);
+        console.error("Registration failed:", response.data.message);
       }
     } catch (error) {
-      console.error("Error during sign in:", error);
+      console.error("Error during registration:", error);
     }
   };
 
@@ -42,7 +44,7 @@ const SignInPage = () => {
     <main className="signin">
       <section className="signin-container">
         <header>
-          <h1 className="title">SIGN IN</h1>
+          <h1 className="title">SIGN UP</h1>
           <GreenLine />
         </header>
         <p className="subtitle">
@@ -71,6 +73,16 @@ const SignInPage = () => {
             />
           </div>
 
+          <div className="checkbox-container">
+            <input
+              type="checkbox"
+              id="adminCheck"
+              checked={isAdmin}
+              onChange={(e) => setIsAdmin(e.target.checked)}
+            />
+            <label htmlFor="adminCheck">Register as Admin</label>
+          </div>
+
           <section className="button-container">
             <Button
               label="Sign In"
@@ -88,4 +100,4 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default SingUpPage;
