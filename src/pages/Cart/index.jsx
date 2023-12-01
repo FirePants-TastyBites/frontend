@@ -28,7 +28,7 @@ function Cart() {
 
         dispatch(setOrder(newOrder));
         await animate(".cart", { x: ["0%", "-100%"], opacity: [1, 0]});
-        navigate('/checkout');
+        navigate('/checkout', { state: { canCheckout: true }});
     }
 
     return (

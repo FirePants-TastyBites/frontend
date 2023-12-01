@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import GreenLine from "../../components/GreenLine";
 import Button from "../../components/Button";
 import DetailsButton from '../../components/DetailsButton';
@@ -15,29 +15,11 @@ function Checkout() {
 
     async function placeOrder() {
         // skicka order till databas och invänta svar 
-        // om allt gick bra => lagra i location.state och navigera till confirmation
-        
-        const response = {
-            comment: "",
-            createdAt: "2023-11-29T11:24:31.747Z",
-            orderId:"wcl01KagFKBpNM3TyrsTw",
-            orderItems: [
-                {
-                    qty: 1,
-                    itemName: 'Cheesy Rainbow Veggie Wrap'
-                },
-                {
-                    qty: 1,
-                    itemName: "Mediterranean Delight"
-                }
-            ],
-            totalAmount: 200,
-            status: 'pending',
-            isLocked: false
-        }
+        // om allt gick bra => till confirmation
+
 
         await animate(".checkout", { x: ["0%", "-100%"], opacity: [1, 0]});
-        navigate(`/confirmation/${order.orderId}`, { state: response });
+        navigate(`/confirmation/${order.orderId}`, { state: { canConfirm: true } });
         dispatch(resetOrder());
 
         // annars => navigera till errorPage?
