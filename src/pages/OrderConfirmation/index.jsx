@@ -16,7 +16,7 @@ function OrderConfirmation() {
     const id = useParams().id;
 
     // Hämta från databas
-    const response = {
+    const order = {
         comment: "",
         createdAt: "2023-11-29T11:24:31.747Z",
         orderId:"wcl01KagFKBpNM3TyrsTw",
