@@ -80,6 +80,11 @@
     > button {
         margin: auto;
     }
+
+    .svg-container {
+        display: flex;
+        justify-content: center;
+    }
 }
 
 .cancel-modal {

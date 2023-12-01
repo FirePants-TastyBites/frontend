@@ -88,7 +88,7 @@ function OrderConfirmation() {
                 <section className="message">
                     <p>Your Tasty Bites order is on it’s way. Thanks for choosing us!</p>
                     <figure>
-                        <motion.svg 
+                        <motion.svg
                             initial={{ opacity: 0, scale: 0 }}
                             animate={{ opacity: 1, scale: 1, transition: { delay: .5, duration: .6, type: "spring", stiffness: 150 } }}
                             xmlns="http://www.w3.org/20:00/svg" width="448" height="448" viewBox="0 0 448 448" fill="none"
@@ -135,11 +135,16 @@ function OrderConfirmation() {
             </motion.section>
 
             {!isLocked &&
-                <section className='cancel-order'>
-                    <h2>Unexpected change of plans?</h2>
-                    <p>No problem! You can cancel your order anytime before our chefs hit the kitchen stage.</p>
-                    <DetailsButton onClick={toggleModal}>Cancel Order</DetailsButton>
-                </section>
+                <>
+                    <section className='cancel-order'>
+                        <h2>Unexpected change of plans?</h2>
+                        <p>No problem! You can cancel your order anytime before our chefs hit the kitchen stage.</p>
+                        <DetailsButton onClick={toggleModal}>Cancel Order</DetailsButton>
+                    </section>
+                    <div className='svg-container'>
+                        <PinkThingy />
+                    </div>
+                </>
             }
 
             <Button label={"Go to Home Page"} type={"primary"} onClick={() => navigate('/')} />
