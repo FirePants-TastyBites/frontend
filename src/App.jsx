@@ -15,6 +15,7 @@ import StaffMenuPage from "./pages/StaffMenu";
 import OrderConfirmation from "./pages/OrderConfirmation";
 import OrderCancellation from "./pages/OrderCancellation";
 import { useEffect } from "react";
+import SingUpPage from "./pages/Sign-up";
 
 function App() {
   const { pathname } = useLocation();
@@ -47,6 +48,7 @@ function App() {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/confirmation/:id" element={<OrderConfirmation />} />
             <Route path="/cancel-order" element={<OrderCancellation />} />
+            <Route path="/sign-up" element={<SingUpPage />}></Route>
             <Route path="/staff" element={<StaffLayout />}>
               <Route index element={<StaffPage />} />
               <Route path="orders" element={<StaffOrdersPage />} />
