@@ -17,6 +17,11 @@ const Modal = ({ isOpen, onClose, item }) => {
     transition: { duration: 0.3 }
   };
 
+  function addToCartAndCloseModal() {
+    dispatch(addItem(item));
+    onClose();
+  }
+
   return (
     <motion.aside
       className={styles.modalOverlay}
@@ -59,7 +64,7 @@ const Modal = ({ isOpen, onClose, item }) => {
             Total Calories: <span>{calories}cal</span>
           </p>
         </div>
-        <button className={styles.addToCartButton} onClick={() => dispatch(addItem(item))}>
+        <button className={styles.addToCartButton} onClick={addToCartAndCloseModal}>
           <i className="fa-solid fa-cart-shopping"></i> Add to Cart
         </button>
       </motion.article>
