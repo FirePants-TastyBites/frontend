@@ -74,7 +74,7 @@ const Menu = () => {
           >
             <MenuItem
               item={food}
-              name={food.itemName}
+              name={food.title}
               price={food.price}
               imageUrl={food.url || foodImage}
               category={food.category}

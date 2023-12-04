@@ -83,7 +83,7 @@ const StaffMenuPage = () => {
         {filteredItems.map((menuItem) => (
           <StaffMenuItemCard
             key={menuItem.id}
-            name={menuItem.itemName}
+            name={menuItem.title}
             imageUrl={menuItem.url}
             available={menuItem.available}
             onToggleAvailability={() => toggleItemAvailability(menuItem.id)}
