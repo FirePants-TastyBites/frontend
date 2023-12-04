@@ -28,48 +28,49 @@ const prioritizeOrders = (orders) => {
   return [...prioritizedPendingOrders, ...completedOrders];
 };
 
-const initialOrders = [
-  {
-    id: "1234",
-    userId: "Michael Brown",
-    totalAmount: 299,
-    time: "12:00",
-    orderItems: ["Heavenly Tuna", "Avocado Turkey Club"],
-    comment: "no onions",
-    status: "pending"
-  },
-  {
-    id: "1235",
-    totalAmount: 199,
-    time: "9:30",
-    orderItems: ["Heavenly Tuna"],
-    comment: "",
-    status: "delivered",
-    userId: "Shahin"
-  },
-  {
-    id: "1236",
-    totalAmount: 199,
-    time: "10:30",
-    orderItems: ["Heavenly Tuna"],
-    comment: "",
-    status: "pending",
-    userId: "Michael Brown"
-  }
-];
-
 const StaffOrdersPage = () => {
   const [activeTab, setActiveTab] = useState("all");
-  const [orders, setOrders] = useState(prioritizeOrders(initialOrders));
+  const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [isTabClicked, setIsTabClicked] = useState(false);
 
+  console.log("Orders:", selectedOrder);
   const tabs = [
     { id: "all", label: "All" },
     { id: "pending", label: "Pending" },
     { id: "completed", label: "Completed" }
   ];
 
+  useEffect(() => {
+    fetch("https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/orders")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data.orders);
+
+        const transformedOrders = data.orders.map((order) => ({
+          id: order.id,
+          userId: order.userId,
+          totalAmount: order.totalPrice,
+          time: new Date(order.createdAt).toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit"
+          }),
+          orderItems: order.cart,
+          comment: order.comment,
+          status: order.orderStatus
+        }));
+
+        setOrders(prioritizeOrders(transformedOrders));
+      })
+      .catch((error) => {
+        console.error("Failed to fetch orders:", error);
+      });
+  }, []);
   useEffect(() => {
     setOrders((prevOrders) => {
       return prevOrders.map((order, index) => ({
@@ -191,7 +192,7 @@ const StaffOrdersPage = () => {
           id={selectedOrder.id}
           status={selectedOrder.status}
           comment={selectedOrder.comment}
-          orderedItems={selectedOrder.orderItems}
+          orderedItems={selectedOrder.orderItems || []}
           userId={selectedOrder.userId}
           deliveryTime={"12:40"}
           orderTime={selectedOrder.time}

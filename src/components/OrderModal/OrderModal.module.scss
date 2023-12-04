@@ -42,6 +42,12 @@
 
 .modalHeaderHeading {
   @include text-style-600-18px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+  cursor: pointer;
 }
 
 .modalBody {

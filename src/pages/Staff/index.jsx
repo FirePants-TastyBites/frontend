@@ -10,28 +10,18 @@ const StaffPage = () => {
   const [menuItems, setMenuItems] = useState([]);
 
   useEffect(() => {
-    const ordersData = [
-      {
-        id: "#1234",
-        deliveryTime: "12:00",
-        userId: "Michael Brown",
-        imageUrl: "/tuna.png",
-        orderItems: {},
-        comment: "",
-        priority: 1
-      },
-      {
-        id: "#1235",
-        deliveryTime: "12:10",
-        userId: "Sarah Johnson",
-        imageUrl: "/tuna.png",
-        orderItems: {},
-        comment: "",
-        priority: 2
-      }
-    ];
-
-    setOrders(ordersData);
+    axios
+      .get("https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/orders")
+      .then((response) => {
+        console.log(response.data);
+        const filteredOrders = response.data.orders.filter(
+          (order) => order.orderStatus === "pending"
+        );
+        setOrders(filteredOrders);
+      })
+      .catch((error) => {
+        console.error("Error fetching orders:", error);
+      });
 
     axios
       .get("https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/menu")

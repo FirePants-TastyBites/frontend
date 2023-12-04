@@ -80,7 +80,9 @@ const OrderModal = ({
           </p>
           <ul className={styles.orderedItems}>
             {orderedItems.map((item, index) => (
-              <li key={index}>{item}</li>
+              <li key={index}>
+                {item.title} - {item.qty}
+              </li>
             ))}
           </ul>
           <div className={styles.timeInfo}>
