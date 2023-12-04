@@ -1,12 +1,13 @@
-import { useLocation, useNavigate } from "react-router-dom";
 import GreenLine from "../../components/GreenLine";
 import Button from "../../components/Button";
 import DetailsButton from '../../components/DetailsButton';
 import './Checkout.scss';
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { resetOrder } from "../../store/orderSlice";
 import { animate } from "framer-motion";
+import axios from "axios";
 
 function Checkout() {
     const order = useSelector(state => state.order);
@@ -14,16 +15,20 @@ function Checkout() {
     const navigate = useNavigate();
 
     async function placeOrder() {
-        // skicka order till databas och invänta svar 
-        // om allt gick bra => till confirmation
 
+        if (order.cart.length  < 1) {
+            navigate('/error');
+        }
 
-        await animate(".checkout", { x: ["0%", "-100%"], opacity: [1, 0]});
-        navigate(`/confirmation/${order.orderId}`);
-        dispatch(resetOrder());
-
-        // annars => navigera till errorPage?
-
+        axios.post('https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/order', order)
+            .then(async () => {
+                await animate(".checkout", { x: ["0%", "-100%"], opacity: [1, 0]});
+                navigate(`/confirmation/${order.id}`);
+                dispatch(resetOrder());
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
 
     useEffect(() => {
@@ -68,7 +73,7 @@ function Checkout() {
             </section>
             <section className="total-price">
                 <p>Total Price</p>
-                <p>{order.totalAmount} kr</p>
+                <p>{order.totalPrice} kr</p>
             </section>
 
             <Button label={"Place Your Order"} type={"primary"} onClick={placeOrder} />

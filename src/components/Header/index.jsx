@@ -8,7 +8,7 @@ import { animate } from "framer-motion";
 const Header = () => {
   const [isVisible, setIsVisible] = useState(false);
   const navigate = useNavigate();
-  const orderItems = useSelector(state => state.order.orderItems);
+  const cart = useSelector(state => state.order.cart);
  
   let itemsInCart = 0;
   let displayItemsInCart = { display: 'none' };
@@ -16,11 +16,11 @@ const Header = () => {
   useEffect(() => {
     animate(".items-in-cart", {y: [0, -10, 0]});
 
-  }, [orderItems])
+  }, [cart])
   
-  if (orderItems.length > 0) {
+  if (cart.length > 0) {
 
-    orderItems.forEach(item => {
+    cart.forEach(item => {
       itemsInCart += item.qty;
     });
 
