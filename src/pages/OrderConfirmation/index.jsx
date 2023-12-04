@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import PinkThingy from '../../components/PinkThingy';
 import GreenLine from '../../components/GreenLine';
 import Button from '../../components/Button';
@@ -13,43 +13,22 @@ function OrderConfirmation() {
     const [openModal, setOpenModal] = useState(false);
     const [isLocked, setIsLocked] = useState(false);
     const [deliveryTime, setDeliveryTime] = useState(null);
+    const [order, setOrder] = useState({});
     const navigate = useNavigate();
     const id = useParams().id;
-    // let order = {};
 
     useEffect(() => {
         axios.get(`https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/order/${id}`)
             .then(response => {
-                console.log(response)
+                console.log(response.data.order)
+                setOrder(response.data.order);
             })
             .catch(error => console.log(error))
-            
-    }, [])
 
-    // Hämta från databas
-    const order = {
-        comment: "",
-        createdAt: "2023-11-29T11:24:31.747Z",
-        id:"wcl01KagFKBpNM3TyrsTw",
-        cart: [
-            {
-                qty: 1,
-                title: 'Cheesy Rainbow Veggie Wrap'
-            },
-            {
-                qty: 1,
-                title: "Mediterranean Delight"
-            }
-        ],
-        totalPrice: 200,
-        orderStatus: 'pending',
-        isLocked: false
-    }
+    }, [])
 
     // Ska vara ett state?
     const orderStatus = order.orderStatus === 'pending' ? 'Pending' : "In progress";
-
-    // console.log('isLocked: ', isLocked);
 
     useEffect(() => {
         let timeoutId;
@@ -83,15 +62,6 @@ function OrderConfirmation() {
 
         setDeliveryTime(estimatedTime);
     }
-
-    const cart = order.cart.map((item, i) => {
-        return (
-            <li key={i}>
-                <p>{item.qty} {item.title}</p>
-            </li>
-        )
-    });
-
 
     function cancelOrder() {
         console.log('Canceling order');
@@ -154,7 +124,7 @@ function OrderConfirmation() {
                             >
                                 <section className='details'>
                                     <ul>
-                                        {cart}
+                                        {order.cart.map((item, i) => <li key={i}><p>{item.qty} {item.title}</p></li>)}
                                     </ul>
                                     <p>{orderStatus}</p>
                                 </section>
