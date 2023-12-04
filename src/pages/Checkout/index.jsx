@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import GreenLine from "../../components/GreenLine";
 import Button from "../../components/Button";
 import DetailsButton from '../../components/DetailsButton';
@@ -19,7 +19,7 @@ function Checkout() {
 
 
         await animate(".checkout", { x: ["0%", "-100%"], opacity: [1, 0]});
-        navigate(`/confirmation/${order.orderId}`);
+        navigate(`/confirmation/${order.id}`);
         dispatch(resetOrder());
 
         // annars => navigera till errorPage?
@@ -68,7 +68,7 @@ function Checkout() {
             </section>
             <section className="total-price">
                 <p>Total Price</p>
-                <p>{order.totalAmount} kr</p>
+                <p>{order.totalPrice} kr</p>
             </section>
 
             <Button label={"Place Your Order"} type={"primary"} onClick={placeOrder} />

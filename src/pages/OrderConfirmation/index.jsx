@@ -19,24 +19,24 @@ function OrderConfirmation() {
     const order = {
         comment: "",
         createdAt: "2023-11-29T11:24:31.747Z",
-        orderId:"wcl01KagFKBpNM3TyrsTw",
-        orderItems: [
+        id:"wcl01KagFKBpNM3TyrsTw",
+        cart: [
             {
                 qty: 1,
-                itemName: 'Cheesy Rainbow Veggie Wrap'
+                title: 'Cheesy Rainbow Veggie Wrap'
             },
             {
                 qty: 1,
-                itemName: "Mediterranean Delight"
+                title: "Mediterranean Delight"
             }
         ],
-        totalAmount: 200,
-        status: 'pending',
+        totalPrice: 200,
+        orderStatus: 'pending',
         isLocked: false
     }
 
     // Ska vara ett state?
-    const orderStatus = order.status === 'pending' ? 'Pending' : "In progress";
+    const orderStatus = order.orderStatus === 'pending' ? 'Pending' : "In progress";
 
     // console.log('isLocked: ', isLocked);
 
@@ -73,10 +73,10 @@ function OrderConfirmation() {
         setDeliveryTime(estimatedTime);
     }
 
-    const orderItems = order.orderItems.map((item, i) => {
+    const cart = order.cart.map((item, i) => {
         return (
             <li key={i}>
-                <p>{item.qty} {item.itemName}</p>
+                <p>{item.qty} {item.title}</p>
             </li>
         )
     });
@@ -126,7 +126,7 @@ function OrderConfirmation() {
                 <section className="order-id">
                     <h4>Order ID</h4>
                     <div>
-                        <p>{id}</p>
+                        <p>{order.id}</p>
                         <DetailsButton onClick={() => setShowMore(!showMore)}>
                             {
                                 showMore ? 'Show less' : 'Show more'
@@ -143,7 +143,7 @@ function OrderConfirmation() {
                             >
                                 <section className='details'>
                                     <ul>
-                                        {orderItems}
+                                        {cart}
                                     </ul>
                                     <p>{orderStatus}</p>
                                 </section>

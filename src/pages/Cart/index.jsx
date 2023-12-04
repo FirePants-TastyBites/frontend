@@ -12,17 +12,17 @@ import { nanoid } from "@reduxjs/toolkit";
 function Cart() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const orderItems = useSelector(state => state.order.orderItems);
-    const totalPrice = orderItems.reduce((total, item) => total + item.price, 0);
+    const cart = useSelector(state => state.order.cart);
+    const totalPrice = cart.reduce((total, item) => total + item.price, 0);
     const [comment, setComment] = useState('');
 
     async function createOrder() {
 
         const newOrder = {
-            orderId: nanoid(),
+            id: nanoid(),
             userId: 'guest',
-            totalAmount: totalPrice,
-            orderItems,
+            totalPrice,
+            cart,
             comment
         }
 
@@ -39,7 +39,7 @@ function Cart() {
             </header>
 
             {
-                orderItems.length > 0 ?
+                cart.length > 0 ?
                     <>
                         <motion.section
                             initial={{ opacity: 0 }}
@@ -47,7 +47,7 @@ function Cart() {
                             className="details"
                         >
                             <section className="order-items">
-                                {orderItems.map((item, i) => <OrderItem key={i} item={item} />)}
+                                {cart.map((item, i) => <OrderItem key={i} item={item} />)}
                                 <div className="total-price">
                                     <p>Total Price</p>
                                     <p>{totalPrice} kr</p>

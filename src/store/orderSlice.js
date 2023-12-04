@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    orderId: '',
+    id: '',
     userId: '',
-    totalAmount: 0,
+    totalPrice: 0,
     deliveryTime: '',
-    orderItems: [],
+    cart: [],
     comment: ''
 };
 
@@ -14,24 +14,24 @@ export const orderSlice = createSlice({
     initialState,
     reducers: {
         addItem: (state, action) => {
-            const index = state.orderItems.findIndex(item => action.payload.id === item.id);
+            const index = state.cart.findIndex(item => action.payload.id === item.id);
             
             if (index < 0) {
-                state.orderItems.push({...action.payload, qty: 1});
+                state.cart.push({...action.payload, qty: 1});
             } else {
-                const item = state.orderItems[index];
+                const item = state.cart[index];
                 const update = {
                     ...item,
                     price: item.price + (item.price / item.qty),
                     qty: item.qty += 1,
                 };
 
-                state.orderItems.splice(index, 1, update);
+                state.cart.splice(index, 1, update);
             }
         },
         removeItem: (state, action) => {
-            const index = state.orderItems.findIndex(item => action.payload === item.id);
-            const item = state.orderItems[index];
+            const index = state.cart.findIndex(item => action.payload === item.id);
+            const item = state.cart[index];
             
             if (item.qty > 1) {
                 const update = {
@@ -40,9 +40,9 @@ export const orderSlice = createSlice({
                     qty: item.qty -= 1
                 };
 
-                state.orderItems.splice(index, 1, update);
+                state.cart.splice(index, 1, update);
             } else {
-                state.orderItems.splice(index, 1);
+                state.cart.splice(index, 1);
             }
         },
         setOrder: (state, action) => {
