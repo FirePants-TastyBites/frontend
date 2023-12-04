@@ -18,15 +18,11 @@ const StaffMenuSection = ({ menuItems }) => {
       {menuItems.map((menu) => (
         <article className="menu-item" key={menu.id}>
           <div className="menu-image-container">
-            <img
-              className="menu-image-small"
-              src={menu.url}
-              alt={menu.itemName}
-            />
+            <img className="menu-image-small" src={menu.url} alt={menu.title} />
           </div>
           <div className="menu-info-container">
             <div className="order-info">
-              <p className="menu-name">{menu.itemName}</p>
+              <p className="menu-name">{menu.title}</p>
               <p className="menu-price">{menu.price}</p>
             </div>
           </div>
