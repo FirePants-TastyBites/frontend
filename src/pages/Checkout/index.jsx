@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { resetOrder } from "../../store/orderSlice";
 import { animate } from "framer-motion";
+import axios from "axios";
 
 function Checkout() {
     const order = useSelector(state => state.order);
@@ -14,13 +15,22 @@ function Checkout() {
     const navigate = useNavigate();
 
     async function placeOrder() {
-        // skicka order till databas och invänta svar 
+        // skicka order till databas och invänta svar (kolla om det finns en order?)
         // om allt gick bra => till confirmation
 
+        axios.post('https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/order', order)
+            .then(async response => {
+                console.log(response);
 
-        await animate(".checkout", { x: ["0%", "-100%"], opacity: [1, 0]});
-        navigate(`/confirmation/${order.id}`);
-        dispatch(resetOrder());
+                // allt annat här
+                await animate(".checkout", { x: ["0%", "-100%"], opacity: [1, 0]});
+                navigate(`/confirmation/${order.id}`);
+                dispatch(resetOrder());
+            })
+            .catch(error => {
+                console.log(error);
+            })
+            
 
         // annars => navigera till errorPage?
 

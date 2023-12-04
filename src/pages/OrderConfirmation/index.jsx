@@ -6,6 +6,7 @@ import './OrderConfirmation.scss'
 import DetailsButton from '../../components/DetailsButton';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import axios from 'axios';
 
 function OrderConfirmation() {
     const [showMore, setShowMore] = useState(false);
@@ -14,6 +15,16 @@ function OrderConfirmation() {
     const [deliveryTime, setDeliveryTime] = useState(null);
     const navigate = useNavigate();
     const id = useParams().id;
+    // let order = {};
+
+    useEffect(() => {
+        axios.get(`https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/order/${id}`)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => console.log(error))
+            
+    }, [])
 
     // Hämta från databas
     const order = {
