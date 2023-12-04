@@ -1,8 +1,9 @@
-import "./Orders.scss";
 import { useState, useEffect } from "react";
 import TabButtons from "../../components/TabButtons";
 import StaffOrdersCard from "../../components/StaffOrdersCard";
 import OrderModal from "../../components/OrderModal";
+import { motion, AnimatePresence } from "framer-motion";
+import "./Orders.scss";
 
 const prioritizeOrders = (orders) => {
   const pendingOrders = orders.filter((order) => order.status === "pending");
@@ -61,6 +62,7 @@ const StaffOrdersPage = () => {
   const [activeTab, setActiveTab] = useState("all");
   const [orders, setOrders] = useState(prioritizeOrders(initialOrders));
   const [selectedOrder, setSelectedOrder] = useState(null);
+  const [isTabClicked, setIsTabClicked] = useState(false);
 
   const tabs = [
     { id: "all", label: "All" },
@@ -69,20 +71,24 @@ const StaffOrdersPage = () => {
   ];
 
   useEffect(() => {
-    const setPriorities = (orders) => {
-      return orders.map((order, index) => ({
+    setOrders((prevOrders) => {
+      return prevOrders.map((order, index) => ({
         ...order,
         priority: index + 1
       }));
-    };
-
-    setOrders((prevOrders) => setPriorities([...prevOrders]));
+    });
   }, []);
+
+  useEffect(() => {
+    if (isTabClicked) {
+      setTimeout(() => setIsTabClicked(false), 300);
+    }
+  }, [isTabClicked]);
 
   const sortOrders = (tab) => {
     setActiveTab(tab);
+    setIsTabClicked(true);
   };
-
   const filteredOrders = () => {
     if (activeTab === "all") {
       return orders;
@@ -113,6 +119,7 @@ const StaffOrdersPage = () => {
       const updatedOrders = prevOrders.map((order) =>
         order.id === orderId ? { ...order, status: "completed" } : order
       );
+
       const updatedPendingOrders = updatedOrders.filter(
         (order) => order.status === "pending"
       );
@@ -124,15 +131,13 @@ const StaffOrdersPage = () => {
         })
       );
 
-      const updatedAllOrders = [
+      return [
         ...updatedPrioritizedPendingOrders,
         ...updatedOrders.filter(
           (order) =>
             order.status === "completed" || order.status === "delivered"
         )
       ];
-
-      return updatedAllOrders;
     });
   };
 
@@ -145,6 +150,7 @@ const StaffOrdersPage = () => {
           that need your attention.
         </p>
       </header>
+
       <TabButtons
         activeTab={activeTab}
         onClick={sortOrders}
@@ -154,26 +160,30 @@ const StaffOrdersPage = () => {
 
       <strong>Orders to handle</strong>
       <section className="orders-container">
-        {filteredOrders().length > 0 ? (
-          filteredOrders().map((order) => (
-            <StaffOrdersCard
+        <AnimatePresence initial={false}>
+          {filteredOrders().map((order) => (
+            <motion.div
               key={order.id}
-              id={order.id}
-              time={order.time}
-              status={order.status}
-              userId={order.userId}
-              comment={order.comment}
-              priority={order.status === "pending" ? order.priority : undefined}
-              onOpenModal={() => handleOpenModal(order.id)}
-              onProcessOrder={handleProcessOrder}
-            />
-          ))
-        ) : (
-          <p className="">
-            You handled all the orders. <br />
-            All Done
-          </p>
-        )}
+              initial={isTabClicked ? { opacity: 0, y: 10 } : {}}
+              animate={isTabClicked ? { opacity: 1, y: 0 } : {}}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.3 }}
+            >
+              <StaffOrdersCard
+                id={order.id}
+                time={order.time}
+                status={order.status}
+                userId={order.userId}
+                comment={order.comment}
+                priority={
+                  order.status === "pending" ? order.priority : undefined
+                }
+                onOpenModal={() => handleOpenModal(order.id)}
+                onProcessOrder={handleProcessOrder}
+              />
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </section>
 
       {selectedOrder && (
