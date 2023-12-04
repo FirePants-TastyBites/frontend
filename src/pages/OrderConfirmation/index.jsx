@@ -1,9 +1,9 @@
-import { useNavigate, useParams } from 'react-router-dom';
 import PinkThingy from '../../components/PinkThingy';
 import GreenLine from '../../components/GreenLine';
 import Button from '../../components/Button';
-import './OrderConfirmation.scss'
 import DetailsButton from '../../components/DetailsButton';
+import './OrderConfirmation.scss'
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import axios from 'axios';
@@ -11,31 +11,36 @@ import axios from 'axios';
 function OrderConfirmation() {
     const [showMore, setShowMore] = useState(false);
     const [openModal, setOpenModal] = useState(false);
-    const [isLocked, setIsLocked] = useState(false);
-    const [deliveryTime, setDeliveryTime] = useState(null);
-    const [order, setOrder] = useState({});
+    const [order, setOrder] = useState({
+        id: '',
+        isLocked: false,
+        deliveryTime: null,
+        orderStatus: null,
+        cart: [],
+        createdAt: null
+    });
+
+    const { id } = useParams();
     const navigate = useNavigate();
-    const id = useParams().id;
 
     useEffect(() => {
+        // Sätt den här inuti calcDeliveryTimeWithInterval?
         axios.get(`https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/order/${id}`)
             .then(response => {
-                console.log(response.data.order)
                 setOrder(response.data.order);
             })
             .catch(error => console.log(error))
 
     }, [])
 
-    // Ska vara ett state?
+
     const orderStatus = order.orderStatus === 'pending' ? 'Pending' : "In progress";
 
     useEffect(() => {
         let timeoutId;
-        console.log('order.isLocked: ', order.isLocked);
 
         // Måste prata med databasen?
-        setIsLocked(order.isLocked);
+        // setOrder(prevOrder => ({...prevOrder, isLocked: order.isLocked}))
 
         function calcDeliveryTimeWithInterval() {
             if (!order.isLocked) {
@@ -50,7 +55,7 @@ function OrderConfirmation() {
             clearTimeout(timeoutId);
         }
 
-    }, [order.isLocked])
+    }, [])
 
     function calcDeliveryTime() {
         const timestamp = Date.now();
@@ -60,14 +65,24 @@ function OrderConfirmation() {
         // console.log('createdAt: ', order.createdAt);
         // console.log('estimatedTime: ', estimatedTime);
 
-        setDeliveryTime(estimatedTime);
+        setOrder(prevOrder => ({ ...prevOrder, deliveryTime: estimatedTime }));
     }
 
     function cancelOrder() {
-        console.log('Canceling order');
         toggleModal();
-        // Skicka till databasen
-        navigate('/cancel-order');
+
+        axios.put('https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/order', {
+            id: order.id,
+            orderStatus: 'cancelled',
+            deliveryTime: null
+        })
+            .then(() => {
+                navigate('/cancel-order');
+            })
+            .catch(error => {
+                console.error(error);
+                navigate('/error');
+            })
     }
 
     function toggleModal() {
@@ -101,7 +116,7 @@ function OrderConfirmation() {
                 <section className="time">
                     <h4>Estimated Delivery Time</h4>
                     <div>
-                        <p>{deliveryTime}</p>
+                        <p>{order.deliveryTime}</p>
                     </div>
                 </section>
                 <section className="order-id">
@@ -134,7 +149,7 @@ function OrderConfirmation() {
                 </section>
             </motion.section>
 
-            {!isLocked &&
+            {!order.isLocked &&
                 <>
                     <section className='cancel-order'>
                         <h2>Unexpected change of plans?</h2>

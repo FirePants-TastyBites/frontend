@@ -1,8 +1,8 @@
-import { useNavigate } from "react-router-dom";
 import GreenLine from "../../components/GreenLine";
 import Button from "../../components/Button";
 import DetailsButton from '../../components/DetailsButton';
 import './Checkout.scss';
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { resetOrder } from "../../store/orderSlice";
@@ -15,14 +15,13 @@ function Checkout() {
     const navigate = useNavigate();
 
     async function placeOrder() {
-        // skicka order till databas och invänta svar (kolla om det finns en order?)
-        // om allt gick bra => till confirmation
+
+        if (order.cart.length  < 1) {
+            navigate('/error');
+        }
 
         axios.post('https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/order', order)
-            .then(async response => {
-                console.log(response);
-
-                // allt annat här
+            .then(async () => {
                 await animate(".checkout", { x: ["0%", "-100%"], opacity: [1, 0]});
                 navigate(`/confirmation/${order.id}`);
                 dispatch(resetOrder());
@@ -30,10 +29,6 @@ function Checkout() {
             .catch(error => {
                 console.log(error);
             })
-            
-
-        // annars => navigera till errorPage?
-
     }
 
     useEffect(() => {
