@@ -64,6 +64,12 @@
         p,
         time {
           @include text-style-700-16px;
+
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 100px;
+          cursor: pointer;
         }
       }
 

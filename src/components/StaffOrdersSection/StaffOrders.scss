@@ -80,7 +80,14 @@
         .menu-name,
         .order-time,
         .menu-price {
-          @include text-style-500-16px;
+          @include text-style-500-14px;
+        }
+        .truncated-text {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 50px;
+          cursor: pointer;
         }
       }
 
