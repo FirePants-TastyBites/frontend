@@ -17,6 +17,7 @@ import OrderCancellation from "./pages/OrderCancellation";
 import { useEffect } from "react";
 import ErrorBoundary from "./pages/ErrorBoundary";
 import SingUpPage from "./pages/Sign-up";
+import Profile from "./pages/Profile";
 
 function App() {
   const { pathname } = useLocation();
@@ -45,6 +46,7 @@ function App() {
             <Route path="/about" element={<About />}></Route>
             <Route path="/menu" element={<Menu />}></Route>
             <Route path="/sign-in" element={<SignInPage />}></Route>
+            <Route path="/my-profile" element={<Profile />}/>
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/confirmation/:id" element={<OrderConfirmation />} />
