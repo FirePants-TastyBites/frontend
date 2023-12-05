@@ -35,9 +35,6 @@ function OrderConfirmation() {
 
     }, [])
 
-
-    const orderStatus = order.orderStatus === 'pending' ? 'Pending' : "In progress";
-
     useEffect(() => {
         let timeoutId;
         let minutes = 5;
@@ -53,7 +50,7 @@ function OrderConfirmation() {
                     minutes--;
                     console.log('minutes: ', minutes)
                 } else {
-                    setOrder(prevOrder => ({...prevOrder, isLocked: true}))
+                    setOrder(prevOrder => ({...prevOrder, isLocked: true, orderStatus: 'in progress'}));
                 }
             })
             .catch(error => console.log(error))
@@ -149,7 +146,7 @@ function OrderConfirmation() {
                                     <ul>
                                         {order.cart.map((item, i) => <li key={i}><p>{item.qty} {item.title}</p></li>)}
                                     </ul>
-                                    <p>{orderStatus}</p>
+                                    <p>{order.orderStatus}</p>
                                 </section>
                             </motion.section>
                         }
