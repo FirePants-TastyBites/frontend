@@ -28,6 +28,8 @@ function OrderConfirmation() {
         axios.get(`https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/order/${id}`)
             .then(response => {
                 setOrder(response.data.order);
+                calcDeliveryTime();
+                console.log('first fetch: ', response.data.order);
             })
             .catch(error => console.log(error))
 
@@ -38,12 +40,25 @@ function OrderConfirmation() {
 
     useEffect(() => {
         let timeoutId;
+        let minutes = 5;
 
         function calcDeliveryTimeWithInterval() {
-            if (!order.isLocked) {
-                calcDeliveryTime();
-                timeoutId = setTimeout(calcDeliveryTimeWithInterval, 1000);
-            }
+
+            axios.get(`https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/order/${id}`)
+            .then(response => {
+                console.log('Fetch inside interval: ', response.data.order);
+                if (!response.data.order.isLocked && minutes > 0) {
+                    calcDeliveryTime();
+                    timeoutId = setTimeout(calcDeliveryTimeWithInterval, 10000);
+                    minutes--;
+                    console.log('minutes: ', minutes)
+                } else {
+                    setOrder(prevOrder => ({...prevOrder, isLocked: true}))
+                }
+            })
+            .catch(error => console.log(error))
+
+
         }
 
         calcDeliveryTimeWithInterval();
