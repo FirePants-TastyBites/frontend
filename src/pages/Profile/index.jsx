@@ -2,10 +2,17 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import GreenLine from "../../components/GreenLine";
 import './Profile.scss';
+import { useEffect } from "react";
 
 function Profile() {
-    const user = useLocation().state.user;
+    const user = useLocation().state?.user || null;
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!user) {
+            navigate('/error');
+        }
+    }, [])
 
     console.log(user);
 
