@@ -14,10 +14,16 @@ const formatTime = (dateTime) => {
 const StaffOrdersSection = ({ orders }) => {
   const navigate = useNavigate();
 
-  const sortedOrders = useMemo(() => {
-    return [...orders].sort(
+  const pendingOrders = useMemo(() => {
+    const filteredOrders = orders.filter(
+      (order) => order.orderStatus === "pending"
+    );
+
+    const sortedOrders = filteredOrders.sort(
       (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
     );
+
+    return sortedOrders.slice(0, 4);
   }, [orders]);
 
   const handleViewAllOrdersClick = () => {
@@ -32,23 +38,35 @@ const StaffOrdersSection = ({ orders }) => {
         </div>
         <p className="title">Orders to handle</p>
       </header>
-      {sortedOrders.map((order) => (
-        <article className="order-item" key={order.id}>
-          <div className="order-image-container">
-            <img className="order-image" src={order.cart[0].url} alt="Order" />
-          </div>
 
-          <div className="order-info-container">
-            <div className="order-info">
-              <p className="order-id truncated-text" title={order.id}>
-                #{order.id}
-              </p>
-              <time className="order-time">{formatTime(order.createdAt)}</time>
+      {pendingOrders.length > 0 ? (
+        pendingOrders.map((order) => (
+          <article className="order-item" key={order.id}>
+            <div className="order-image-container">
+              <img
+                className="order-image"
+                src={order.cart[0].url}
+                alt="Order"
+              />
             </div>
-            <p className="customer-name">{order.userId}</p>
-          </div>
-        </article>
-      ))}
+
+            <div className="order-info-container">
+              <div className="order-info">
+                <p className="order-id truncated-text" title={order.id}>
+                  #{order.id}
+                </p>
+                <time className="order-time">
+                  {formatTime(order.createdAt)}
+                </time>
+              </div>
+              <p className="customer-name">{order.userId}</p>
+            </div>
+          </article>
+        ))
+      ) : (
+        <p>No pending orders to process.</p>
+      )}
+
       <button onClick={handleViewAllOrdersClick} className="menu-button">
         See All Orders
       </button>
