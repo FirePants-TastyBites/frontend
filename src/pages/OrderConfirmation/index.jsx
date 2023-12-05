@@ -39,9 +39,6 @@ function OrderConfirmation() {
     useEffect(() => {
         let timeoutId;
 
-        // Måste prata med databasen?
-        // setOrder(prevOrder => ({...prevOrder, isLocked: order.isLocked}))
-
         function calcDeliveryTimeWithInterval() {
             if (!order.isLocked) {
                 calcDeliveryTime();
@@ -58,12 +55,8 @@ function OrderConfirmation() {
     }, [])
 
     function calcDeliveryTime() {
-        const timestamp = Date.now();
-        let estimatedTime = new Date(timestamp) + 25 * 60 * 1000;
-        estimatedTime = new Date(estimatedTime).toLocaleString();
-
-        // console.log('createdAt: ', order.createdAt);
-        // console.log('estimatedTime: ', estimatedTime);
+        const timestamp = Date.now() + 25 * 60 * 1000;
+        const estimatedTime = new Date(timestamp).toLocaleString().slice(0, 16);
 
         setOrder(prevOrder => ({ ...prevOrder, deliveryTime: estimatedTime }));
     }
