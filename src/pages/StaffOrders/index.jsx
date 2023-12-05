@@ -68,7 +68,8 @@ const StaffOrdersPage = () => {
           }),
           orderItems: order.cart,
           comment: order.comment,
-          status: order.orderStatus
+          status: order.orderStatus,
+          deliveryTime: order.deliveryTime
         }));
 
         setOrders(prioritizeOrders(transformedOrders));
@@ -221,7 +222,7 @@ const StaffOrdersPage = () => {
           comment={selectedOrder.comment}
           orderedItems={selectedOrder.orderItems || []}
           userId={selectedOrder.userId}
-          deliveryTime={"12:40"}
+          deliveryTime={selectedOrder.deliveryTime}
           orderTime={selectedOrder.time}
           onClose={handleCloseModal}
           onProcessOrder={handleProcessOrder}
