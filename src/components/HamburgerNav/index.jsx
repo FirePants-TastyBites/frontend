@@ -35,7 +35,7 @@ function HamburgerNav({ isVisible, setIsVisible }) {
     exit: {
       x: "-100%",
       transition: {
-        duration: 5,
+        duration: 0.3,
         ease: "easeIn"
       }
     }
@@ -54,8 +54,9 @@ function HamburgerNav({ isVisible, setIsVisible }) {
   });
 
   return (
-    isVisible && (
-      <AnimatePresence>
+    <AnimatePresence> 
+      {isVisible && (
+        <>
         <motion.div
           className={styles.overlayShadow}
           onClick={closeHamburgerNav}
@@ -80,8 +81,9 @@ function HamburgerNav({ isVisible, setIsVisible }) {
           </div>
           {renderedOptions}
         </motion.nav>
+        </>
+    )}
       </AnimatePresence>
-    )
   );
 }
 
