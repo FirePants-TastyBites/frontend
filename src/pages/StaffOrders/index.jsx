@@ -8,7 +8,7 @@ import "./Orders.scss";
 const prioritizeOrders = (orders) => {
   const pendingOrders = orders.filter((order) => order.status === "pending");
   const completedOrders = orders.filter(
-    (order) => order.status === "completed" || order.status === "delivered"
+    (order) => order.status === "handled" || order.status === "delivered"
   );
 
   pendingOrders.sort(
@@ -50,9 +50,15 @@ const StaffOrdersPage = () => {
         return response.json();
       })
       .then((data) => {
-        console.log(data.orders);
+        console.log(data);
+        const filteredOrders = data.orders.filter(
+          (order) =>
+            order.orderStatus === "pending" || order.orderStatus === "handled"
+        );
 
-        const transformedOrders = data.orders.map((order) => ({
+        console.log(filteredOrders);
+
+        const transformedOrders = filteredOrders.map((order) => ({
           id: order.id,
           userId: order.userId,
           totalAmount: order.totalPrice,
@@ -71,6 +77,7 @@ const StaffOrdersPage = () => {
         console.error("Failed to fetch orders:", error);
       });
   }, []);
+
   useEffect(() => {
     setOrders((prevOrders) => {
       return prevOrders.map((order, index) => ({
@@ -96,9 +103,7 @@ const StaffOrdersPage = () => {
     } else if (activeTab === "pending") {
       return orders.filter((order) => order.status === "pending");
     } else {
-      return orders.filter(
-        (order) => order.status === "completed" || order.status === "delivered"
-      );
+      return orders.filter((order) => order.status === "handled");
     }
   };
 
@@ -116,30 +121,52 @@ const StaffOrdersPage = () => {
   };
 
   const handleProcessOrder = (orderId) => {
-    setOrders((prevOrders) => {
-      const updatedOrders = prevOrders.map((order) =>
-        order.id === orderId ? { ...order, status: "completed" } : order
-      );
-
-      const updatedPendingOrders = updatedOrders.filter(
-        (order) => order.status === "pending"
-      );
-
-      const updatedPrioritizedPendingOrders = updatedPendingOrders.map(
-        (order, index) => ({
-          ...order,
-          priority: index + 1
-        })
-      );
-
-      return [
-        ...updatedPrioritizedPendingOrders,
-        ...updatedOrders.filter(
-          (order) =>
-            order.status === "completed" || order.status === "delivered"
-        )
-      ];
+    const deliveryTime = new Date(new Date().getTime() + 25 * 60000);
+    const updatedDeliveryTime = deliveryTime.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit"
     });
+
+    const orderUpdate = {
+      id: orderId,
+      orderStatus: "handled",
+      deliveryTime: updatedDeliveryTime,
+      isLocked: true
+    };
+
+    fetch("https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/order", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(orderUpdate)
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then(() => {
+        setOrders((prevOrders) => {
+          return prioritizeOrders(
+            prevOrders.map((order) => {
+              if (order.id === orderId) {
+                return {
+                  ...order,
+                  status: "handled",
+                  deliveryTime: updatedDeliveryTime,
+                  isLocked: true
+                };
+              }
+              return order;
+            })
+          );
+        });
+      })
+      .catch((error) => {
+        console.error("Failed to update order status:", error);
+      });
   };
 
   return (
