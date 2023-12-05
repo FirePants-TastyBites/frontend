@@ -24,29 +24,34 @@ function OrderConfirmation() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Sätt den här inuti calcDeliveryTimeWithInterval?
+
         axios.get(`https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/order/${id}`)
             .then(response => {
                 setOrder(response.data.order);
+                calcDeliveryTime();
             })
             .catch(error => console.log(error))
 
     }, [])
 
-
-    const orderStatus = order.orderStatus === 'pending' ? 'Pending' : "In progress";
-
     useEffect(() => {
         let timeoutId;
-
-        // Måste prata med databasen?
-        // setOrder(prevOrder => ({...prevOrder, isLocked: order.isLocked}))
+        let minutes = 5;
 
         function calcDeliveryTimeWithInterval() {
-            if (!order.isLocked) {
-                calcDeliveryTime();
-                timeoutId = setTimeout(calcDeliveryTimeWithInterval, 1000);
-            }
+
+            axios.get(`https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/order/${id}`)
+            .then(response => {
+                const orderFromDB = response.data.order;
+                if (!orderFromDB.isLocked && minutes > 0) {
+                    calcDeliveryTime();
+                    timeoutId = setTimeout(calcDeliveryTimeWithInterval, 10000);
+                    minutes--;
+                } else {
+                    setOrder(prevOrder => ({...prevOrder, isLocked: true, orderStatus: 'In progress', deliveryTime: orderFromDB.deliveryTime || order.deliveryTime }));
+                }
+            })
+            .catch(error => console.log(error))
         }
 
         calcDeliveryTimeWithInterval();
@@ -58,12 +63,11 @@ function OrderConfirmation() {
     }, [])
 
     function calcDeliveryTime() {
-        const timestamp = Date.now();
-        let estimatedTime = new Date(timestamp) + 25 * 60 * 1000;
-        estimatedTime = new Date(estimatedTime).toLocaleString();
-
-        // console.log('createdAt: ', order.createdAt);
-        // console.log('estimatedTime: ', estimatedTime);
+        const timestamp = Date.now() + 25 * 60 * 1000;
+        const estimatedTime = new Date(timestamp).toLocaleString([], {
+            hour: "2-digit",
+            minute: "2-digit"
+          });
 
         setOrder(prevOrder => ({ ...prevOrder, deliveryTime: estimatedTime }));
     }
@@ -141,7 +145,7 @@ function OrderConfirmation() {
                                     <ul>
                                         {order.cart.map((item, i) => <li key={i}><p>{item.qty} {item.title}</p></li>)}
                                     </ul>
-                                    <p>{orderStatus}</p>
+                                    <p>{order.orderStatus}</p>
                                 </section>
                             </motion.section>
                         }
