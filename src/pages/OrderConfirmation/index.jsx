@@ -24,7 +24,7 @@ function OrderConfirmation() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Sätt den här inuti calcDeliveryTimeWithInterval?
+
         axios.get(`https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/order/${id}`)
             .then(response => {
                 setOrder(response.data.order);
@@ -43,19 +43,19 @@ function OrderConfirmation() {
 
             axios.get(`https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/order/${id}`)
             .then(response => {
-                console.log('Fetch inside interval: ', response.data.order);
-                if (!response.data.order.isLocked && minutes > 0) {
+                const orderFromDB = response.data.order;
+                console.log('Fetch inside interval: ', orderFromDB);
+                if (!orderFromDB.isLocked && minutes > 0) {
                     calcDeliveryTime();
                     timeoutId = setTimeout(calcDeliveryTimeWithInterval, 10000);
                     minutes--;
                     console.log('minutes: ', minutes)
                 } else {
-                    setOrder(prevOrder => ({...prevOrder, isLocked: true, orderStatus: 'in progress'}));
+                    setOrder(prevOrder => ({...prevOrder, isLocked: true, orderStatus: 'In progress', deliveryTime: orderFromDB.deliveryTime || order.deliveryTime }));
+                    console.log('Order i state: ', order);
                 }
             })
             .catch(error => console.log(error))
-
-
         }
 
         calcDeliveryTimeWithInterval();
