@@ -29,7 +29,6 @@ function OrderConfirmation() {
             .then(response => {
                 setOrder(response.data.order);
                 calcDeliveryTime();
-                console.log('first fetch: ', response.data.order);
             })
             .catch(error => console.log(error))
 
@@ -44,15 +43,12 @@ function OrderConfirmation() {
             axios.get(`https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/order/${id}`)
             .then(response => {
                 const orderFromDB = response.data.order;
-                console.log('Fetch inside interval: ', orderFromDB);
                 if (!orderFromDB.isLocked && minutes > 0) {
                     calcDeliveryTime();
                     timeoutId = setTimeout(calcDeliveryTimeWithInterval, 10000);
                     minutes--;
-                    console.log('minutes: ', minutes)
                 } else {
                     setOrder(prevOrder => ({...prevOrder, isLocked: true, orderStatus: 'In progress', deliveryTime: orderFromDB.deliveryTime || order.deliveryTime }));
-                    console.log('Order i state: ', order);
                 }
             })
             .catch(error => console.log(error))
@@ -68,7 +64,10 @@ function OrderConfirmation() {
 
     function calcDeliveryTime() {
         const timestamp = Date.now() + 25 * 60 * 1000;
-        const estimatedTime = new Date(timestamp).toLocaleString().slice(0, 16);
+        const estimatedTime = new Date(timestamp).toLocaleString([], {
+            hour: "2-digit",
+            minute: "2-digit"
+          });
 
         setOrder(prevOrder => ({ ...prevOrder, deliveryTime: estimatedTime }));
     }
