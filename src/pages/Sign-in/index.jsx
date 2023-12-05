@@ -28,7 +28,7 @@ const SignInPage = () => {
         if (response.data.isAdmin) {
           navigate("/staff");
         } else {
-          navigate("/my-profile");
+          navigate("/my-profile", { state: { user: response.data.email } });
         }
       } else {
         console.error("Sign in failed:", response.data.message);
