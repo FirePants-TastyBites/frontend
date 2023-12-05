@@ -87,7 +87,10 @@ const OrderModal = ({
           </ul>
           <div className={styles.timeInfo}>
             <p>Order time: {orderTime}</p>
-            <p>Estimated Delivery time: {deliveryTime}</p>
+            Delivery time:
+            {deliveryTime
+              ? deliveryTime
+              : "Delivery time is shown after processing the order"}
             <p className={styles.customer}>Customer: {userId}</p>
           </div>
         </section>
