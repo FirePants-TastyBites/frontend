@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import ErrorBoundary from "./pages/ErrorBoundary";
 import SingUpPage from "./pages/Sign-up";
 import Profile from "./pages/Profile";
+import OrderHistory from "./pages/OrderHistory";
 
 function App() {
   const { pathname } = useLocation();
@@ -46,13 +47,14 @@ function App() {
             <Route path="/about" element={<About />}></Route>
             <Route path="/menu" element={<Menu />}></Route>
             <Route path="/sign-in" element={<SignInPage />}></Route>
-            <Route path="/my-profile" element={<Profile />}/>
+            <Route path="/my-profile" element={<Profile />} />
+            <Route path="/order-history" element={<OrderHistory />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/confirmation/:id" element={<OrderConfirmation />} />
             <Route path="/cancel-order" element={<OrderCancellation />} />
             <Route path="/sign-up" element={<SingUpPage />}></Route>
-            <Route path="/staff" element={<StaffLayout />} errorElement={<ErrorBoundary/>} >
+            <Route path="/staff" element={<StaffLayout />} errorElement={<ErrorBoundary />} >
               <Route index element={<StaffPage />} />
               <Route path="orders" element={<StaffOrdersPage />} />
               <Route path="menu" element={<StaffMenuPage />} />
