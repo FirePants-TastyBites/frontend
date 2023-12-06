@@ -9,7 +9,7 @@
     max-width: 600px;
 
     h4 {
-        @include text-style-600
+        @include text-style-500-16px;
     }
 
     >div {

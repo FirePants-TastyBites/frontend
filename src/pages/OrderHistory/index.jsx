@@ -1,8 +1,9 @@
-import { useNavigate, useLocation } from "react-router-dom";
 import GreenLine from "../../components/GreenLine";
+import OrderHistoryItem from "../../components/OrderHistoryItem";
+import './OrderHistory.scss';
+import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import OrderHistoryItem from "../../components/OrderHistoryItem";
 
 function OrderHistory() {
     const user = useLocation().state?.user || null;
@@ -27,14 +28,14 @@ function OrderHistory() {
                 orders.forEach(order => {
 
                     if (order.orderStatus === 'cancelled') {
-                        setOrderHistory(prevHistory => ({...prevHistory, cancelled: [...prevHistory.cancelled, order]}));
+                        setOrderHistory(prevHistory => ({ ...prevHistory, cancelled: [...prevHistory.cancelled, order] }));
 
                     } else if (isDelivered(order.deliveryTime, order.createdAt)) {
-                        setOrderHistory(prevHistory => ({...prevHistory, delivered: [...prevHistory.delivered, order]}));
+                        setOrderHistory(prevHistory => ({ ...prevHistory, delivered: [...prevHistory.delivered, order] }));
 
                     } else {
-                        setOrderHistory(prevHistory => ({...prevHistory, inProgress: [...prevHistory.inProgress, order]}));
-                        
+                        setOrderHistory(prevHistory => ({ ...prevHistory, inProgress: [...prevHistory.inProgress, order] }));
+
                     }
 
                 });
@@ -51,7 +52,7 @@ function OrderHistory() {
 
         // Turn createdAt into ms
         const createdAtInMs = Date.parse(createdAt);
-        
+
         // Extract date
         const createdAtDate = createdAt.split('T')[0]
 
@@ -59,55 +60,51 @@ function OrderHistory() {
         const deliveryAt = new Date(`${createdAtDate} ${deliveryTime}`);
         const deliveryAtInMs = Date.parse(deliveryAt);
 
-        return deliveryAtInMs > Date.now();
+        return Date.now() > deliveryAtInMs;
     }
 
-
-    console.log(orderHistory);
-
     return (
-        <main>
+        <main className="order-history">
             <header>
                 <h1>YOUR ORDERS</h1>
                 <GreenLine />
             </header>
-            <section>
-                <p>
-                    Navigate your Tasty Bites food odyssey effortlessly. Peek into your Order History, effortlessly reorder cherished meals, and keep your culinary journey alive – all at your fingertips.
-                </p>
-            </section>
-            <section>
+            <p>
+                Navigate your Tasty Bites food odyssey effortlessly. Peek into your Order History, effortlessly reorder cherished meals, and keep your culinary journey alive – all at your fingertips.
+            </p>
+
+            <section className="orders">
                 <section>
                     <h3>In progress</h3>
                     {
                         orderHistory.inProgress.length > 0 ?
-                        <ul>
-                            {orderHistory.inProgress.map((order, index) => <OrderHistoryItem key={index} order={order}/>)}
-                        </ul>
-                        :
-                        <p>No orders</p>
+                            <ul>
+                                {orderHistory.inProgress.map((order, index) => <OrderHistoryItem key={index} order={order} />)}
+                            </ul>
+                            :
+                            <p>No orders</p>
                     }
                 </section>
                 <section>
                     <h3>Delivered</h3>
                     {
                         orderHistory.delivered.length > 0 ?
-                        <ul>
-                            {orderHistory.delivered.map((order, index) => <OrderHistoryItem key={index} order={order}/>)}
-                        </ul>
-                        :
-                        <p>No orders</p>
+                            <ul>
+                                {orderHistory.delivered.map((order, index) => <OrderHistoryItem key={index} order={order} />)}
+                            </ul>
+                            :
+                            <p>No orders</p>
                     }
                 </section>
                 <section>
                     <h3>Cancelled</h3>
                     {
                         orderHistory.cancelled.length > 0 ?
-                        <ul>
-                            {orderHistory.cancelled.map((order, index) => <OrderHistoryItem key={index} order={order}/>)}
-                        </ul>
-                        :
-                        <p>No orders</p>
+                            <ul>
+                                {orderHistory.cancelled.map((order, index) => <OrderHistoryItem key={index} order={order} />)}
+                            </ul>
+                            :
+                            <p>No orders</p>
                     }
                 </section>
             </section>

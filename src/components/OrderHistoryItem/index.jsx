@@ -1,6 +1,6 @@
-import { useState } from "react";
 import DetailsButton from "../DetailsButton";
 import styles from './orderHistoryItem.module.scss';
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addItem } from '../../store/orderSlice';
 import { useNavigate } from "react-router-dom";
@@ -13,7 +13,6 @@ function OrderHistoryItem({ order }) {
     const date = createdAt.split('T')[0];
 
     function handleReorder() {
-        console.log(cart);
         cart.map(item => dispatch(addItem(item)));
         navigate('/cart');
     }
