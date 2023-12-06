@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { updateNavigation } from "../../store/navigationSlice";
+import { updateUserId } from "../../store/orderSlice";
 
 const SignInPage = () => {
   const [email, setEmail] = useState("");
@@ -33,7 +34,8 @@ const SignInPage = () => {
         if (response.data.isAdmin) {
           navigate("/staff");
         } else {
-          navigate("/my-profile", { state: { user: response.data.email } });
+          dispatch(updateUserId(email));
+          navigate("/my-profile");
         }
       } else {
         console.error("Sign in failed:", response.data.message);
