@@ -1,29 +1,32 @@
 import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import IconSystem from "../IconSystem";
+import { motion } from "framer-motion";
 import "./StaffOrders.scss";
 
 const formatTime = (dateTime) => {
   const date = new Date(dateTime);
   return date.toLocaleTimeString("en-US", {
     hour: "2-digit",
-    minute: "2-digit"
+    minute: "2-digit",
   });
 };
 
-const StaffOrdersSection = ({ orders }) => {
+const spinnerVariants = {
+  animate: {
+    rotate: 360,
+    transition: { duration: 1, repeat: Infinity, ease: "linear" },
+  },
+};
+
+const StaffOrdersSection = ({ orders, isLoading }) => {
   const navigate = useNavigate();
 
   const pendingOrders = useMemo(() => {
-    const filteredOrders = orders.filter(
-      (order) => order.orderStatus === "pending"
-    );
-
-    const sortedOrders = filteredOrders.sort(
-      (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
-    );
-
-    return sortedOrders.slice(0, 4);
+    return orders
+      .filter((order) => order.orderStatus === "pending")
+      .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+      .slice(0, 4);
   }, [orders]);
 
   const handleViewAllOrdersClick = () => {
@@ -39,7 +42,13 @@ const StaffOrdersSection = ({ orders }) => {
         <p className="title">Orders to handle</p>
       </header>
 
-      {pendingOrders.length > 0 ? (
+      {isLoading ? (
+        <motion.div
+          className="loader"
+          animate={{ rotate: 360 }}
+          variants={spinnerVariants}
+        />
+      ) : pendingOrders.length > 0 ? (
         pendingOrders.map((order) => (
           <article className="order-item" key={order.id}>
             <div className="order-image-container">
@@ -49,7 +58,6 @@ const StaffOrdersSection = ({ orders }) => {
                 alt="Order"
               />
             </div>
-
             <div className="order-info-container">
               <div className="order-info">
                 <p className="order-id truncated-text" title={order.id}>
@@ -67,9 +75,7 @@ const StaffOrdersSection = ({ orders }) => {
         <p>No pending orders to process.</p>
       )}
 
-      <button onClick={handleViewAllOrdersClick} className="menu-button">
-        See All Orders
-      </button>
+      <button onClick={handleViewAllOrdersClick}>See All Orders</button>
     </section>
   );
 };

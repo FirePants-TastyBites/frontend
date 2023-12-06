@@ -9,29 +9,27 @@ const StaffMenuSection = ({ menuItems }) => {
   };
   return (
     <section className="menu-section">
-      <header className="section-header">
+      <header>
         <div className="section-icon">
           <IconSystem name="menu" />
         </div>
-        <p className="title">Current Menu</p>
+        <p>Current Menu</p>
       </header>
       {menuItems.map((menu) => (
-        <article className="menu-item" key={menu.id}>
-          <div className="menu-image-container">
+        <section key={menu.id}>
+          <div>
             <img className="menu-image-small" src={menu.url} alt={menu.title} />
           </div>
-          <div className="menu-info-container">
-            <div className="order-info">
-              <p className="menu-name">{menu.title}</p>
-              <p className="menu-price">{menu.price}</p>
+          <article>
+            <div className="menu-info">
+              <p>{menu.title}</p>
+              <p>{menu.price}</p>
             </div>
-          </div>
-        </article>
+          </article>
+        </section>
       ))}
 
-      <button onClick={handleViewMenuClick} className="menu-button">
-        Update Availability
-      </button>
+      <button onClick={handleViewMenuClick}>Update Availability</button>
     </section>
   );
 };
