@@ -2,6 +2,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import GreenLine from "../../components/GreenLine";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import OrderHistoryItem from "../../components/OrderHistoryItem";
 
 function OrderHistory() {
     const user = useLocation().state?.user || null;
@@ -78,15 +79,36 @@ function OrderHistory() {
             <section>
                 <section>
                     <h3>In progress</h3>
-                    <ul>{orderHistory.inProgress.length}</ul>
+                    {
+                        orderHistory.inProgress.length > 0 ?
+                        <ul>
+                            {orderHistory.inProgress.map((order, index) => <OrderHistoryItem key={index} order={order}/>)}
+                        </ul>
+                        :
+                        <p>No orders</p>
+                    }
                 </section>
                 <section>
                     <h3>Delivered</h3>
-                    <ul>{orderHistory.delivered.length}</ul>
+                    {
+                        orderHistory.delivered.length > 0 ?
+                        <ul>
+                            {orderHistory.delivered.map((order, index) => <OrderHistoryItem key={index} order={order}/>)}
+                        </ul>
+                        :
+                        <p>No orders</p>
+                    }
                 </section>
                 <section>
                     <h3>Cancelled</h3>
-                    <ul>{orderHistory.cancelled.length}</ul>
+                    {
+                        orderHistory.cancelled.length > 0 ?
+                        <ul>
+                            {orderHistory.cancelled.map((order, index) => <OrderHistoryItem key={index} order={order}/>)}
+                        </ul>
+                        :
+                        <p>No orders</p>
+                    }
                 </section>
             </section>
         </main>
