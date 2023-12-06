@@ -10,17 +10,18 @@ import { setOrder } from "../../store/orderSlice";
 import { nanoid } from "@reduxjs/toolkit";
 
 function Cart() {
+    const [comment, setComment] = useState('');
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const cart = useSelector(state => state.order.cart);
+    const userId = useSelector(state => state.order.userId);
     const totalPrice = cart.reduce((total, item) => total + item.price, 0);
-    const [comment, setComment] = useState('');
 
     async function createOrder() {
-
+        
         const newOrder = {
             id: nanoid(),
-            userId: 'guest',
+            userId,
             totalPrice,
             cart,
             comment
