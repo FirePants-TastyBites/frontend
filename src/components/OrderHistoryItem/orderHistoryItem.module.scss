@@ -1,0 +1,21 @@
+@import "../../styles/_variables";
+
+.item {
+    margin: 1rem 0;
+    padding: 10px;
+    background-color: $bg-white;
+    border: .5px solid $secondary-color;
+    border-radius: 8px;
+    max-width: 600px;
+
+    h4 {
+       @include text-style-600
+    }
+
+    div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 1rem;
+    }
+}

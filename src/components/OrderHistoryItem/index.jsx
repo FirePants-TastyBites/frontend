@@ -1,14 +1,15 @@
 import DetailsButton from "../DetailsButton";
+import styles from './orderHistoryItem.module.scss';
 
 function OrderHistoryItem({ order }) {
     const { id, createdAt, cart, totalPrice } = order;
     return (
-        <li>
+        <li className={styles.item}>
+            <h4> Order {id}</h4>
             <div>
-                <h4> Order {id}</h4>
                 <p>{createdAt.split('T')[0]}</p>
+                <DetailsButton >View details</DetailsButton>
             </div>
-            <DetailsButton>View details</DetailsButton>
         </li>
     );
 }
