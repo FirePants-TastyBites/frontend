@@ -14,7 +14,7 @@ function OrderHistory() {
     }, [])
 
     useEffect(() => {
-        axios.get('https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/user/orders', { userId: user })
+        axios.post('https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/user/orders', { userId: user })
             .then(response => console.log(response))
             .catch(error => console.log(error))
     }, [])
