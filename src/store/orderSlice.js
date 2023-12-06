@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     id: '',
-    userId: '',
+    userId: 'guest',
     totalPrice: 0,
     deliveryTime: '',
     cart: [],
@@ -48,10 +48,13 @@ export const orderSlice = createSlice({
         setOrder: (state, action) => {
             return action.payload;
         },
+        updateUserId: (state, action) => {
+            state.userId = action.payload
+        },
         resetOrder: () => initialState
     }
 });
 
-export const { addItem, removeItem, setOrder, resetOrder } = orderSlice.actions;
+export const { addItem, removeItem, setOrder, resetOrder, updateUserId } = orderSlice.actions;
 
 export default orderSlice.reducer;
