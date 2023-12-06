@@ -7,11 +7,14 @@ import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import GreenLine from "../../components/GreenLine";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { updateNavigation } from "../../store/navigationSlice";
 
 const SignInPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,11 +23,13 @@ const SignInPage = () => {
         "https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/user",
         {
           email: email,
-          password: password
+          password: password,
         }
       );
 
       if (response.data.success) {
+        dispatch(updateNavigation({ isAdmin: response.data.isAdmin }));
+
         if (response.data.isAdmin) {
           navigate("/staff");
         } else {
