@@ -9,13 +9,43 @@
     max-width: 600px;
 
     h4 {
-       @include text-style-600
+        @include text-style-500-16px;
     }
 
-    div {
+    >div {
         display: flex;
         justify-content: space-between;
-        align-items: center;
-        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    >section {
+        margin: 1rem 0 0;
+
+        ul {
+            @include text-style-400-14px;
+            margin-bottom: 1rem;
+        }
+
+        button {
+            padding: 8px;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid #111214;
+            background: $cta-color;
+            color: $text-white;
+            text-align: center;
+            @include text-style-600-14px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: darken($cta-color, 10%);
+            }
+        }
     }
 }
