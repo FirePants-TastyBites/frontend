@@ -126,7 +126,7 @@ function OrderConfirmation() {
                 <section className="order-id">
                     <h4>Order ID</h4>
                     <div>
-                        <p>{order.id}</p>
+                        <p>#{order.id.slice(0,6).toUpperCase()}</p>
                         <DetailsButton onClick={() => setShowMore(!showMore)}>
                             {
                                 showMore ? 'Show less' : 'Show more'

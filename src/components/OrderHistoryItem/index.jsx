@@ -20,7 +20,7 @@ function OrderHistoryItem({ order }) {
     return (
         <li className={styles.item}>
             <div>
-                <h4> Order {id}</h4>
+                <h4> Order #{id.slice(0,6).toUpperCase()}</h4>
                 <DetailsButton onClick={() => setShowDetails(!showDetails)}>
                     {
                         showDetails ? "Show less" : "Show more"
