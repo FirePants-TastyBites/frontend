@@ -8,8 +8,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { resetOrder } from "../../store/orderSlice";
 import { animate } from "framer-motion";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 
 function Checkout() {
+    const [cookies, setCookies] = useCookies(["userId"]);
     const order = useSelector(state => state.order);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -52,7 +54,7 @@ function Checkout() {
                 <section className="time">
                     <h4>Email</h4>
                     <div>
-                        <p>user@example.com</p>
+                        <p>{cookies.userId || "guest@example.com"}</p>
                         <DetailsButton>Change</DetailsButton>
                     </div>
                 </section>
