@@ -3,15 +3,12 @@ import Button from "../../components/Button";
 import GreenLine from "../../components/GreenLine";
 import './Profile.scss';
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 
 
 function Profile() {
     const [cookies, setCookies, removeCookies] = useCookies(["userId"]);
     const navigate = useNavigate();
-
-    console.log(cookies.userId)
 
     useEffect(() => {
         if (!cookies.userId) {

@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { updateNavigation } from "../../store/navigationSlice";
-import { updateUserId } from "../../store/orderSlice";
 import { useCookies } from "react-cookie";
 
 const SignInPage = () => {
@@ -37,7 +36,6 @@ const SignInPage = () => {
           navigate("/staff");
         } else {
           setCookies("userId", email);
-          dispatch(updateUserId(email));
           navigate("/my-profile");
         }
       } else {
