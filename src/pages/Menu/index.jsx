@@ -48,7 +48,7 @@ const Menu = () => {
 
   return (
     <main className="menu-page">
-      <header>
+      <header className="menu-page-header">
         <h1>Our menu</h1>
         <GreenLine />
       </header>
