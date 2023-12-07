@@ -17,7 +17,6 @@ const Menu = () => {
     axios
       .get("https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/menu")
       .then((response) => {
-        console.log(response.data.menu);
         const availableFoods = response.data.menu.filter(
           (food) => food.isAvailable
         );
