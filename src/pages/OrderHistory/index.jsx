@@ -1,13 +1,13 @@
 import GreenLine from "../../components/GreenLine";
 import OrderHistoryItem from "../../components/OrderHistoryItem";
 import './OrderHistory.scss';
-import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { useCookies } from "react-cookie";
 
 function OrderHistory() {
-    const user = useLocation().state?.user || null;
-    const navigate = useNavigate();
+    const [cookies, setCookies] = useCookies(["userId"]);
     const [orderHistory, setOrderHistory] = useState({
         inProgress: [],
         delivered: [],
@@ -15,16 +15,10 @@ function OrderHistory() {
     })
 
     useEffect(() => {
-        if (!user) {
-            navigate('/error');
-        }
-    }, [])
-
-    useEffect(() => {
-        axios.post('https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/user/orders', { userId: user })
+        axios.post('https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/user/orders', { userId: cookies.userId })
             .then(response => {
                 const orders = response.data.orders;
-                console.log("orders: ", orders)
+            
                 orders.forEach(order => {
 
                     if (order.orderStatus === 'cancelled') {

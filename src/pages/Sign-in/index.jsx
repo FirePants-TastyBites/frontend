@@ -9,12 +9,14 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { updateNavigation } from "../../store/navigationSlice";
+import { useCookies } from "react-cookie";
 
 const SignInPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [cookies, setCookies] = useCookies(["userId"]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,7 +35,8 @@ const SignInPage = () => {
         if (response.data.isAdmin) {
           navigate("/staff");
         } else {
-          navigate("/my-profile", { state: { user: response.data.email } });
+          setCookies("userId", email);
+          navigate("/my-profile");
         }
       } else {
         console.error("Sign in failed:", response.data.message);

@@ -8,19 +8,21 @@ import { useNavigate } from "react-router-dom";
 import { motion, animate } from "framer-motion";
 import { setOrder } from "../../store/orderSlice";
 import { nanoid } from "@reduxjs/toolkit";
+import { useCookies } from "react-cookie";
 
 function Cart() {
+    const [comment, setComment] = useState('');
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const cart = useSelector(state => state.order.cart);
+    const [cookies, setCookies] = useCookies(["userId"]);
     const totalPrice = cart.reduce((total, item) => total + item.price, 0);
-    const [comment, setComment] = useState('');
 
     async function createOrder() {
-
+        
         const newOrder = {
             id: nanoid(),
-            userId: 'guest',
+            userId: cookies.userId || 'guest',
             totalPrice,
             cart,
             comment

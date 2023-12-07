@@ -1,20 +1,26 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import GreenLine from "../../components/GreenLine";
 import './Profile.scss';
 import { useEffect } from "react";
+import { useCookies } from "react-cookie";
+
 
 function Profile() {
-    const user = useLocation().state?.user || null;
+    const [cookies, setCookies, removeCookies] = useCookies(["userId"]);
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!user) {
-            navigate('/error');
+        if (!cookies.userId) {
+            navigate('/error')
         }
     }, [])
 
-    console.log(user);
+    function handleLogOut() {
+        removeCookies("userId");
+        navigate('/');
+        location.reload();
+    }
 
     return (
         <main className="profile">
@@ -27,7 +33,7 @@ function Profile() {
                 <p>
                     Welcome back! Check out your order history, keep tabs on your culinary adventures, and snag exclusive deals. It's your space—explore, enjoy, and let's make your dining experience awesome!
                 </p>
-                <Button label={"View Your Orders"} type={"primary"} onClick={() => navigate('/order-history', { state: { user }})}/>
+                <Button label={"View Your Orders"} type={"primary"} onClick={() => navigate('/order-history')}/>
                 <Button label={"Order Here"} type={"secondary"} onClick={() => navigate('/menu')}/>
             </section>
             <figure>
@@ -43,6 +49,7 @@ function Profile() {
                 </p>
                 <Button label={"Join The Fun"} type={"primary"} />
             </section>
+            <Button label={"Sign Out"} type={"secondary"} onClick={handleLogOut}/>
 
         </main>
     );
