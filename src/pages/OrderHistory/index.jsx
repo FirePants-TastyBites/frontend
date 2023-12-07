@@ -3,12 +3,14 @@ import OrderHistoryItem from "../../components/OrderHistoryItem";
 import "./OrderHistory.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
+import BigLoader from "../../components/BigLoader";
+
 
 function OrderHistory() {
   const [cookies, setCookies] = useCookies(["userId"]);
   const [orderHistory, setOrderHistory] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     axios
@@ -32,7 +34,8 @@ function OrderHistory() {
 
         setOrderHistory(updatedOrderHistory);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
+      .finally(() => setIsLoading(false))
   }, []);
 
   function isDelivered(deliveryTime, createdAt) {
@@ -67,51 +70,61 @@ function OrderHistory() {
       </p>
 
       <section className="orders">
-        <section>
-          <h3>In progress</h3>
-          {orderHistory.filter((order) => order.status === "inProgress")
-            .length > 0 ? (
-            <ul>
-              {orderHistory
-                .filter((order) => order.status === "inProgress")
-                .map((order, index) => (
-                  <OrderHistoryItem key={index} order={order} />
-                ))}
-            </ul>
-          ) : (
-            <p>No orders</p>
-          )}
-        </section>
-        <section>
-          <h3>Delivered</h3>
-          {orderHistory.filter((order) => order.status === "delivered").length >
-          0 ? (
-            <ul>
-              {orderHistory
-                .filter((order) => order.status === "delivered")
-                .map((order, index) => (
-                  <OrderHistoryItem key={index} order={order} />
-                ))}
-            </ul>
-          ) : (
-            <p>No orders</p>
-          )}
-        </section>
-        <section>
-          <h3>Cancelled</h3>
-          {orderHistory.filter((order) => order.status === "cancelled").length >
-          0 ? (
-            <ul>
-              {orderHistory
-                .filter((order) => order.status === "cancelled")
-                .map((order, index) => (
-                  <OrderHistoryItem key={index} order={order} />
-                ))}
-            </ul>
-          ) : (
-            <p>No orders</p>
-          )}
-        </section>
+
+        {
+          isLoading ?
+            <BigLoader />
+            :
+            <>
+
+              <section>
+                <h3>In progress</h3>
+                {orderHistory.filter((order) => order.status === "inProgress")
+                  .length > 0 ? (
+                  <ul>
+                    {orderHistory
+                      .filter((order) => order.status === "inProgress")
+                      .map((order, index) => (
+                        <OrderHistoryItem key={index} order={order} />
+                      ))}
+                  </ul>
+                ) : (
+                  <p>No orders</p>
+                )}
+              </section>
+              <section>
+                <h3>Delivered</h3>
+                {orderHistory.filter((order) => order.status === "delivered").length >
+                  0 ? (
+                  <ul>
+                    {orderHistory
+                      .filter((order) => order.status === "delivered")
+                      .map((order, index) => (
+                        <OrderHistoryItem key={index} order={order} />
+                      ))}
+                  </ul>
+                ) : (
+                  <p>No orders</p>
+                )}
+              </section>
+              <section>
+                <h3>Cancelled</h3>
+                {orderHistory.filter((order) => order.status === "cancelled").length >
+                  0 ? (
+                  <ul>
+                    {orderHistory
+                      .filter((order) => order.status === "cancelled")
+                      .map((order, index) => (
+                        <OrderHistoryItem key={index} order={order} />
+                      ))}
+                  </ul>
+                ) : (
+                  <p>No orders</p>
+                )}
+              </section>
+            </>
+        }
+
       </section>
     </main>
   );
