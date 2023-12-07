@@ -1,3 +1,5 @@
+@import "../../styles/_variables";
+
 .profile {
     width: 100%;
     display: flex;
@@ -29,6 +31,10 @@
 
     p {
         margin-bottom: 2rem;
+
+        @media screen and (min-width: $breakpoint-desktop) {
+            text-align: left;
+        }
     }
 
     figure {
