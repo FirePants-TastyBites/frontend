@@ -19,6 +19,7 @@ function Profile() {
     function handleLogOut() {
         removeCookies("userId");
         navigate('/');
+        location.reload();
     }
 
     return (
