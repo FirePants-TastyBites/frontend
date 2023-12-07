@@ -5,10 +5,12 @@
   width: 100%;
   min-height: 100vh;
 
-  h2 {
-    color: #112a13;
-    text-align: center;
-    @include text-style-600-24px;
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
   }
 
   .category-buttons {
