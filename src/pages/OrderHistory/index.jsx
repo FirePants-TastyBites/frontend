@@ -4,9 +4,10 @@ import './OrderHistory.scss';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useCookies } from "react-cookie";
 
 function OrderHistory() {
-    const userId = useSelector(state => state.order.userId);
+    const [cookies, setCookies] = useCookies(["userId"]);
     const [orderHistory, setOrderHistory] = useState({
         inProgress: [],
         delivered: [],
@@ -14,7 +15,7 @@ function OrderHistory() {
     })
 
     useEffect(() => {
-        axios.post('https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/user/orders', { userId })
+        axios.post('https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/user/orders', { userId: cookies.userId })
             .then(response => {
                 const orders = response.data.orders;
             

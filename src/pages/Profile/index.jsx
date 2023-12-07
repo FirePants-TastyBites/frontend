@@ -8,7 +8,6 @@ import { useCookies } from "react-cookie";
 
 
 function Profile() {
-    const userId = useSelector(state => state.order.userId);
     const [cookies, setCookies, removeCookies] = useCookies(["userId"]);
     const navigate = useNavigate();
 
