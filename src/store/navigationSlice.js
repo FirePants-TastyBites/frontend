@@ -3,20 +3,20 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = [
   {
     label: "Home",
-    path: "/",
+    path: "/"
   },
   {
     label: "Sign In",
-    path: "/sign-in",
+    path: "/sign-in"
   },
   {
     label: "Menu",
-    path: "/menu",
+    path: "/menu"
   },
   {
     label: "About Us",
-    path: "/about",
-  },
+    path: "/about"
+  }
 ];
 
 const updateNavigationForLoggedInUser = (state, action) => {
@@ -30,14 +30,19 @@ const updateNavigationForLoggedInUser = (state, action) => {
   }
 };
 
+const updateNavigationForLoggedOutUser = (state) => {
+  return initialState;
+};
+
 export const navigationSlice = createSlice({
   name: "navigation",
   initialState,
   reducers: {
     updateNavigation: updateNavigationForLoggedInUser,
-  },
+    logoutNavigation: updateNavigationForLoggedOutUser
+  }
 });
 
-export const { updateNavigation } = navigationSlice.actions;
+export const { updateNavigation, logoutNavigation } = navigationSlice.actions;
 
 export default navigationSlice.reducer;
