@@ -4,17 +4,26 @@ import GreenLine from "../../components/GreenLine";
 import './Profile.scss';
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useCookies } from "react-cookie";
 
 
 function Profile() {
     const userId = useSelector(state => state.order.userId);
+    const [cookies, setCookies, removeCookies] = useCookies(["userId"]);
     const navigate = useNavigate();
 
+    console.log(cookies.userId)
+
     useEffect(() => {
-        if (userId === 'guest') {
+        if (!cookies.userId) {
             navigate('/error')
         }
     }, [])
+
+    function handleLogOut() {
+        removeCookies("userId");
+        navigate('/');
+    }
 
     return (
         <main className="profile">
@@ -43,6 +52,7 @@ function Profile() {
                 </p>
                 <Button label={"Join The Fun"} type={"primary"} />
             </section>
+            <Button label={"Sign Out"} type={"secondary"} onClick={handleLogOut}/>
 
         </main>
     );
