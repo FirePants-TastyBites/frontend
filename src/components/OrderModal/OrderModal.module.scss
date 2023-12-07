@@ -42,6 +42,12 @@
 
 .modalHeaderHeading {
   @include text-style-600-18px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+  cursor: pointer;
 }
 
 .modalBody {
@@ -113,4 +119,12 @@ footer {
   .modal {
     max-width: 600px;
   }
+}
+
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid $primary-color;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
 }

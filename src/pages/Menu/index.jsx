@@ -17,8 +17,12 @@ const Menu = () => {
     axios
       .get("https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/menu")
       .then((response) => {
-        setFoods(response.data.menu);
-        setFilteredFoods(response.data.menu);
+        console.log(response.data.menu);
+        const availableFoods = response.data.menu.filter(
+          (food) => food.isAvailable
+        );
+        setFoods(availableFoods);
+        setFilteredFoods(availableFoods);
       })
       .catch((error) => console.error(error));
   }, []);
@@ -28,7 +32,7 @@ const Menu = () => {
     setFilteredFoods(
       category === "All"
         ? foods
-        : foods.filter((food) => food.category === category)
+        : foods.filter((food) => food.category === category && food.isAvailable)
     );
   };
 
@@ -64,25 +68,31 @@ const Menu = () => {
           )
         )}
       </nav>
+
       <section className="menu-grid">
-        {filteredFoods.map((food) => (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            key={food.id}
-          >
-            <MenuItem
-              item={food}
-              name={food.itemName}
-              price={food.price}
-              imageUrl={food.url || foodImage}
-              category={food.category}
-              onIconClick={() => handleItemClick(food)}
-            />
-          </motion.div>
-        ))}
+        {filteredFoods.length > 0 ? (
+          filteredFoods.map((food) => (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              key={food.id}
+            >
+              <MenuItem
+                item={food}
+                name={food.title}
+                price={food.price}
+                imageUrl={food.url || foodImage}
+                category={food.category}
+                onIconClick={() => handleItemClick(food)}
+              />
+            </motion.div>
+          ))
+        ) : (
+          <p>No items available at the moment.</p>
+        )}
       </section>
+
       {isModalOpen && (
         <Modal
           isOpen={isModalOpen}

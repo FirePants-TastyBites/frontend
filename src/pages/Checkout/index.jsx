@@ -1,47 +1,36 @@
-import { useNavigate } from "react-router-dom";
 import GreenLine from "../../components/GreenLine";
 import Button from "../../components/Button";
+import DetailsButton from '../../components/DetailsButton';
 import './Checkout.scss';
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { resetOrder } from "../../store/orderSlice";
 import { animate } from "framer-motion";
+import axios from "axios";
+import { useCookies } from "react-cookie";
 
 function Checkout() {
+    const [cookies, setCookies] = useCookies(["userId"]);
     const order = useSelector(state => state.order);
-    let isLocked = order.isLocked;
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     async function placeOrder() {
-        // skicka order till databas och invänta svar 
-        // om allt gick bra => lagra i location.state och navigera till confirmation
-        
-        const response = {
-            comment: "",
-            createdAt: "2023-11-29T11:24:31.747Z",
-            orderId:"wcl01KagFKBpNM3TyrsTw",
-            orderItems: [
-                {
-                    qty: 1,
-                    itemName: 'Cheesy Rainbow Veggie Wrap'
-                },
-                {
-                    qty: 1,
-                    itemName: "Mediterranean Delight"
-                }
-            ],
-            totalAmount: 200,
-            status: 'pending',
-            isLocked: false
+
+        if (order.cart.length  < 1) {
+            navigate('/error');
         }
 
-        await animate(".checkout", { x: ["0%", "-100%"], opacity: [1, 0]});
-        navigate(`/confirmation/${order.orderId}`, { state: response });
-        dispatch(resetOrder());
-
-        // annars => navigera till errorPage?
-
+        axios.post('https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/order', order)
+            .then(async () => {
+                await animate(".checkout", { x: ["0%", "-100%"], opacity: [1, 0]});
+                navigate(`/confirmation/${order.id}`);
+                dispatch(resetOrder());
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
 
     useEffect(() => {
@@ -59,27 +48,34 @@ function Checkout() {
                     <h4>Estimated Delivery Time</h4>
                     <div>
                         <p>ASAP (25min)</p>
-                        <button>Change</button>
+                        <DetailsButton>Change</DetailsButton>
+                    </div>
+                </section>
+                <section className="time">
+                    <h4>Email</h4>
+                    <div>
+                        <p>{cookies.userId || "guest@example.com"}</p>
+                        <DetailsButton>Change</DetailsButton>
                     </div>
                 </section>
                 <section className="address">
                     <h4>Delivery Address</h4>
                     <div>
                         <p>Sherwood Forest 1</p>
-                        <button>Change</button>
+                        <DetailsButton>Change</DetailsButton>
                     </div>
                 </section>
                 <section className="payment">
                     <h4>Payment Method</h4>
                     <div>
                         <p>Apple Pay</p>
-                        <button>Change</button>
+                        <DetailsButton>Change</DetailsButton>
                     </div>
                 </section>
             </section>
             <section className="total-price">
                 <p>Total Price</p>
-                <p>{order.totalAmount} kr</p>
+                <p>{order.totalPrice} kr</p>
             </section>
 
             <Button label={"Place Your Order"} type={"primary"} onClick={placeOrder} />

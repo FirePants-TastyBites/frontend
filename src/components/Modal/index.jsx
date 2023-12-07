@@ -8,7 +8,7 @@ const Modal = ({ isOpen, onClose, item }) => {
 
   if (!isOpen || !item) return null;
 
-  const { ingredients = [], description: { fat, protein, calories } = {} } =
+  const { ingredients = [], nutritions: { fat, protein, calories } = {} } =
     item;
 
   const modalAnimation = {
@@ -16,6 +16,11 @@ const Modal = ({ isOpen, onClose, item }) => {
     visible: { opacity: 1, scale: 1 },
     transition: { duration: 0.3 }
   };
+
+  function addToCartAndCloseModal() {
+    dispatch(addItem(item));
+    onClose();
+  }
 
   return (
     <motion.aside
@@ -34,7 +39,7 @@ const Modal = ({ isOpen, onClose, item }) => {
         variants={modalAnimation}
       >
         <header className={styles.modalHeader}>
-          <h3 className={styles.modalTitle}>{item.itemName}</h3>
+          <h3 className={styles.modalTitle}>{item.title}</h3>
           <button
             className={styles.closeButton}
             onClick={onClose}
@@ -59,7 +64,10 @@ const Modal = ({ isOpen, onClose, item }) => {
             Total Calories: <span>{calories}cal</span>
           </p>
         </div>
-        <button className={styles.addToCartButton} onClick={() => dispatch(addItem(item))}>
+        <button
+          className={styles.addToCartButton}
+          onClick={addToCartAndCloseModal}
+        >
           <i className="fa-solid fa-cart-shopping"></i> Add to Cart
         </button>
       </motion.article>

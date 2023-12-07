@@ -8,21 +8,23 @@ import { useNavigate } from "react-router-dom";
 import { motion, animate } from "framer-motion";
 import { setOrder } from "../../store/orderSlice";
 import { nanoid } from "@reduxjs/toolkit";
+import { useCookies } from "react-cookie";
 
 function Cart() {
+    const [comment, setComment] = useState('');
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const orderItems = useSelector(state => state.order.orderItems);
-    const totalPrice = orderItems.reduce((total, item) => total + item.price, 0);
-    const [comment, setComment] = useState('');
+    const cart = useSelector(state => state.order.cart);
+    const [cookies, setCookies] = useCookies(["userId"]);
+    const totalPrice = cart.reduce((total, item) => total + item.price, 0);
 
     async function createOrder() {
-
+        
         const newOrder = {
-            orderId: nanoid(),
-            userId: 'guest',
-            totalAmount: totalPrice,
-            orderItems,
+            id: nanoid(),
+            userId: cookies.userId || 'guest',
+            totalPrice,
+            cart,
             comment
         }
 
@@ -39,7 +41,7 @@ function Cart() {
             </header>
 
             {
-                orderItems.length > 0 ?
+                cart.length > 0 ?
                     <>
                         <motion.section
                             initial={{ opacity: 0 }}
@@ -47,7 +49,7 @@ function Cart() {
                             className="details"
                         >
                             <section className="order-items">
-                                {orderItems.map((item, i) => <OrderItem key={i} item={item} />)}
+                                {cart.map((item, i) => <OrderItem key={i} item={item} />)}
                                 <div className="total-price">
                                     <p>Total Price</p>
                                     <p>{totalPrice} kr</p>
