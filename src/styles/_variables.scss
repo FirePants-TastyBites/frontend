@@ -172,3 +172,19 @@ $staff-bg-color: #f2f2f2;
   font-weight: 400;
   font-size: 10px;
 }
+
+@mixin main-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 3rem;
+  min-height: 88vh;
+}
+
+@mixin page-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}

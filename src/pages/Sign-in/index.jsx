@@ -10,6 +10,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { updateNavigation } from "../../store/navigationSlice";
 import { useCookies } from "react-cookie";
+import DetailsButton from "../../components/DetailsButton";
 
 const SignInPage = () => {
   const [email, setEmail] = useState("");
@@ -87,10 +88,14 @@ const SignInPage = () => {
             />
             <Button
               label="Cancel"
-              onClick={() => console.log("cancel clicked")}
+              onClick={() => navigate('/')}
             />
           </section>
         </form>
+      </section>
+      <section className="sign-up-section">
+        <p>Don't have an account?</p>
+        <DetailsButton onClick={() => navigate('/sign-up')}>Sign Up Here</DetailsButton>
       </section>
     </main>
   );
