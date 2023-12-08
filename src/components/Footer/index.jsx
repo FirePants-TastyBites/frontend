@@ -82,7 +82,7 @@ function Footer() {
             About Us
           </NavLink>
         </nav>
-        <NavLink to={"#top"} className={styles.toTop}>Take me to the top</NavLink>
+        <a href="#top" className={styles.toTop}>Take me to the top</a>
       </div>
     </footer>
   );
