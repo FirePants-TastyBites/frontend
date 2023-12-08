@@ -55,13 +55,13 @@ const Modal = ({ isOpen, onClose, item }) => {
         </ul>
         <div className={styles.nutritionalInfo}>
           <p>
-            Total Protein: <span>{protein}g</span>
+            Total Protein: <span>{protein} g</span>
           </p>
           <p>
-            Total Fat: <span>{fat}g</span>
+            Total Fat: <span>{fat} g</span>
           </p>
           <p>
-            Total Calories: <span>{calories}cal</span>
+            Total Calories: <span>{calories} kcal</span>
           </p>
         </div>
         <button

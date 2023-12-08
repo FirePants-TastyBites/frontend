@@ -7,12 +7,17 @@ import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import GreenLine from "../../components/GreenLine";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useCookies } from "react-cookie";
+import { useDispatch } from "react-redux";
+import { updateNavigation } from "../../store/navigationSlice";
 
 const SingUpPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
+  const [cookies, setCookies] = useCookies(["userId"]);
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,9 +32,12 @@ const SingUpPage = () => {
       );
 
       if (response.data.success) {
+        dispatch(updateNavigation({ isAdmin }));
+
         if (isAdmin) {
           navigate("/staff");
         } else {
+          setCookies("userId", email);
           navigate("/my-profile");
         }
       } else {
@@ -48,9 +56,7 @@ const SingUpPage = () => {
           <GreenLine />
         </header>
         <p className="subtitle">
-          Unlock a personalized experience by signing in! Access your order
-          history, effortlessly reorder your favorite meals, and enjoy exclusive
-          promotions tailored just for you.
+          Embark on a culinary adventure with us at Tasty Bites. Sign up now to unlock a world of delightful flavors and scrumptious delights. Your journey to tastiness begins right here!
         </p>
         <PinkThingy />
         <form onSubmit={handleSubmit}>
@@ -87,11 +93,11 @@ const SingUpPage = () => {
             <Button
               label="Sign In"
               type="primary"
-              onClick={() => console.log("sign-in clicked")}
+              onClick={() => {}}
             />
             <Button
               label="Cancel"
-              onClick={() => console.log("cancel clicked")}
+              onClick={() => navigate('/sign-in')}
             />
           </section>
         </form>

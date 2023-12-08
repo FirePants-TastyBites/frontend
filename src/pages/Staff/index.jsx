@@ -13,7 +13,7 @@ const StaffPage = () => {
     axios
       .get("https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/orders")
       .then((response) => {
-        console.log(response.data);
+       
         const filteredOrders = response.data.orders.filter(
           (order) => order.orderStatus === "pending"
         );

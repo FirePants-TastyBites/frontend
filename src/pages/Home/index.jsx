@@ -2,9 +2,13 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import PinkThingy from "../../components/PinkThingy";
 import "./Home.scss";
+import { useCookies } from "react-cookie";
 
 const Home = () => {
   const navigate = useNavigate();
+  const [cookies, setCookies] = useCookies(["userId"]);
+
+  let showSignInOrProfile = cookies.userId ? { label: "Show Profile", path: "/my-profile" } : { label: "Sign In", path: "/sign-in" };
 
   return (
     <section className="home">
@@ -31,9 +35,9 @@ const Home = () => {
       
           
             <Button
-              label="Sign In"
+              label={showSignInOrProfile.label}
               type="secondary"
-              onClick={() => navigate('/sign-in')}
+              onClick={() => navigate(showSignInOrProfile.path)}
             />
           
         </div>

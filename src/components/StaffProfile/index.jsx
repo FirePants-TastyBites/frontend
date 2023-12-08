@@ -5,7 +5,7 @@ const StaffProfile = () => (
       <img className="profile-picture" src="/maria.png" alt="Profile" />
       <section className="profile-details">
         <p className="profile-name">Maria Gomez</p>
-        <p className="profile-email">Maria@Tastybites.se</p>
+        <p className="profile-email">maria.gomez@gmail.com</p>
       </section>
       <p className="profile-description">
         Stay on top of your daily tasks and manage your workflow efficiently

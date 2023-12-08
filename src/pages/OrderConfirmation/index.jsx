@@ -126,7 +126,7 @@ function OrderConfirmation() {
                 <section className="order-id">
                     <h4>Order ID</h4>
                     <div>
-                        <p>{order.id}</p>
+                        <p>#{order.id.slice(0,6).toUpperCase()}</p>
                         <DetailsButton onClick={() => setShowMore(!showMore)}>
                             {
                                 showMore ? 'Show less' : 'Show more'
@@ -174,7 +174,7 @@ function OrderConfirmation() {
                         <div aria-label='close' onClick={toggleModal}>
                             <i className="fa-solid fa-x"></i>
                         </div>
-                        <h2>Canceling You Order? We Understand.</h2>
+                        <h2>Canceling Your Order? We Understand.</h2>
                         <section>
                             <p>Are you sure you want to cancel your order? If unexpected cravings return, you can always reorder.</p>
                             <p>Do you want to cancel your order?</p>

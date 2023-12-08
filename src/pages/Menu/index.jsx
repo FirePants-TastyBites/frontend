@@ -2,6 +2,7 @@ import "./menu.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import MenuItem from "../../components/MenuItem/";
+import GreenLine from '../../components/GreenLine'
 import foodImage from "/food.jpg";
 import Modal from "../../components/Modal/";
 import { motion } from "framer-motion";
@@ -17,7 +18,6 @@ const Menu = () => {
     axios
       .get("https://gcr5ddoy04.execute-api.eu-north-1.amazonaws.com/menu")
       .then((response) => {
-        console.log(response.data.menu);
         const availableFoods = response.data.menu.filter(
           (food) => food.isAvailable
         );
@@ -48,7 +48,10 @@ const Menu = () => {
 
   return (
     <main className="menu-page">
-      <h2>Our Menu</h2>
+      <header className="menu-page-header">
+        <h1>Our menu</h1>
+        <GreenLine />
+      </header>
       <nav className="category-buttons">
         <button
           onClick={() => filterFoods("All")}
