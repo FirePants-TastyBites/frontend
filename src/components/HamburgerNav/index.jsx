@@ -6,25 +6,6 @@ import { useSelector } from "react-redux";
 function HamburgerNav({ isVisible, setIsVisible }) {
   const navigationItems = useSelector((state) => state.navigation);
 
-  // const options = [
-  //   {
-  //     label: "Home",
-  //     path: "/",
-  //   },
-  //   {
-  //     label: "My Profile",
-  //     path: "/sign-in",
-  //   },
-  //   {
-  //     label: "Menu",
-  //     path: "/menu",
-  //   },
-  //   {
-  //     label: "About Us",
-  //     path: "/about",
-  //   },
-  // ];
-
   const navVariants = {
     hidden: {
       x: "-100%",

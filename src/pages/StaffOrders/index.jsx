@@ -34,7 +34,6 @@ const StaffOrdersPage = () => {
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [isTabClicked, setIsTabClicked] = useState(false);
 
-  console.log("Orders:", selectedOrder);
   const tabs = [
     { id: "all", label: "All" },
     { id: "pending", label: "Pending" },
@@ -50,13 +49,13 @@ const StaffOrdersPage = () => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
+      
         const filteredOrders = data.orders.filter(
           (order) =>
             order.orderStatus === "pending" || order.orderStatus === "handled"
         );
 
-        console.log(filteredOrders);
+      
 
         const transformedOrders = filteredOrders.map((order) => ({
           id: order.id,
