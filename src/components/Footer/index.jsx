@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import styles from "./Footer.module.scss";
 
 function Footer() {
@@ -71,19 +72,17 @@ function Footer() {
         </section>
         <h1 className={styles.logo}>TASTY BITES</h1>
         <nav className={styles.footerNav}>
-          <a href="/sign-in" className={styles.navLink}>
+          <NavLink to={"/sign-in"} className={styles.navLink}>
             Sign In
-          </a>
-          <a href="/menu" className={styles.navLink}>
+          </NavLink>
+          <NavLink to={"/menu"} className={styles.navLink}>
             Menu
-          </a>
-          <a href="/about" className={styles.navLink}>
+          </NavLink>
+          <NavLink to={"/about"} className={styles.navLink}>
             About Us
-          </a>
+          </NavLink>
         </nav>
-        <a href="#top" className={styles.toTop}>
-          Take me to the top
-        </a>
+        <NavLink to={"#top"} className={styles.toTop}>Take me to the top</NavLink>
       </div>
     </footer>
   );
