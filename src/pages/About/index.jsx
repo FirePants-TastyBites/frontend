@@ -1,5 +1,6 @@
 import "./About.scss";
 import PinkThingy from "../../components/PinkThingy";
+import { NavLink } from "react-router-dom";
 
 const AboutPage = () => (
   <main className="about-page">
@@ -98,7 +99,7 @@ const AboutPage = () => (
     <section className="cta-container">
       <article className="cta">
         <p>Call Us</p>
-        <a href="tel:0123456789">+ 000-000-000</a>
+        <NavLink to={"tel:0123456789"}>+ 000-000-000</NavLink>
       </article>
       <article className="cta">
         <p>Our Location</p>
@@ -106,7 +107,7 @@ const AboutPage = () => (
       </article>
       <article className="cta">
         <p>Email Us</p>
-        <a href="mailto:info@tastybites.se">info@tastybites.se</a>
+        <NavLink to={"mailto:info@tastybites.se"}>info@tastybites.se</NavLink>
       </article>
     </section>
 
