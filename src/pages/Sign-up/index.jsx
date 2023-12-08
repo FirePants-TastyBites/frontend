@@ -93,7 +93,7 @@ const SingUpPage = () => {
             <Button
               label="Sign In"
               type="primary"
-              onClick={() => console.log("sign-in clicked")}
+              onClick={() => {}}
             />
             <Button
               label="Cancel"
